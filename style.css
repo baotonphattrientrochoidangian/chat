@@ -90,6 +90,13 @@ body.dark-mode {
     flex-direction: row-reverse;
 }
 
+.message-typing-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
 /* Avatar */
 .avatar {
     width: 35px;
