@@ -106,7 +106,7 @@ code {
     padding: 8px;
     background-color: var(--light-secondary-bg);
     border-radius: 6px;
-    font-weight: 600;
+    font-style: italic;
 }
 
 .dark-mode code {
@@ -274,7 +274,7 @@ textarea::placeholder {
 }
 
 .typing-dots::after {
-    content: '...';
+    content: 'Đang tìm kiếm và suy nghĩ .';
     animation: typing 1s infinite;
 }
 
@@ -285,9 +285,9 @@ textarea::placeholder {
 }
 
 @keyframes typing {
-    0% { content: '.'; }
-    33% { content: '..'; }
-    66% { content: '...'; }
+    0% { content: 'Đang tìm kiếm và suy nghĩ .'; }
+    33% { content: 'Đang tìm kiếm và suy nghĩ ..'; }
+    66% { content: 'Đang tìm kiếm và suy nghĩ ...'; }
 }
 
 /* Scrollbar */

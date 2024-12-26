@@ -28,7 +28,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Giải thích lý do tại sao các trò chơi đó phù hợp.
 
 ## Lưu ý:
-- Đưa ra bài đồng dao của trò chơi (nhớ xuống dòng cho từng câu trong bài đồng dao) (nếu có, nếu không thì bỏ qua, đừng nói \"Trò chơi này không có bài đồng giao nên tôi sẽ không đề cập\").
+- Đưa ra bài đồng dao của trò chơi (nhớ xuống dòng cho từng câu trong bài đồng dao) (nếu có, nếu không thì bỏ qua, đừng nói "Trò chơi này không có bài đồng giao nên tôi sẽ không đề cập").
 - Không trả lời lười biếng kiểu như là "như đã nêu ở trên".
 - Chỉ tập trung vào các trò chơi dân gian Việt Nam.
 - Sử dụng ngôn ngữ Việt Nam chính xác và rõ ràng.
@@ -76,7 +76,7 @@ async function check(question) {
 async function getGoogleResults(searchQuery) {
     try {
         const encodedQuery = encodeURIComponent(searchQuery);
-        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=2`;
+        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=3`;
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(googleUrl)}`;
         
         console.log("Google Search API Request:", { googleUrl, proxyUrl });
@@ -90,7 +90,7 @@ async function getGoogleResults(searchQuery) {
         const results = [];
         
         doc.querySelectorAll('a').forEach(link => {
-            if (results.length >= 2) return;
+            if (results.length >= 3) return;
 
             const href = link.getAttribute('href');
             if (href?.startsWith('/url?q=')) {
@@ -260,26 +260,6 @@ async function processImageAndText(message, imageBase64 = null) {
         
         document.getElementById('messages').appendChild(typingContainer);
          
-        // Create a preliminary bot message container (to show a message before API response)
-        const botMessageContainer = document.createElement('div');
-        botMessageContainer.className = 'message-container';
-        
-        const botAvatar = document.createElement('img');
-        botAvatar.src = 'https://api.dicebear.com/7.x/bottts/svg?seed=gemini';
-        botAvatar.className = 'avatar';
-        botMessageContainer.appendChild(botAvatar);
-        
-        const botMessageDiv = document.createElement('div');
-        botMessageDiv.className = 'message bot-message';
-         
-        const botTextElement = document.createElement('div');
-        botTextElement.className = 'message-text';
-        botTextElement.innerHTML = 'Đang suy nghĩ... 🤔';
-        botMessageDiv.appendChild(botTextElement);
-        
-        botMessageContainer.appendChild(botMessageDiv);
-        document.getElementById('messages').appendChild(botMessageContainer);
-         
         // Now we are going to do everything else
          // Perform check using fast_check.js logic
          const searchKeywords = await check(message);
@@ -318,10 +298,8 @@ async function processImageAndText(message, imageBase64 = null) {
         // Remove typing indicator
         typingContainer.remove();
          
-         // Clear preliminary message (use timeout to allow for visual update)
-         setTimeout(() => {
-            botTextElement.innerHTML = '';
-          }, 50)
+        // Create a preliminary bot message container (to show a message before API response)
+         const botTextElement = addMessage(null, false)
 
         // Process the stream
          for await (const chunk of result.stream) {
