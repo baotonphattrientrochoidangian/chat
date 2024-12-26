@@ -46,7 +46,6 @@ const generationConfig = {
     maxOutputTokens: 8192,
 };
 
-// --- Start of fast_check.js logic ---
 const fastCheckModel = genAI.getGenerativeModel({
     model: "gemini-1.5-flash-8b",
     systemInstruction: 'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian. Trả lời "false" nếu đơn giản.'
@@ -55,36 +54,27 @@ const fastCheckModel = genAI.getGenerativeModel({
 const checkConfig = {temperature: 0.3, topP: 0.1, topK: 1, responseMimeType: "text/plain"};
 
 async function check(question) {
-    console.log("Fast Check API Request:", { question });
     const chat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 5 } });
     const response = (await chat.sendMessage(`Câu lệnh này có cần sử dụng công cụ tìm kiếm không: ${question}`)).response;
-    console.log("Fast Check API Response:", response);
     const needSearch = response.text().trim() === "true";
 
     if (!needSearch) return null;
 
     const searchChat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 50 } });
-    console.log("Fast Check Search Keyword API Request:", { question });
     const searchResponse = (await searchChat.sendMessage(`Hãy tìm từ khóa đề tìm kiếm về vấn đề này: ${question}`)).response;
-    console.log("Fast Check Search Keyword API Response:", searchResponse);
 
     return searchResponse.text();
 }
-// --- End of fast_check.js logic ---
 
-// --- Start of search_google_raw.html logic (adapted) ---
 async function getGoogleResults(searchQuery) {
     try {
         const encodedQuery = encodeURIComponent(searchQuery);
         const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=3`;
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(googleUrl)}`;
         
-        console.log("Google Search API Request:", { googleUrl, proxyUrl });
         const response = await fetch(proxyUrl);
         const html = await response.text();
-         console.log("Google Search API Response:", { status: response.status });
 
-        
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         const results = [];
@@ -149,9 +139,7 @@ function processHTMLContent(html) {
 async function fetchAndProcessURL(url) {
     try {
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-          console.log("URL Fetch API Request:", { url, proxyUrl });
         const response = await fetch(proxyUrl);
-         console.log("URL Fetch API Response:", { status: response.status });
 
         if (!response.ok) return null;
         
@@ -181,15 +169,12 @@ async function performSearch(query) {
         return null;
     }
 }
-// --- End of search_google_raw.html logic ---
-
 
 async function initChat() {
     chatSession = model.startChat({
         generationConfig,
         history: chatHistory,
     });
-     console.log("Chat Session Initialized:", chatSession);
     return chatSession;
 }
 
@@ -201,7 +186,6 @@ function addMessage(content, isUser = false, imageBase64 = null) {
         messageContainer.classList.add('user');
     }
 
-    // Add avatar
     const avatar = document.createElement('img');
     avatar.src = isUser ? 'https://images.unsplash.com/photo-1618397746666-63405ce5d015?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' : 'https://api.dicebear.com/7.x/bottts/svg?seed=gemini';
     avatar.className = 'avatar';
@@ -210,7 +194,6 @@ function addMessage(content, isUser = false, imageBase64 = null) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
     
-    // Add image if present
     if (imageBase64) {
         const imageElement = document.createElement('img');
         imageElement.src = `data:image/jpeg;base64,${imageBase64}`;
@@ -218,7 +201,6 @@ function addMessage(content, isUser = false, imageBase64 = null) {
         messageDiv.appendChild(imageElement);
     }
 
-    // Add text content div that will be used for streaming
     const textElement = document.createElement('div');
     textElement.className = 'message-text';
     if (content) {
@@ -230,7 +212,7 @@ function addMessage(content, isUser = false, imageBase64 = null) {
     messagesDiv.appendChild(messageContainer);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
     
-    return textElement; // Return the text element for streaming updates
+    return textElement;
 }
 
 
@@ -240,10 +222,8 @@ async function processImageAndText(message, imageBase64 = null) {
             await initChat();
         }
 
-        // Add user message
         addMessage(message, true, imageBase64);
         
-        // Add typing indicator (before anything else)
         const typingContainer = document.createElement('div');
         typingContainer.className = 'message-container'
         typingContainer.className = 'message-typing-area';
@@ -260,15 +240,12 @@ async function processImageAndText(message, imageBase64 = null) {
         
         document.getElementById('messages').appendChild(typingContainer);
          
-        // Now we are going to do everything else
-         // Perform check using fast_check.js logic
          const searchKeywords = await check(message);
          let searchResults = null;
           if(searchKeywords) {
              searchResults = await performSearch(searchKeywords);
           }
 
-          // Add search results if available to prompt
         let prompt = message;
 
         if (searchResults) {
@@ -277,8 +254,6 @@ async function processImageAndText(message, imageBase64 = null) {
 
         let result;
         let responseText = '';
-        
-        console.log("Gemini API Request:", { prompt, imageBase64: !!imageBase64 });
 
         if (imageBase64) {
             result = await model.generateContentStream([
@@ -293,25 +268,18 @@ async function processImageAndText(message, imageBase64 = null) {
         } else {
             result = await chatSession.sendMessageStream(prompt);
         }
-        console.log("Gemini API Response (Stream):", result);
 
-        // Remove typing indicator
         typingContainer.remove();
          
-        // Create a preliminary bot message container (to show a message before API response)
-         const botTextElement = addMessage(null, false)
+        const botTextElement = addMessage(null, false)
 
-        // Process the stream
          for await (const chunk of result.stream) {
             const chunkText = chunk.text();
-             console.log("Gemini API Response Chunk:", { chunkText });
             responseText += chunkText;
             botTextElement.innerHTML = marked.parse(responseText);
             document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
         }
 
-
-        // Update chat history
         chatHistory.push({
             role: 'user',
             parts: [{ text: message }]
@@ -337,11 +305,8 @@ async function processImageAndText(message, imageBase64 = null) {
             parts: [{ text: responseText }]
         });
 
-
-        // Reinitialize chat with updated history
         await initChat();
 
-        // Clean up UI
         const imagePreviewContainer = document.querySelector('.image-preview-container');
         if (imagePreviewContainer) {
             imagePreviewContainer.remove();
@@ -359,8 +324,6 @@ async function processImageAndText(message, imageBase64 = null) {
     }
 }
 
-
-// Event Listeners
 const uploadBtn = document.getElementById('uploadBtn');
 const imageUpload = document.getElementById('imageUpload');
 const textarea = document.getElementById('input');
@@ -377,7 +340,6 @@ imageUpload.addEventListener('change', async (e) => {
             reader.onload = async () => {
                 uploadedImage = reader.result.split(',')[1];
 
-                // Hiển thị hình ảnh preview
                 const imagePreviewContainer = document.createElement('div');
                 imagePreviewContainer.className = 'image-preview-container';
                 const imagePreview = document.createElement('img');
@@ -404,7 +366,6 @@ imageUpload.addEventListener('change', async (e) => {
                 const inputWrapper = document.querySelector('.input-wrapper');
                 inputWrapper.insertBefore(imagePreviewContainer, inputWrapper.firstChild);
 
-                // Kích hoạt nút gửi
                 document.getElementById('send').disabled = false;
             };
             reader.readAsDataURL(file);
@@ -423,8 +384,6 @@ textarea.addEventListener('input', function() {
 textarea.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-
-        // Remove suggestions UI
         const welcomeSection = document.querySelector('.welcome');
         const suggestionsSection = document.querySelector('.suggestions-grid');
         if (welcomeSection) welcomeSection.remove();
@@ -444,9 +403,8 @@ textarea.addEventListener('keydown', (e) => {
 });
 
 document.getElementById('send').addEventListener('click', (e) => {
-    e.preventDefault(); // Ngăn chặn reload trang
+    e.preventDefault();
 
-    // Remove suggestions UI
     const welcomeSection = document.querySelector('.welcome');
     const suggestionsSection = document.querySelector('.suggestions-grid');
     if (welcomeSection) welcomeSection.remove();
@@ -465,7 +423,6 @@ document.getElementById('send').addEventListener('click', (e) => {
     }
 });
 
-// Initial suggestions data
 const suggestions = [
     {
         title: "🎮 Trò chơi dân gian phổ biến",
@@ -485,11 +442,9 @@ const suggestions = [
     }
 ];
 
-// Function to create suggestions UI
 function createSuggestionsUI() {
     const messagesArea = document.getElementById('messages');
     
-    // Create welcome section
     const welcome = document.createElement('div');
     welcome.className = 'welcome';
     welcome.innerHTML = `
@@ -497,40 +452,33 @@ function createSuggestionsUI() {
         <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
     `;
     
-    // Create suggestions grid
     const suggestionsGrid = document.createElement('div');
     suggestionsGrid.className = 'suggestions-grid';
     
-    // Add suggestion cards
     suggestions.forEach((suggestion, index) => {
         const card = document.createElement('div');
         card.className = 'suggestion-card';
-        card.setAttribute('data-index', index); // Để xác định vị trí phần tử
+        card.setAttribute('data-index', index);
         card.innerHTML = `
             <div class="card-content">${suggestion.title}</div>
             <div class="suggestion-preview">${suggestion.content}</div>
         `;
         
-        // Add click handler
         card.addEventListener('click', () => {
-            // Remove suggestions UI
             const welcomeSection = document.querySelector('.welcome');
             const suggestionsSection = document.querySelector('.suggestions-grid');
             if (welcomeSection) welcomeSection.remove();
             if (suggestionsSection) suggestionsSection.remove();
             
-            // Send the suggestion message
             processImageAndText(suggestion.content);
         });
         
         suggestionsGrid.appendChild(card);
     });
     
-    // Add welcome and suggestions to messages area
     messagesArea.appendChild(welcome);
     messagesArea.appendChild(suggestionsGrid);
     
-    // Add specific styles for suggestions UI
     const style = document.createElement('style');
     style.textContent = `
         .welcome {
@@ -559,18 +507,18 @@ function createSuggestionsUI() {
             gap: 1rem;
             padding: 0 1rem;
             margin-bottom: 100px;
-            grid-template-columns: repeat(2, 1fr); /* Default to 2 columns */
+            grid-template-columns: repeat(2, 1fr);
         }
 
         @media screen and (min-width: 768px) {
             .suggestions-grid {
-                grid-template-columns: repeat(4, 1fr); /* 4 columns for medium screens */
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
         @media screen and (max-width: 600px) {
             .suggestions-grid {
-                grid-template-columns: 1fr; /* 1 column for small screens */
+                grid-template-columns: 1fr;
             }
 
             .suggestion-card {
@@ -624,11 +572,9 @@ function createSuggestionsUI() {
     document.head.appendChild(style);
 }
 
-// Initialize suggestions UI when page loads
 document.addEventListener('DOMContentLoaded', () => {
     createSuggestionsUI();
     
-    // Add event listener to remove suggestions on manual message
     const textarea = document.getElementById('input');
     textarea.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey && textarea.value.trim()) {
