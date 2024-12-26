@@ -76,7 +76,7 @@ async function check(question) {
 async function getGoogleResults(searchQuery) {
     try {
         const encodedQuery = encodeURIComponent(searchQuery);
-        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=5`;
+        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=2`;
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(googleUrl)}`;
         
         console.log("Google Search API Request:", { googleUrl, proxyUrl });
@@ -90,7 +90,7 @@ async function getGoogleResults(searchQuery) {
         const results = [];
         
         doc.querySelectorAll('a').forEach(link => {
-            if (results.length >= 5) return;
+            if (results.length >= 2) return;
 
             const href = link.getAttribute('href');
             if (href?.startsWith('/url?q=')) {
