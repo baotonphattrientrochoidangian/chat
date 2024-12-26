@@ -40,7 +40,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 });
 
 const generationConfig = {
-    temperature: 0.5,
+    temperature: 0.8,
     topP: 0.9,
     topK: 1,
     maxOutputTokens: 8192,
