@@ -5,6 +5,9 @@ const genAI = new GoogleGenerativeAI(apiKey);
 let chatSession;
 let uploadedImage = null;
 let chatHistory = [];
+// Add a flag to track if a response is in progress
+let isProcessing = false;
+
 
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -28,60 +31,69 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Giải thích lý do tại sao các trò chơi đó phù hợp.
 
 ## Lưu ý:
-- Đưa ra bài đồng dao của trò chơi (nhớ xuống dòng cho từng câu trong bài đồng dao) (nếu có, nếu không thì bỏ qua, đừng nói "Trò chơi này không có bài đồng giao nên tôi sẽ không đề cập").
+- Đưa ra bài đồng dao của trò chơi ("bắt buộc" xuống dòng cho từng câu trong bài đồng dao và đánh dầu đầu đuôi bằng markdown code | chỉ nếu có bài đồng giao, nếu không thì bỏ qua, đừng nói "Trò chơi này không có bài đồng giao nên tôi sẽ không đề cập").
 - Không trả lời lười biếng kiểu như là "như đã nêu ở trên".
 - Chỉ tập trung vào các trò chơi dân gian Việt Nam.
 - Sử dụng ngôn ngữ Việt Nam chính xác và rõ ràng.
 - Luôn luôn kết hợp câu trả lời với emoji để tăng sức truyền đạt.
 - Tránh sử dụng ngôn ngữ khó hiểu hoặc chuyên ngành.
-- Cung cấp thông tin chính xác và đáng tin cậy.
 - Sử dụng markdown để trả lời câu hỏi (Không sử dụng markdown bảng, code, text-box).
+- Cung cấp thông tin chính xác và đáng tin cậy.
+- QUAN TRỌNG: Nếu không biết rõ thông tin về một trò chơi dân gian nào đó, hãy từ chối trả lời, không nói bừa bãi (Trả lời nếu có kết quả tìm kiếm web).
 `,
 });
 
 const generationConfig = {
-    temperature: 0.8,
+    temperature: 0.5,
     topP: 0.9,
     topK: 1,
     maxOutputTokens: 8192,
 };
 
-const fastCheckModel = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-8b",
-    systemInstruction: 'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian. Trả lời "false" nếu đơn giản.'
-});
-
-const checkConfig = {temperature: 0.3, topP: 0.1, topK: 1, responseMimeType: "text/plain"};
+const checkConfig = {temperature: 0.5, topP: 1, topK: 1, responseMimeType: "text/plain"};
 
 async function check(question) {
+    let fastCheckModel = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash-8b",
+        systemInstruction: 'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian. Trả lời "false" nếu đơn giản.'
+    });
     const chat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 5 } });
-    const response = (await chat.sendMessage(`Câu lệnh này có cần sử dụng công cụ tìm kiếm không: ${question}`)).response;
+    const response = (await chat.sendMessage(`Câu lệnh này có cần sử dụng công cụ tìm kiếm không, hãy ưu tiên tìm kiếm: ${question}`)).response;
     const needSearch = response.text().trim() === "true";
 
     if (!needSearch) return null;
 
+    fastCheckModel = genAI.getGenerativeModel({model: "gemini-1.5-flash-8b", systemInstruction: "Trả về từ khóa tìm kiếm cho câu hỏi"});
+    // Only proceed to get search keywords if needSearch is true
     const searchChat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 50 } });
-    const searchResponse = (await searchChat.sendMessage(`Hãy tìm từ khóa đề tìm kiếm về vấn đề này: ${question}`)).response;
+    const searchKeywords = (await searchChat.sendMessage(`Hãy trả về từ khóa tìm kiếm cho: ${question}. Chỉ trả về từ khóa, không thêm giải thích. Ngắn gọn`)).response;
 
-    return searchResponse.text();
+    return searchKeywords.text();
 }
 
 async function getGoogleResults(searchQuery) {
     try {
+        console.log('Starting search for:', searchQuery);
         const encodedQuery = encodeURIComponent(searchQuery);
-        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=3`;
+        // Tăng số lượng kết quả lên 5
+        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=5`;
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(googleUrl)}`;
         
+        console.log('Fetching from proxy:', proxyUrl);
         const response = await fetch(proxyUrl);
-        const html = await response.text();
+        
+        if (!response.ok) {
+            console.error('Proxy request failed:', response.status, response.statusText);
+            return [];
+        }
 
+        const html = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        const results = [];
+        const candidates = [];
         
+        // Thu thập tất cả các link tiềm năng
         doc.querySelectorAll('a').forEach(link => {
-            if (results.length >= 3) return;
-
             const href = link.getAttribute('href');
             if (href?.startsWith('/url?q=')) {
                 let actualUrl = decodeURIComponent(href.substring(7));
@@ -95,17 +107,47 @@ async function getGoogleResults(searchQuery) {
                     !actualUrl.includes('youtube.com') && 
                     !actualUrl.includes('instagram.com') && 
                     !actualUrl.includes('maps.google.com')) {
-                    results.push({
+                    candidates.push({
                         title: link.textContent.trim(),
                         url: actualUrl
                     });
                 }
             }
         });
+
+        // Kiểm tra từng URL cho đến khi có 2 kết quả hợp lệ
+        const validResults = [];
+        for (const candidate of candidates) {
+            if (validResults.length >= 2) break;
+            
+            try {
+                // Tạo một Promise với timeout
+                const timeout = new Promise((_, reject) => {
+                    setTimeout(() => reject(new Error('Timeout')), 2000);
+                });
+                
+                // Race giữa fetch request và timeout
+                const urlCheck = await Promise.race([
+                    fetch(candidate.url),
+                    timeout
+                ]);
+                
+                if (urlCheck.ok) {
+                    validResults.push(candidate);
+                    console.log('Valid result found:', candidate.url);
+                } else {
+                    console.log('Skipping invalid URL:', candidate.url);
+                }
+            } catch (error) {
+                console.log('Error checking URL:', candidate.url, 
+                    error.message === 'Timeout' ? 'Request timed out (>2000ms)' : error.message);
+                continue;
+            }
+        }
         
-        return results;
+        return validResults;
     } catch (error) {
-        console.error('Error fetching Google results:', error);
+        console.error('Search failed:', error);
         return [];
     }
 }
@@ -215,9 +257,33 @@ function addMessage(content, isUser = false, imageBase64 = null) {
     return textElement;
 }
 
+// Function to disable input elements
+function disableInput(disabled = true) {
+    const textarea = document.getElementById('input');
+    const sendButton = document.getElementById('send');
+    const uploadBtn = document.getElementById('uploadBtn');
+    
+    textarea.disabled = disabled;
+    sendButton.disabled = disabled;
+    uploadBtn.disabled = disabled;
+    
+    if (disabled) {
+        textarea.placeholder = 'Đang chờ phản hồi...';
+    } else {
+        textarea.placeholder = 'Nhập tin nhắn...';
+    }
+}
 
+// Modify the processImageAndText function
 async function processImageAndText(message, imageBase64 = null) {
-   try {
+    try {
+        if (isProcessing) {
+            return; // Prevent multiple simultaneous messages
+        }
+        
+        isProcessing = true;
+        disableInput(true);
+
         if (!chatSession) {
             await initChat();
         }
@@ -307,13 +373,6 @@ async function processImageAndText(message, imageBase64 = null) {
 
         await initChat();
 
-        const imagePreviewContainer = document.querySelector('.image-preview-container');
-        if (imagePreviewContainer) {
-            imagePreviewContainer.remove();
-        }
-        uploadedImage = null;
-        document.getElementById('send').disabled = true;
-        
     } catch (error) {
         console.error('Error:', error);
         const typingContainer = document.querySelector('.message-typing-area');
@@ -321,6 +380,15 @@ async function processImageAndText(message, imageBase64 = null) {
             typingContainer.remove();
         }
         addMessage('Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.', false);
+    } finally {
+        isProcessing = false;
+        disableInput(false);
+        
+        const imagePreviewContainer = document.querySelector('.image-preview-container');
+        if (imagePreviewContainer) {
+            imagePreviewContainer.remove();
+        }
+        uploadedImage = null;
     }
 }
 
@@ -566,6 +634,19 @@ function createSuggestionsUI() {
         
         .dark-mode .suggestion-preview {
             color: #9aa0a6;
+        }
+        textarea:disabled {
+            background-color: var(--light-secondary-bg);
+            cursor: not-allowed;
+        }
+        
+        .dark-mode textarea:disabled {
+            background-color: var(--dark-secondary-bg);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
     `;
     
