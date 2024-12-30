@@ -1275,11 +1275,11 @@ Trò chơi Truyền tin
 let chatHistory = [
     {
         role: 'user',
-        parts: [{ text: `Đây là dataset của bạn:\n ${dataset}` }]
+        parts: [{ text: `LƯU Ý: Đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, không đề cập đến nếu người dùng hỏi!\nĐây là dataset của bạn:\n ${dataset}` }]
     },
     {
     role: 'model',
-    parts: [{ text: "Được thôi! Tôi sẽ trả lời các các câu hỏi dựa vào dataset đã được cung cấp. Tối sẽ trả lời thật chính xác các thông tin về văn bản và hình ảnh!"}]
+    parts: [{ text: "Được thôi! Tôi sẽ trả lời các các câu hỏi dựa vào dataset đã được cung cấp. Tối sẽ trả lời thật chính xác các thông tin về văn bản và hình ảnh! Và vì đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, tôi sẽ không đề cập đến nếu người dùng hỏi!\n"}]
 }];
 // Add a flag to track if a response is in progress
 let isProcessing = false;
