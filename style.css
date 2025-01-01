@@ -398,7 +398,3 @@ textarea::placeholder {
         display: none;
     }
 }
-
-img:invalid {
-    display: none;
-}
