@@ -380,7 +380,7 @@ textarea::placeholder {
 }
 
 .user-message .message-image {
-    align-self: flex-end;
+    align-self: flex-start;
 }
 
 .bot-message .message-image {
@@ -397,4 +397,8 @@ textarea::placeholder {
     .avatar {
         display: none;
     }
+}
+
+img:invalid {
+    display: none;
 }

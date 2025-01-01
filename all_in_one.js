@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 let chatSession;
 let uploadedImage = null;
 const dataset = `
-1Chi chi chành chành
+1. Chi chi chành chành
 Giới thiệu trò chơi
 Đây là trò chơi cho bé được rất nhiều trẻ em yêu thích, với cách thức chơi đơn giản, nhưng phải có được phản ứng nhanh và tinh ý. Khi chơi trò này, người tham gia nên dùng một ít kỹ xảo và đọc nhẩm theo người chơi để tránh bị bắt trúng tay nhé.
 Hướng dẫn cách chơi và luật
@@ -20,9 +20,9 @@ Khi người xòe bàn tay đếm đến chữ “ập” thì người xòe tay
 Ai rút không kịp hoặc bị nắm trúng thì thua và phải làm người thay thế vào chỗ người xòe tay, sau đó người chơi này tiếp tục đọc bài đồng dao và làm cho những người khác chơi.
 Có thể bạn quan tâm: Làm sao để khuyến khích trẻ chơi trò chơi giả bộ của trẻ mầm non?
 <img class="ls-is-cached lazyloaded" title="Chi chi chành chành" alt="Chi chi chành chành" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-1-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-1-800x450.jpg">
-Chi chi chành chành
-Có thể bạn quan tâm: 50 bài hát ru con ngủ nhanh, lời dễ thuộc được mẹ yêu thích
-2Cướp cờ
+
+
+2. Cướp cờ
 Giới thiệu trò chơi
 Đây là trò chơi không còn quá xa lạ với mọi người, trò chơi này đòi hỏi người chơi phải phản ứng và chạy nhanh. Nếu như người chơi không chạy nhanh để cướp cờ thì bạn phải chặn người cướp được cờ và giật cờ chạy về đích thật nhanh để giành chiến thắng.
 Hướng dẫn cách chơi và luật
@@ -32,9 +32,9 @@ Hoặc nếu trọng tài gọi số nào về thì số đó phải về, trong
 Trong quá trình chơi, khi đang cầm cờ mà nếu bị đối phương vỗ vào người thì người đó bị loại và ngược lại khi lấy được cờ phải chạy nhanh về vạch xuất phát của đội mình không bị đội bạn&nbsp;vỗ vào người thì người cầm cờ&nbsp;mới thắng.
 Có thể bạn quan tâm: 10 Trò chơi cho bé vui đêm trung thu và gợi ý những ý tưởng tổ chức trung thu cho bé
 <img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cờ" alt="Trò chơi Cướp cờ" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-2-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-2-800x450.jpg">
-Trò chơi Cướp cờ
-Có thể bạn quan tâm: 10 Trò chơi cho bé 3 tuổi giúp con bạn vừa học vừa chơi cả tuần
-3Dung dăng dung dẻ
+
+
+3. Dung dăng dung dẻ
 Giới thiệu trò chơi
 Khi chơi trò này người chơi phải tinh ý lựa chọn sẵn cho mình một cái vòng tròn để ngồi xuống, nếu trường hợp người chơi không vào được vòng tròn nào, thì có thể lanh trí dẫn dụ người khác để mình được vào và lập tức ngồi xuống ngay nhé.&nbsp;
 Hướng dẫn cách chơi và luật
@@ -50,9 +50,9 @@ Ngồi xẹp xuống đây.”&nbsp;
 Khi đọc hết chữ “đây” người chơi phải nhanh chóng tìm một vòng tròn và ngồi xuống. Nếu người chơi nào không tìm thấy được vòng tròn thì bị loại.
 Trò chơi cứ tiếp tục như thế đến khi tìm được người thắng cuộc.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Dung dăng dung dẻ" alt="Trò chơi Dung dăng dung dẻ" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-3-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-3-800x450.jpg">
-Trò chơi Dung dăng dung dẻ
-Có thể bạn quan tâm: Mẹ có biết 8 trò chơi cho bé 5 tuổi giúp bé rèn luyện trí tuệ
-4Rồng rắn lên mây
+
+
+4. Rồng rắn lên mây
 Giới thiệu trò chơi
 Trò chơi này quan trọng ở người đứng đầu hàng và người thầy thuốc, người đứng đầu hàng phải ngăn cản người thầy thuốc bắt được đuôi của mình, trong khi người thầy thuốc phải cố gắng bắt được đuôi của người đầu hàng. Trò chơi này đòi hỏi người chơi phải lanh lẹ và tinh mắt để tránh bị thua cuộc nhé.
 Hướng dẫn cách chơi và luật
@@ -89,18 +89,18 @@ Kế đó, thì thầy thuốc đòi hỏi:
 Lúc này người chơi làm thầy thuốc phải tìm cách bắt cho được người cuối cùng trong hàng, và người đứng đầu phải cản lại người thầy thuốc, cố ngăn cản không cho người thầy thuốc bắt được cái đuôi (người đứng cuối hàng) của mình.
 Hoặc người đứng cuối hàng phải chạy nhanh và tìm cách né tránh thầy thuốc. Nếu thầy thuốc bắt được người cuối cùng thì người đó sẽ bị loại.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Rồng rắn lên mây" alt="Trò chơi Rồng rắn lên mây" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-4-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-4-800x450.jpg">
-Trò chơi Rồng rắn lên mây
-Có thể bạn quan tâm: Thử ngay 10 trò chơi cho bé 2 tuổi giúp con phát triển IQ vượt trội
-5Kéo co
+
+
+5. Kéo co
 Giới thiệu trò chơi
 Đây là một trò chơi khá đơn giản và rất được nhiều người biết đến, hai bên phải kéo co đến khi nào một bên vượt vạch mức là thua. Trò chơi này đòi hỏi người chơi phải có thể lực, sức khỏe.
 Hướng dẫn cách chơi và luật
 Khi có tiếng bắt đầu của trọng tài, các đội bắt đầu túm lấy một sợi dây thừng để kéo.&nbsp;
 Hai bên phải ra sức kéo, sao cho đội đối phương bước qua vạch của mình là thắng.&nbsp;
 <img class="ls-is-cached lazyloaded" title="Trò chơi Rồng rắn lên mây" alt="Trò chơi Kéo co" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-5-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-5-800x450.jpg">
-Trò chơi Kéo co
-Có thể bạn quan tâm: Mách mẹ top 20+ trò chơi teambuilding cho trẻ em cực vui
-6Bịt mắt bắt dê
+
+
+6. Bịt mắt bắt dê
 Giới thiệu trò chơi
 Một người chơi phải bịt mắt để đi bắt những người chơi còn lại. Nếu là người đi bắt, người chơi nên dùng tai nhiều hơn để xác định vị trí của các người chơi khác. Còn nếu là người trốn, người chơi phải đi nhẹ, nói khẽ để tránh việc bị người bịt mắt phát hiện và bị bắt.
 Hướng dẫn cách chơi và luật
@@ -108,18 +108,18 @@ Một người bịt mắt lại bằng một chiếc khăn, những người c�
 Sau đó, người bị bịt mắt bắt đầu di chuyển tìm kiếm mọi nơi để bắt người chơi, người chơi phải cố tránh để không bị bắt và có thể tạo ra nhiều tiếng động khác để đánh lạc hướng người bịt mắt.
 Đến khi người bịt mắt bắt được người chơi thì người chơi đó sẽ bị thua.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Bịt mắt bắt dê" alt="Trò chơi Bịt mắt bắt dê" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-6-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-6-800x450.jpg">
-Trò chơi Bịt mắt bắt dê
-Có thể bạn quan tâm: 30 Trò chơi ngoài trời cho trẻ mầm non hay nhất mẹ nên biết
-7Đua thuyền trên cạn
+
+
+7. Đua thuyền trên cạn
 Giới thiệu trò chơi
 Các thuyền phải được dùng cơ thể của người chơi tạo thành, người chơi phải dùng hai tay và hai chân để chèo thuyền về phía trước. Trò chơi này đòi hỏi người chơi phải đoàn kết, có sức khỏe và lực cánh tay tốt.
 Hướng dẫn cách chơi và luật
 Trò chơi này có thể chia thành nhiều đội chơi khác nhau, mỗi đội chơi phải có số lượng người chơi bằng nhau.
 Các người chơi ngồi thành hàng dọc theo từng đội, người chơi ngồi sau cặp chân vào vòng bụng của người trước để tạo thành một chiếc thuyền đua. Khi nghe hiệu lệnh của trọng tài, tất cả các thuyền đua dùng sức bằng hai chân và hai tay di chuyển cơ thể nhanh chóng để tiến về phía trước cho đến đích. Đội nào đến đích trước sẽ giành chiến thắng.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Đua thuyền trên cạn" alt="Trò chơi Đua thuyền trên cạn" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-7-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-7-800x450.jpg">
-Trò chơi Đua thuyền trên cạn
-Có thể bạn quan tâm: 30 Hoạt động và trò chơi ngoài trời cho trẻ mầm non&nbsp;vui nhộn
-8Thả chó
+
+
+8. Thả chó
 Giới thiệu trò chơi
 Người chơi ông chủ phải nhanh tay bắt được một người chơi khác để làm chú chó, chú chó phải lanh tay lẹ mắt để ý người chơi khác di chuyển có đúng luật hay không để bắt lại. Và sau cùng là các con thỏ phải nhanh nhẹn, chạy thật nhanh đến đồ vật và về lại ông chủ trong thời gian ngắn. Trò chơi này gắn kết 3 nhân vật chơi lại với nhau, tạo nên sự thú vị và vui nhộn.
 Hướng dẫn cách chơi và luật
@@ -135,9 +135,9 @@ Người chơi nào bị ông chủ nắm được ngón tay, sẽ đóng vai ch
 Sau đó, khi ông chủ diễn tả một vật nào đó thì các chú thỏ lập tức phải chạy nhanh tới chạm vào vật đó trước khoảng thời gian ông chủ sẽ thả chó.
 Trong quá trình chạy về, nếu thấy chú chó xuất hiện thì các con thỏ phải đi về ở tư thế 2 tay nắm lỗ tai.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Thả chó" alt="Trò chơi Thả chó" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-8-800x450-1.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-8-800x450-1.jpg">
-Trò chơi Thả chó
-Có thể bạn quan tâm: Mách ba mẹ 16 trò chơi phát triển ngôn ngữ cho trẻ hay nhất
-9Chùm nụm
+
+
+9. Chùm nụm
 Giới thiệu trò chơi
 Trò chơi này dựa vào yếu tố “hên xui” nhiều hơn, người chơi có thể dùng tay hoặc chân để chơi. Nếu người chơi bị loại trước một cánh tay/chân, thì hãy cố giữ lại cánh tay/chân còn lại để tiếp tục và đếm trước các cánh tay/chân còn lại để khi đọc đồng dao được biết trước nhé.
 Hướng dẫn cách chơi và luật
@@ -153,9 +153,9 @@ Con rắn con rít
 Nó rít tay này.”
 Đến từ “này” cuối cùng, trúng tay ai thì người đó phải rút nắm tay ra, sau đó trò chơi cứ thế tiếp tục. Nếu hết các nắm tay thì trò chơi kết thúc và ai trụ lại cuối cùng sẽ là người chiến thắng.
 <img class="ls-is-cached lazyloaded" title="Thả chó Chùm nụm" alt="Thả chó Chùm nụm" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-9-800x450-1.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-9-800x450-1.jpg">
-Thả chó Chùm nụm
-Có thể bạn quan tâm: Top các trò chơi toán học cho trẻ 5 - 6 tuổi mà các mẹ nên biết
-10Đúc cây dừa, chừa cây mỏng
+
+
+10. Đúc cây dừa, chừa cây mỏng
 Giới thiệu trò chơi
 Trò chơi này vừa đếm vừa hát ca dao cũng gần giống với trò chơi Chùm nụm, tuy nhiên, trò chơi này người chơi phải thụt được 2 chân vào để làm người chiến thắng. Và người thua nên chạy thật nhanh để đuổi bắt người thắng, cả 2 người thắng và thua nên lanh lẹ để tránh đối phương hoặc bắt được đối phương.
 Hướng dẫn cách chơi và luật
@@ -174,9 +174,9 @@ Chùm rụm chùm rịu (rạ)
 Mà ra chân này.”
 Khi đọc hết câu “mà ra chân này”, tới chân người nào, thì người đó sẽ phải thụt chân vào, người nào thụt hết hai chân thì thua, người nào chưa thụt chân nào thì thắng.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Đúc cây dừa, chừa cây mỏng" alt="Trò chơi Đúc cây dừa, chừa cây mỏng" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-10-800x450-1.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-10-800x450-1.jpg">
-Trò chơi Đúc cây dừa, chừa cây mỏng
-Có thể bạn quan tâm: Mách mẹ các trò chơi rèn luyện trí nhớ cho trẻ cực vui
-11Chơi chuyền
+
+
+11. Chơi chuyền
 Giới thiệu trò chơi
 Đâu là trò chơi rất được các bé gái ưa chuộng, người chơi phải nhanh tay, nhanh mắt để bắt được que và quả bóng nhanh chóng. Trong quá trình chơi, người chơi nên ghi nhớ số lượng que của mỗi màn để tránh bắt nhầm và mất lượt nhé.
 Hướng dẫn cách chơi và luật
@@ -186,9 +186,9 @@ Trong quá trình chơi, người chơi bắt đầu chơi từ màng 1 (lấy m
 Sau đó đến màng 2 (lấy hai que một lần),... cứ tiếp tục tung lên cho đến khi đủ 10 que.
 Khi người chơi không nhanh tay hay nhanh mắt để bắt được bóng và que cùng một lúc sẽ bị mất lượt, lượt chơi đó sẽ chuyển sang người bên cạnh.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Chơi chuyền" alt="Trò chơi Chơi chuyền" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-11-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-11-800x450.jpg">
-Trò chơi Chơi chuyền
-Có thể bạn quan tâm: Mách mẹ 10+ trò chơi sáng tạo cho trẻ mầm non
-12Nhảy bao bố
+
+
+12. Nhảy bao bố
 Giới thiệu trò chơi
 Trò chơi này đòi hỏi người chơi phải có thể lực, nhanh chân chạy thật nhanh khi đến lượt mình và cố gắng vượt qua đội khác. Vì là trò chơi đồng đội nên mỗi người phải cố gắng hoàn thành lượt chơi của mình nhanh nhất có thể nhé.
 Hướng dẫn cách chơi và luật
@@ -196,9 +196,9 @@ Tất cả người chơi chia thành nhiều đội chơi có số lượng b�
 Người đứng đầu bước vào trong bao bố, sau khi nghe lệnh xuất phát mới bắt đầu nhảy nhanh đến đích, tiếp đó sẽ đến người thứ 2 nhảy, người thứ 3,... cho đến hết người chơi. Đội nào về trước đội đó thắng.
 Trong quá trình chơi, người chơi nào nhảy trước hiệu lệnh xuất phát là phạm luật, người nhảy chưa đến mức quy định hoặc nhảy chưa đến đích mà bỏ bao ra cũng phạm luật.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Nhảy bao bố" alt="Trò chơi Nhảy bao bố" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-12-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-12-800x450.jpg">
-Trò chơi Nhảy bao bố
-Có thể bạn quan tâm: Gợi ý mẹ top 20 trò chơi tiếng Anh cho trẻ vừa học vừa chơi
-13Ô ăn quan
+
+
+13.Ô ăn quan
 Giới thiệu trò chơi
 Người chơi phải nhanh tay ăn hết quan (sỏi) của người chơi khác một cách nhanh chóng. Trò chơi này người chơi nên tính toán trước các quan (sỏi) để được thắng nhanh nhất.
 Hướng dẫn cách chơi và luật
@@ -206,9 +206,9 @@ Người chơi vẽ một hình chữ nhật được chia đôi theo chiều d�
 Sau đó, hai người chơi đi hai bên, người thứ nhất đi quan với nắm sỏi trong ô vuông nhỏ, các sỏi được rải đều xung quanh từng viên một, khi đến hòn sỏi cuối cùng người chơi vẫn đi ô bên cạnh và cứ thế tiếp tục đi quan (bỏ những viên sỏi nhỏ vào từng ô liên tục). Vậy là những viên sỏi đó đã thuộc về người chơi đó, lúc này người đối diện mới được bắt đầu.
 Đến lượt đối phương đi quan cũng như người đầu tiên, cả hai thay phiên nhau đi quan cho đến khi nào nhặt được phần ô quan lớn và lấy được hết phần của đối phương. Phân thắng thua theo số lượng của các viên sỏi.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cầu" alt="Trò chơi Ô ăn quan" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg">
-Trò chơi Ô ăn quan
-Có thể bạn quan tâm: Mách ba mẹ 10 trò chơi cho trẻ tự kỷ tại nhà giúp con phát triển các giác quan
-14Cướp cầu
+
+
+14. Cướp cầu
 Giới thiệu trò chơi
 Trò tung cầu, cướp cầu là một trò chơi mang tính đặc trưng ở nhiều lễ hội. Với trò chơi này, người chơi phải nhanh nhẹn tranh giành lấy cầu để ném vào rổ hoặc truyền cho đồng đội của mình.
 Trò chơi này mang tính đồng đội rất cao, nên người chơi phải phối hợp nhịp nhàng với nhau trong suốt quá trình chơi.
@@ -216,9 +216,9 @@ Hướng dẫn cách chơi và luật
 Khi quả cầu được trọng tài tung ra sân. Các nhóm người chơi phải tranh cướp quyết liệt để giành quả cầu. Và người chơi cùng mỗi đội phải tranh cướp cầu của đội khác và truyền ngay cho các thành viên trong đội của mình.
 Mỗi đội cướp cầu phải nhanh chóng ném vào điểm đích (rổ) của đội mình. Đội nào cướp được cầu và ném vào rổ của đội mình nhiều nhất là đội thắng cuộc.&nbsp;
 <img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cầu" alt="Trò chơi Cướp cầu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-14-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-14-800x450.jpg">
-Trò chơi Cướp cầu
-Có thể bạn quan tâm: Mách ba mẹ 12 trò chơi cho trẻ sơ sinh luyện phát âm hiệu quả nhất
-15Oẳn tù tì
+
+
+15. Oẳn tù tì
 Giới thiệu trò chơi
 Trò chơi này vô cùng đơn giản, không đòi hỏi phải dùng nhiều kỹ thuật hay dụng cụ gì nhiều, người chơi chỉ cần tinh ý và sử dụng một chút kỹ xảo nhỏ để biết trước người chơi khác ra cái gì, từ đó có thể suy tính nên sử dụng cái gì để thắng.
 Hướng dẫn cách chơi và luật
@@ -229,43 +229,44 @@ Bao: Người chơi chỉ cần xòe cả 5 ngón tay ra.
 Trong quá trình chơi, nếu muốn thắng, người chơi nên ghi nhớ “búa thì đập được kéo, kéo thì cắt được bao, bao thì bao được búa.”
 Khi tất cả người chơi cùng đọc: “Oẳn tù tì, ra cái gì? ra cái này”, sau đó tất cả người chơi đưa tay ra cùng một lúc, sau đó phân định thắng thua theo kiểu hình thức là kéo, búa hoặc bao, khi hai bên ra một kiểu giống nhau thì được oẳn tù tì lại.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Oẳn tù tì" alt="Trò chơi Oẳn tù tì" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-15-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-15-800x450.jpg">
-Trò chơi Oẳn tù tì
-Có thể bạn quan tâm: Top 12 những trò chơi phát triển vận động tinh ba mẹ nên biết
-16Kể chuyện
+
+
+16. Kể chuyện
 Giới thiệu trò chơi
 Trò chơi này rất đơn giản, một người kể chuyện cho cả một nhóm người nghe, người kể chuyện nên kể những câu chuyện thú vị, kịch tính và lôi cuốn để thu hút người nghe. Cứ vậy xoay vòng, đến lượt người nào thì người đó kể chuyện.
 Hướng dẫn cách chơi và luật
 Một người tiên phong làm người kể chuyện, kể các sự tích, câu chuyện dân gian nào đó để mọi người cùng nghe.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Kể chuyện" alt="Trò chơi Kể chuyện" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-16-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-16-800x450.jpg">
-Trò chơi Kể chuyện
-17Hội vật làng Hà
+
+
+17. Hội vật làng Hà
 Giới thiệu trò chơi
 Hội vật làng Hà là một trò chơi truyền thống được diễn ra vào mỗi năm, trong trò chơi này, hai người chơi phải dùng sức mạnh và kỹ thuật vật ngã đối phương để giành chiến thắng.
 Hướng dẫn cách chơi và luật
 Các người chơi phải tranh tài quyết liệt bằng các kỹ thuật, sức mạnh để đối chiến với nhau.
 Người chơi nào vật ngã đối phương xuống trước và đối phương không thể chiến đấu được nữa thì giành chiến thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Hội vật làng Hà" alt="Trò chơi Hội vật làng Hà" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-17-800x450.jpg">
-Trò chơi Hội vật làng Hà
-Có thể bạn quan tâm: Mách mẹ những trò chơi trí tuệ cho bé 6 tuổi hấp dẫn nhất
-18Tả cáy
+
+
+18. Tả cáy
 Giới thiệu trò chơi
 Trò chơi tả cáy còn được gọi là đánh gà, đây là một trò chơi nhanh tay, lẹ mắt cho người chơi. Với hình thức chơi đơn giản và đặc biệt nên trò chơi này thường được nhiều người chơi hiện nay.
 Hướng dẫn cách chơi và luật
 Người chơi đào một cái lỗ to tròn cỡ hình cái bát, sau đó đặt “con gà” dưới lỗ. này, con gà có thể làm bằng chất liệu gỗ hoặc sử dụng quả bóng, đồ vật gì cũng được.
 Sau đó, nhà cái cầm gậy đẩy con gà ra khỏi lỗ, nhà con thì dùng gậy đẩy gà vào lỗ. Trong quá trình chơi, nhà cái phải vừa dùng gậy đẩy gà và vừa phải để ý đỡ đòn gậy của nhà con. Nếu nhà cái trụ được lâu và không có gà lọt xuống dưới thì thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Tả cáy" alt="Trò chơi Tả cáy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-18-800x450.jpg">
-Trò chơi Tả cáy
-Có thể bạn quan tâm: Mẹ hãy thử ngay 10 trò chơi cho bé 4 tuổi giúp bé yêu kích thích tư duy
-19Đánh quay
+
+
+19. Đánh quay
 Giới thiệu trò chơi
 Trò chơi đánh quay được các người chơi nam rất ưa chuộng, với trò chơi này người chơi phải giữ được con quay của mình càng lâu càng tốt.
 Hướng dẫn cách chơi và luật
 Con quay được làm bằng gỗ hay các đồ vật có hình nón cụt, chân bằng sắt. Sau đó, người chơi dùng một sợi dây, quấn từ dưới lên trên rồi cầm một đầu vào con quay.
 Người chơi quăng mạnh con quay xuống dưới đất cho con quay xoay tròn từng vòng, trong quá trình chơi, con quay của ai quay lâu nhất là người đó thắng.&nbsp;
 <img class="ls-is-cached lazyload" title="Trò chơi Đánh quay" alt="Trò chơi Đánh quay" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-19-800x450.jpg">
-Trò chơi Đánh quay
-Có thể bạn quan tâm: Mách ba mẹ 11 trò chơi vận động giúp trẻ phát triển thể chất và trí tuệ
-20Thi thổi cơm
+
+
+20. Thi thổi cơm
 Giới thiệu trò chơi
 Trong dịp lễ hội, một số làng ở miền Bắc và miền Trung của Việt Nam có tổ chức thi thổi cơm. Cuộc thi nấu cơm nhằm diễn lại sự tích của vị tướng Phan Tây Nhạc, một vị tướng thời vua Hùng.
 Trò chơi này không chỉ được diễn ra sôi động, náo nhiệt và vui vẻ cho người chơi, mà còn rèn luyện cho mọi người nấu được cơm ăn trong điều kiện khó khăn, thiếu thốn.
@@ -275,9 +276,9 @@ Trong quá trình chơi, các đội phải đi tìm kiếm các nguyên liệu 
 Các người chơi phải tự xay thóc, giã gạo, giần sàng, lấy lửa, lấy nước và nấu cơm.
 Đội nào làm được cơm trắng tinh, thơm, dẻo và chín nhất thì là đội thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Thi thổi cơm" alt="Trò chơi Thi thổi cơm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-20-800x450.jpg">
-Trò chơi Thi thổi cơm
-Có thể bạn quan tâm: 10 Trò chơi và hoạt động giúp trẻ em vui khỏe phát triển
-21Thi diều sáo
+
+
+21. Thi diều sáo
 Giới thiệu trò chơi
 Hàng năm ở một số nơi sẽ tổ chức cuộc thi diều sáo như hội đền Hùng ở thôn Cổ Tích, Lâm Thao, Phú Thọ. Trò chơi này thường được diễn ra vào mùa hè và được rất nhiều người hưởng ứng và tham dự.
 Hướng dẫn cách chơi và luật
@@ -287,9 +288,9 @@ Trò chơi có 3 hình thức chính được phân theo tiếng kêu:&nbsp;
 3. Sáo còi: tiếng kêu chói tai như tiếng còi.
 Sau đó, ban giám khảo có thể chấm theo tiếng sáo, nhưng trước tiên bao giờ cũng phải xem diều của người chơi trước, nếu diều của người chơi đẹp mắt, bay bổng thì mới xem như đúng quy định.
 <img class="ls-is-cached lazyload" title="Trò chơi Thi diều sáo" alt="Trò chơi Thi diều sáo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-21-800x450.jpg">
-Trò chơi Thi diều sáo
-Có thể bạn quan tâm: Trò chơi trong nhà giúp bé phát triển IQ và EQ
-22Mèo đuổi chuột
+
+
+22. Mèo đuổi chuột
 Giới thiệu trò chơi
 Đây là một trò chơi thuộc kiểu tập thể rất được nhiều trẻ em yêu thích, bởi sự đơn giản và vui nhộn từ trò chơi mang lại. Người chơi là mèo phải cố gắng bắt được chuột để giành chiến thắng.
 Hướng dẫn cách chơi và luật
@@ -303,75 +304,74 @@ Mèo chạy đằng sau.”
 Sau đó, một người chơi được chọn làm mèo và một người chơi được chọn làm chuột sẽ đứng ở giữa vòng tròn và quay lưng vào nhau.&nbsp;
 Khi mọi người hát đến câu cuối thì chuột bắt đầu chạy, mèo phải chạy đằng sau. Tuy nhiên, mèo phải chạy đúng chỗ chuột đã chạy. Mèo thắng khi mèo bắt được chuột.&nbsp;
 <img class="ls-is-cached lazyload" title="Trò chơi Mèo đuổi chuột" alt="Trò chơi Mèo đuổi chuột" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-22-800x450.jpg">
-Trò chơi Mèo đuổi chuột
-Có thể bạn quan tâm: Tổng hợp 6 trò chơi cho bé 1 tuổi giúp con vừa học vừa chơi cả tuần không chán
-23Ném còn
+
+
+23. Ném còn
 Giới thiệu trò chơi
 Đối với các dân tộc Mường, Tày, H'mông, Thái,… ném còn là trò chơi thu hút các bạn trai và gái tham gia trong các dịp lễ. Không những thế, trò chơi này cũng được nhiều người lớn tuổi thích, bởi ngoài cầu duyên, ném còn còn mang ý nghĩa ấm no, mùa màng tươi tốt cho mọi người.
 Hướng dẫn cách chơi và luật
 Với trò chơi này, người chơi cắm một cây tre cao, trên đỉnh tre có vòng còn. Người chơi phải ném quả còn lọt qua vòng còn trên đỉnh cột là thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Ném còn" alt="Trò chơi Ném còn" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-23-800x450.jpg">
-Trò chơi Ném còn
-Có thể bạn quan tâm: Lợi ích và 11 hoạt động khuyến khích trẻ tự chơi một mình
-24Thi dưa hấu
+
+
+24. Thi dưa hấu
 Giới thiệu trò chơi
 Vào khoảng đầu tháng ba âm lịch hàng năm tại Làng Thổ Tang, Vĩnh Tường, Phú Thọ có diễn ra trò chơi thi dưa hấu. Người chơi phải chọn ra những quả dưa đẹp và tươi tốt nhất để tham gia.
 Hướng dẫn cách chơi và luật
 Người chơi phải hái những quả dưa đẹp nhất để tham gia và các giám khảo sẽ xét thắng thua dựa theo các tiêu chuẩn gồm: giống tốt, đẹp, già, đầy đặn, bổ ra đỏ tươi vàng lại nhiều cát.&nbsp;
 Nếu dưa người chơi nào đạt đúng tiêu chuẩn trên thì là người thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Thi dưa hấu" alt="Trò chơi Thi dưa hấu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-24-800x450.jpg">
-Trò chơi Thi dưa hấu
-Có thể bạn quan tâm: Cách chơi với trẻ sơ sinh vừa vui và giúp phát triển thể chất và trí tuệ
-25Thi thơ
+
+
+25. Thi thơ
 Giới thiệu trò chơi
 Hàng năm nhân ngày hội đền vua Đinh, để giữ gìn nếp xưa và khuyến khích mọi người nên đi theo con đường văn học, dùi mài kinh sử, nên hội thi thơ được diễn ra và thu hút rất nhiều người đến tham gia.&nbsp;
 Hướng dẫn cách chơi và luật
 Chủ đề thi thơ tùy vào ban tổ chức đề ra. Thí sinh nào trúng giải thưởng sẽ được thưởng và mang vinh dự về cho bản thân.
 <img class="ls-is-cached lazyload" title="Trò chơi Thi thơ" alt="Trò chơi Thi thơ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-25-800x450.jpg">
-Trò chơi Thi thơ
-Có thể bạn quan tâm: Những trò chơi cho trẻ 3 - 4 tuổi vô cùng hấp dẫn và thú vị
-26Đánh roi múa mọc
+
+
+26. Đánh roi múa mọc
 Giới thiệu trò chơi
 Trò chơi đánh roi múa mọc thường được tổ chức thi đấu vào những ngày đầu tháng giêng ở các hội lễ ở miền Bắc. Trò chơi này đòi hỏi phải có kỹ năng, sức mạnh nếu muốn giành chiến thắng.
 Hướng dẫn cách chơi và luật
 Roi bằng tre vót nhẵn và dẻo, đầu bịt vải đỏ, mộc cũng được sơn bằng sơn đỏ. Các người chơi đấu tay đôi với nhau. Vừa dùng roi để đánh, dùng mộc để đỡ, ai đánh trúng vào chỗ hiểm của đối phương nhiều thì thắng, với trò chơi này thường đánh trúng vào vai và sườn mới được nhiều điểm.
 <img class="ls-is-cached lazyload" title="Trò chơi Đánh roi múa mọc" alt="Trò chơi Đánh roi múa mọc" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-26-800x450.jpg">
-Trò chơi Đánh roi múa mọc
-Có thể bạn quan tâm: 5 hoạt động siêu đơn giản giúp trẻ 13 tháng tuổi phát triển nhiều kỹ năng
-27Thi thả chim
+
+
+27. Thi thả chim
 Giới thiệu trò chơi
 Hàng năm trò chơi thi thả chim thường được tổ chức vào hai mùa: mùa hạ (tháng 3 - 4 âm lịch) và mùa thu (tháng 7 - 8 âm lịch).&nbsp; Trò chơi này không chỉ mang lại không khí vui vẻ và nhộn nhịp mà còn ca ngợi đức tính đoàn kết, chung thuỷ của người dân Việt Nam, nên rất thu hút rất nhiều người, nhiều nơi và mọi lứa tuổi tham gia.
 Hướng dẫn cách chơi và luật
 Chim phải bay đúng hướng xuất phát và về đích mới được xét giải.
 <img class="ls-is-cached lazyload" title="Trò chơi Thi thả chim" alt="Trò chơi Thi thả chim" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-27-800x450.jpg">
-Trò chơi Thi thả chim
-Có thể bạn quan tâm: 10 Hoạt động vui chơi giúp trẻ phát triển thể chất lẫn trí tuệ trong giai đoạn 8 tháng tuổi
-28Nhún đu
+
+
+28. Nhún đu
 Giới thiệu trò chơi
 Trong các ngày hội ở Việt Nam, các thôn làng thường trồng một vài cây đu để trai gái lên đu với nhau. Cây đu được trồng bởi bốn, sáu hay tám cây tre dài vững chắc để chịu đựng được sức nặng của hai người cùng với lực đẩy quán tính. Người chơi chỉ cần lên đu và vịn vào thân trẻ, trò chơi này cũng là một loại sinh hoạt trao đổi tình cảm của trai gái.
 Hướng dẫn cách chơi và luật&nbsp;
 Trong quá trình chơi, người chơi càng nhún mạnh, thì đu càng lên cao. Người chơi phải cho đu lên ngang với ngọn đu là tốt nhất và muốn chiến thắng thì phải đu càng cao càng tốt.&nbsp; Nhiều nơi còn treo giải thưởng ở ngang ngọn đu để người đu giật giải.
 <img class="ls-is-cached lazyload" title="Trò chơi Nhún đu" alt="Trò chơi Nhún đu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-28-800x450-1.jpg">
-Trò chơi Nhún đu
-Có thể bạn quan tâm: Phát triển não bộ của trẻ nhờ vào việc ba mẹ cùng tham gia trò chơi ú oà với con
-29Đấu vật
+
+
+29. Đấu vật
 Giới thiệu trò chơi
 Đấu vật rất phổ biến ở nhiều hội xuân miền Bắc và miền Trung, nên trước khi hội đấu vật diễn ra, các đô vật từ khắp nơi kéo đến để tham gia rất đông đúc, náo nhiệt. Người chơi phải vận dụng các kỹ thuật và sức mạnh của mình để giành chiến thắng.
 Hướng dẫn cách chơi và luật
 Trong lúc thi đấu vật, các đô vật phải giằng co để bắt được lỗ hổng không phòng bị của đối phương, họ phải xông vào ôm lấy nhau. Họ lừa nhau, dùng những kỹ thuật để vật ngã đối thủ. Cả hai phòng thủ tấn công đến khi nào một bên không thể đấu được nữa mới ngừng lại.
 <img class="ls-is-cached lazyload" title="Trò chơi Đấu vật" alt="Trò chơi Đấu vật" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-29-800x450.jpg">
-Trò chơi Đấu vật
-Có thể bạn quan tâm: Khám phá khu vui chơi trẻ em Kizciti, điểm đến hot dành cho các bé dịp hè 2023
-30Vật cù
+
+30. Vật cù
 Giới thiệu trò chơi
 Cả hai đội chơi phải giành và đưa được cù vào sọt (hay vào hố) của đối phương, để đưa được quả cù vào đích thì người chơi phải giành giật, tranh cướp quyết liệt, bên nào cũng tìm mọi cách nhằm cản phá đối phương đưa cù vào sọt (hố) của mình. Vì thế, hàng năm hội vật cù thường rất sôi nổi, hào hứng, cuốn hút mọi người tham gia.
 Hướng dẫn cách chơi và luật
 Mỗi đội phải tìm cách lừa nhau để bỏ cho được quả cù vào hố của đối phương thì là thắng cuộc.
 Kết thúc cuộc chơi, đội nào có số lần đưa cù vào đích của đối phương nhiều hơn là đội thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Vật cù " alt="Trò chơi Vật cù " data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-30-800x450-1.jpg">
-Trò chơi Vật cù
-Có thể bạn quan tâm: Mách mẹ top 5 công viên nước Sài Gòn cho bé vui hè thỏa thích
-31Kéo cưa lừa xẻ
+
+
+31. Kéo cưa lừa xẻ
 Giới thiệu trò chơi
 Trò chơi này thường phổ biến ở các trẻ nhỏ, với lời hát đơn giản, các em nhỏ có thể vừa chơi vừa ghi nhớ các âm điệu, ngôn ngữ giúp các em đoàn kết chơi với nhau hơn và phát huy những vốn từ ngữ.
 Hướng dẫn cách chơi và luật
@@ -390,9 +390,9 @@ Nó lấy mất của
 Lấy gì mà kéo.”
 Mỗi lần hát một từ thì lại đẩy hoặc kéo về một lần.
 <img class="ls-is-cached lazyload" title="Trò chơi Kéo cưa lừa xẻ" alt="Trò chơi Kéo cưa lừa xẻ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-31-800x450.jpg">
-Trò chơi Kéo cưa lừa xẻ
-Có thể bạn quan tâm: Ba mẹ bỏ túi 11 khu vui chơi trẻ em Quận 7 được yêu thích nhất dịp hè 2023
-32Kéo chữ
+
+
+32. Kéo chữ
 Giới thiệu trò chơi
 Trò chơi kéo chữ thường được chơi rất nhiều người và mỗi người chơi cầm gậy dài khoảng 1,2m có quấn giấy màu và ở trên đầu gậy thường có màu sắc rực rỡ. Sau đó, người chơi sẽ tạo thành những chữ cái có nghĩa bằng những cây gậy có sẵn.
 Hướng dẫn cách chơi và luật
@@ -400,9 +400,9 @@ Tất cả người chơi được chia làm hai đội, mỗi đội có một 
 Khi bắt đầu, các người chơi di chuyển dưới sự hướng dẫn của các tổng cờ để xếp thành các chữ khác nhau. Các tổng cờ vừa dẫn quân vừa múa hát.
 Đội quân theo tổng cờ để thực hiện những động tác khác nhau, để tạo ra các chữ (chữ Hán hoặc Nôm) theo ý nghĩa.
 <img class="ls-is-cached lazyload" title="Trò chơi Kéo chữ" alt="Trò chơi Kéo chữ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-32-800x450.jpg">
-Trò chơi Kéo chữ
-Có thể bạn quan tâm: 20 Địa điểm chơi Noel cho gia đình có trẻ nhỏ tại TPHCM
-33Chơi hóp
+
+
+33. Chơi hóp
 Giới thiệu trò chơi
 Chơi hóp là một trong những trò chơi trong dân gian Ninh Hòa mà được rất nhiều người ưa thích. Người chơi phải tinh ý để tính toán sao cho hòn chì của mình trúng hòn chì của người thua.
 Hướng dẫn cách chơi và luật
@@ -417,9 +417,9 @@ Khi chơi người chơi bắt bồ và tìm cách cứu bồ. Khi hòn chì c�
 Người thắng cuộc cầm hòn chì lên trên tay rồi vạch lằn mức ngay tâm hòn chì nằm (tức là vị trí của hòn chì năm trước khi được lượm lên tay). Người thắng cuộc có hai chân đứng ngay lằn mức gạch làm điểm với tay cầm hòn chì cố gắng sao cho hòn chì của mình trúng hòn chì của người khác. Nếu trúng chỗ chật thì không được quyền chơi nữa mà nhường người chơi kế tiếp.
 Xong bàn này người chơi tiếp tục chơi bàn khác và đi theo thứ tự, người thắng cuộc đi sau cùng.
 <img class="ls-is-cached lazyload" title="Trò Chơi hóp" alt="Trò Chơi hóp" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-a33-800x450.jpg">
-Trò Chơi hóp
-Có thể bạn quan tâm: Khám phá những điều thú vị tại khu vui chơi trẻ em Vietopia Quận 7 dịp hè
-34Nhảy chồng cao
+
+
+34. Nhảy chồng cao
 Giới thiệu trò chơi
 Đây là một trò chơi rất được các bé ưa thích. Trước khi chơi người chơi nên ghi nhớ 5 động tác này:
 Canh búp, nở, tàn, gươm: Điển hình là một nụ hoa, dùng bàn tay để trên canh tư
@@ -436,9 +436,9 @@ Khi làm canh tư, hai người ngồi làm chồng những bàn chân lên nhau
 Sau cùng, người chơi phải đi qua sông nhỏ đến sông lớn là xong, hai người làm canh qua sông nhỏ bốn bàn chân chạm vào nhau bẹt ra hơi nhỏ để người đi bước vào cũng nói “đi canh nhỏ về canh nhỏ”.
 Khi tới canh lớn, hai người làm giang chân rộng ra để bên đi bước vào đi canh lớn. Khi về canh lớn hai người làm đưa tay lên cho nhà mẹ nắm và tất cả bắt đầu vụt chạy. Khi bắt được người nào thì người đó mất lượt chơi, bắt được hết là thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Nhảy chồng cao" alt="Trò chơi Nhảy chồng cao" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-34-800x450.jpg">
-Trò chơi Nhảy chồng cao
-Có thể bạn quan tâm: Tất tần tật về khu vui chơi trẻ em Kubo
-35Đánh trỏng
+
+
+35. Đánh trỏng
 Giới thiệu trò chơi
 Đánh trỏng là một trò chơi dân gian ở Ninh Hòa rất được các bạn trẻ tuổi ưa thích. Trò chơi không lệ thuộc vào số người, và các đội chơi phải đoàn kết thực hiện các bước trò chơi để được giành chiến thắng.
 Hướng dẫn cách chơi và luật
@@ -450,9 +450,9 @@ Trò chơi gồm có 4 phần:
 Người thắng một tay cầm cây trỏng dài cho đầu trỏng ngắn bay đi thật xa, người thua lượm đầu trỏng ngắn cầm trên tay, người thắng bắt đầu nhảy từ vị trí đầu trỏng ngắn rớt xuống, nhảy bao nhiêu bước tùy thuộc vào khắc bao nhiêu cái ở trên.&nbsp;
 Khi nhảy xong rồi đặt cây trỏng dài xuống để cho người thua chơi, nếu trúng cây trỏng dài, thì người thua u một hơi dài về lỗ, người ăn chạy theo sau cầm cây trỏng dài đợi khi người thua tắt hơi để đánh người thua, rồi tiếp tục cặp khác u.&nbsp;
 <img class="ls-is-cached lazyload" title="Trò chơi Đánh trỏng" alt="Trò chơi Đánh trỏng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-35-800x450.jpg">
-Trò chơi Đánh trỏng
-Có thể bạn quan tâm: Mẹo giúp cha mẹ lựa chọn đồ chơi cho trẻ em an toàn và phù hợp
-36Đánh banh thẻ
+
+
+36. Đánh banh thẻ
 Giới thiệu trò chơi
 Người chơi phải kết hợp cả tay và mắt cho thật hài hòa để tung hứng banh thẻ, tránh để mất lượt hoặc làm hỏng thẻ, bởi vậy rất có thể người chơi khác sẽ giành chiến thắng trong lượt của người đó.
 Hướng dẫn cách chơi và luật
@@ -460,18 +460,18 @@ Hướng dẫn cách chơi và luật
 Sau đó người chơi tung banh lên, tay cầm banh phải nhanh chóng nhặt từng thẻ, khi trái banh rớt xuống nền nhà và tung lên, thì tay phải của người chơi phải bắt kịp trái banh, không để banh rơi xuống đất. Người chơi cứ thao tác như thế cho hết số thẻ và trong quá trình chơi không được sang tay bên kia.
 Người chơi làm liên tục như thế đủ 10 thẻ, không bị rơi banh hoặc bắt sai thẻ lần nào thì thắng, nếu làm sai thì chuyển lượt cho người chơi khác.
 <img class="ls-is-cached lazyload" title="Trò chơi Đánh banh thẻ" alt="Trò chơi Đánh banh thẻ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-36-800x450.jpg">
-Trò chơi Đánh banh thẻ
-Có thể bạn quan tâm: Top 20 đồ chơi cho trẻ 6 tháng tuổi được yêu thích nhất
-37Xé giấy
+
+
+37. Xé giấy
 Giới thiệu trò chơi
 Trò chơi xé giấy rất đơn giản nên được các nhiều người ưa thích, trò này giúp mọi người&nbsp;rèn luyện sự ăn ý trong các thành viên với nhau.
 Hướng dẫn cách chơi và luật
 Mỗi đội lần lượt cử hai người chơi lên thực hiện. Hai người chơi đứng xoay lưng lại với nhau.
 Sau đó, hai người chơi cầm 2 miếng giấy, trong đó đó một trong hai người sẽ ra lệnh cho người kia gấp giấy rồi xé. Trong quá trình chơi, người nào có số đôi (giấy xé giống nhau) nhiều là người đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Xé giấy" alt="Trò chơi Xé giấy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-37-800x450.jpg">
-Trò chơi Xé giấy
-Có thể bạn quan tâm: Tổng hợp đồ chơi cho bé 9-12 tháng tuổi phát triển toàn diện
-38Hú chuột
+
+
+38. Hú chuột
 Giới thiệu trò chơi
 Khi còn nhỏ sau mỗi lần được mẹ nhổ răng ra, mẹ thường ném cái răng vừa nhổ lên mái nhà hoặc gầm giường ngay lúc đó và hú chuột để cho răng mọc đẹp, đều và nhanh hơn. Đây là một truyền thống của các phụ huynh thường được sử dụng của dân tộc ta.
 Hướng dẫn cách chơi và luật
@@ -481,9 +481,9 @@ Hú chuột răng mới về tao răng cũ về mày
 Răng tao sao răng mày vậy.”
 Người xưa thường nói làm như thế để cho răng được mọc đều, mọc nhanh và đẹp hơn.
 <img class="ls-is-cached lazyload" title="Trò chơi Hú chuột" alt="Trò chơi Hú chuột" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-38-800x450.jpg">
-Trò chơi Hú chuột
-Có thể bạn quan tâm: Đồ chơi Montessori: Bí quyết giúp trẻ phát triển trí tuệ tối ưu
-39Hát sinh
+
+
+39. Hát sinh
 Giới thiệu trò chơi
 Truyền thống hát sinh được bắt nguồn từ người Cao Lan, hát sinh thường được các nam nữ thanh niên sử dụng với người mình mến mộ. Hát sinh có nội dung phong phú, tươi sáng để ca ngợi tình yêu lứa đôi, tình đoàn kết, tình yêu quê hương tổ quốc.
 Hướng dẫn cách chơi và luật
@@ -498,9 +498,9 @@ Nhớ mãi câu hát của nàng
 Ngày mưa đội chung nón
 Ngày nắng che chung ô…”.
 <img class="ls-is-cached lazyload" title="Trò chơi Hát sinh" alt="Trò chơi Hát sinh" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-39-800x450.jpg">
-Trò chơi Hát sinh
-Có thể bạn quan tâm: Bật mí các loại đồ chơi cho bé trai
-40Hát soong
+
+
+40. Hát soong
 Giới thiệu trò chơi
 Hát soong là một thể loại dân ca của đồng bào dân tộc Sán Dìu. Hát soong chủ yếu được hát theo hình thức đối đáp. Hát soong thường được lên kế hoạch sẵn và được tạo ra lời trước. Người đi hát phải thuộc các câu hát và dẫn câu hát trong sách ra để hát đố. Người đáp lại cũng vậy, phải sử dụng những câu đáp hợp tình, hợp cảnh để hát đáp câu của người trước.
 Hướng dẫn cách chơi và luật
@@ -510,9 +510,9 @@ Nửa đêm khi hát mọi người thường hỏi, hỏi về quê quán, gia 
 Cuối cùng là hát chào, hát xin về, hát níu giữ nhau,... Sau đó, họ vừa hát vừa tiễn nhau ra cổng và hát hẹn hò cuộc gặp mặt tới.
 Trong quá trình hát, phải hát nghiêm túc, không đùa giỡn, hát đối đáp hát theo giọng ví, còn hát cộc là hát kiểu kể lể. Trong các đám cưới, thường được hát ru. Người hát ru giọng phải ru dài ra, nếu một từ hát cộc kể ra rồi bắt ngay sang từ khác nhưng hát ru thì ru đi ru lại ngân nga luyến láy điệp khúc kéo dài gấp dăm bảy lần hát cộc.&nbsp;
 <img class="ls-is-cached lazyload" title="Trò chơi Hát soong" alt="Trò chơi Hát soong" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-40-800x450.jpg">
-Trò chơi Hát soong
-Có thể bạn quan tâm: Điểm danh 10 đồ chơi cho bé gái được yêu thích nhiều nhất
-41Trống quân Đức Bác
+
+
+41. Trống quân Đức Bác
 Giới thiệu trò chơi
 Trò chơi trống quân Đức Bác được Làng Cả sáng tác nên, vào mỗi năm, làng sẽ mở tiệc khai xuân cầu đinh và trò chơi sẽ được diễn ra vào ngày này. Trò chơi ngoài trời này thường được nam thanh nữ tú của dân làng đền Đức Ông và đền Đức Bà tham gia.
 Hướng dẫn cách chơi và luật
@@ -528,9 +528,9 @@ Hát đế:
 “Kìa hỡi í a trống quân…”
 Cứ như thế hai bên đối đáp lời qua lời lại. Lời ca đối đáp thường mộc mạc nhưng chứa đầy tình ý mặn nồng.
 <img class="ls-is-cached lazyload" title="Trò chơi Trống quân Đức Bác" alt="Trò chơi Trống quân Đức Bác" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-41-800x450.jpg">
-Trò chơi Trống quân Đức Bác
-Có thể bạn quan tâm: Mách mẹ cách chọn đồ chơi thông minh cho bé thích mê
-42Kéo song Hương Canh
+
+
+42. Kéo song Hương Canh
 Giới thiệu trò chơi
 Hàng năm, làng Hương Canh (Bình Xuyên) thường tổ chức kéo song, kéo song thường thu hút được rất nhiều người tham gia. Những người chơi dùng sức để kéo những dây song. Trò chơi này mang tính tập thể rất cao, nên các thành viên của mỗi đội nên có sự chuẩn bị trước khi thi đấu.
 Hướng dẫn cách chơi và luật
@@ -538,25 +538,25 @@ Số lượng thành viên đội chơi thường bằng nhau, mỗi người ch
 Dây song của mỗi bên có buộc một dải màu đỏ để đánh dấu. Trong quá trình chơi, nếu bị đội đối phương lôi mạnh chỗ đánh dấu chui vào lỗ cọc thì thua. Ngược lại, nếu đội nào kéo mạnh được đội đối phương vào lỗ cọc thì thắng.
 Trò chơi được diễn ra khoảng được 4 hiệp, mỗi hiệp được nghỉ giải lao 30 phút.
 <img class="ls-is-cached lazyload" title="Trò chơi Kéo song Hương Canh" alt="Trò chơi Kéo song Hương Canh" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-42-800x450.jpg">
-Trò chơi Kéo song Hương Canh
-Có thể bạn quan tâm: Top 10 đồ chơi thông minh cho bé gái giúp phát triển trí tuệ
-43Leo cầu ùm
+
+
+43. Leo cầu ùm
 Giới thiệu trò chơi
 Trò chơi này được bắt nguồn ở Bình Dương (Vĩnh Tường), Xuân Hoà (Lập Thạch), Đạo Đức (Bình Xuyên). Cầu ùm được dựng bằng một cây tre gác lên bờ ao và được chôn cọc xuống dưới giúp cố định hai bên, đầu ngọn được cột cố định bằng dây thừng. Người chơi khi chơi trò này thường bị ngã “ùm” xuống ao vì thế gọi trò chơi này là trò leo cầu ùm.
 Hướng dẫn cách chơi và luật
 Người chơi di chuyển lên cầu, giữ thăng bằng để tránh té ngã, sau đó người chơi phải di chuyển đến đầu cầu có cắm cờ để lấy lá cờ về là thắng.&nbsp;
 <img class="ls-is-cached lazyload" title="Trò chơi Leo cầu ùm" alt="Trò chơi Leo cầu ùm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-43-800x450.jpg">
-Trò chơi Leo cầu ùm
-Có thể bạn quan tâm: Top 8 đồ chơi toán học giúp bé phát triển tư duy vượt trội
-44Đả cầu cướp phết
+
+
+44. Đả cầu cướp phết
 Giới thiệu trò chơi
 Trò chơi đả cầu cướp phết được diễn ra hàng năm tại đền Đông Lai, xã Bàn Giản, huyện Lập Thạch, trò chơi này thu hút được rất nhiều người đến tham gia, bởi những người này tin rằng, trong dịp đầu năm mới nếu ai sờ được quả cầu thì sẽ gặp nhiều may mắn, thuận lợi trong năm tới.
 Hướng dẫn cách chơi và luật
 Tất cả mọi người đợi quả cầu được tung ra khi xong nghi thức làm lễ, đến khi quả cầu được tung ra thì tất cả mọi người diễn ra cuộc tranh cướp cầu. Người nào giành được quả cầu là giành được chiến thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Đả cầu cướp phết" alt="Trò chơi Đả cầu cướp phết" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-44-800x450.jpg">
-Trò chơi Đả cầu cướp phết
-Có thể bạn quan tâm: Mách mẹ 10 cách làm đồ chơi học toán cho trẻ mầm non đơn giản tại nhà
-45Tứ thú nhân lương
+
+
+45. Tứ thú nhân lương
 Giới thiệu trò chơi
 Tứ thú nhân lương thường được tổ chức tại 3 làng Mậu Lâm, Mậu Thông, Vĩnh Thịnh, trò chơi này còn có tên là “Lễ khai xuân khánh hạ” (tạm dịch: vui mừng đón xuân). Thường được người xưa gọi là múa Mo – một hình thức Các-na-van độc đáo ít thấy ở vùng quê khác. Trò này thường rất náo nhiệt và thu hút nhiều người xem và tham gia bởi không chỉ không khí vui nhộn mà còn được xem lại những vở kịch thời xưa đặc sắc.
 Hướng dẫn cách chơi và luật
@@ -565,9 +565,9 @@ Sau đó, trong quá trình biểu diễn, các nhân vật đều đeo mặt n�
 Nhân vật nam đóng giả nhân vật nữ, và những nhân vật làm trâu hoặc bò thì chỉ có phần đầu.&nbsp;
 Các nhóm người biểu diễn những vở kịch thời xưa, như: Thầy đồ dạy học, nông phu cấy cày, xúc tép, câu ếch; thương nhân đi buôn; thợ mộc đục bào,...
 <img class="ls-is-cached lazyload" title="Trò chơi Tứ thú nhân lương" alt="Trò chơi Tứ thú nhân lương" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-45-800x450.jpg">
-Trò chơi Tứ thú nhân lương
-Có thể bạn quan tâm: Ba mẹ bỏ túi 13 cách làm đồ chơi từ hộp sữa chua cho bé siêu đơn giản
-46Ném lon
+
+
+46. Ném lon
 Giới thiệu trò chơi
 Đây là một trò chơi đơn giản được rất nhiều trẻ em yêu thích, khi ném lon, người chơi nên vận dụng lực và kỹ năng để cho lon ngã, tránh chạm mức hoặc ném quá nhẹ không tới gần được lon.
 Hướng dẫn cách chơi và luật
@@ -576,9 +576,9 @@ Sau đó, người chơi kẻ một đường mức cách dãy lon một khoản
 Đội chơi nào ném hết số banh và có số lon ngã nhiều hơn là thắng.
 Trong quá trình chơi, người chơi đứng qua vạch mức để ném banh là không được tính lượt đó.
 <img class="ls-is-cached lazyload" title="Trò chơi Ném lon" alt="Trò chơi Ném lon" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-46-800x450.jpg">
-Trò chơi Ném lon
-Có thể bạn quan tâm: Bỏ túi 11 cách làm đồ chơi bằng khẩu trang cho trẻ cực đơn giản
-47Đánh quân
+
+
+47. Đánh quân
 Giới thiệu trò chơi
 Trò chơi đánh quân thường được tổ chức ở nhiều nơi khác nhau như: Làng Tuân Lộ Phù Chính (Tuân Chính, Vĩnh Tường), xã Lý Nhân (Vĩnh Tường), xã Liên Châu (Yên Lạc).
 Riêng ở làng Yên Thư (Yên Phương, Yên Lạc), trò chơi đánh quân lại có nguồn gốc từ “Mục đồng đánh quân” và “Chợ mục đồng”. Đây là hai hình thức vừa chơi vừa tập trận tương truyền do vua
@@ -586,7 +586,8 @@ Riêng ở làng Yên Thư (Yên Phương, Yên Lạc), trò chơi đánh quân 
 Hướng dẫn cách chơi và luật
 Các người chơi chia làm hai nhóm, mỗi nhóm cầm sào, cầm gậy để đánh nhau, bên nào có người chơi ngã trước và ngã nhiều nhất là thua.&nbsp;
 Có thể bạn quan tâm: Những hoạt động vui chơi giúp bé phát triển trí não
-48Hò dô ta
+
+48. Hò dô ta
 Giới thiệu trò chơi
 Trò chơi này rất đơn giản, người chơi chỉ cần thực hiện động tác theo yêu cầu của trọng tài và mọi người cùng hò theo, trò chơi Hò dô ta mang lại cảm giác tươi vui, tràn đầy sức sống của các thanh thiếu niên.
 Hướng dẫn cách chơi và luật
@@ -600,7 +601,8 @@ Người chơi: ”Thì ta đi vòng nào”
 Người chơi: “Dô hò là hò dô ta”Lưu ý :
 Thay lời của câu hò cho vui, như: “Đường xa, thì mặc đường xa, nhưng đường xa quá, thì ta đi tàu” hoặc “Bài khó, thì mặc bài khó, nhưng bài khó quá thì ta hỏi thầy cô...”
 Có thể bạn quan tâm: Mách ba mẹ 18 cách làm đồ chơi từ lõi giấy vệ sinh an toàn cho bé
-49Vây lưới bắt cá
+
+49. Vây lưới bắt cá
 Giới thiệu trò chơi
 Trò chơi này có thể tổ chức cho mọi đối tượng, tuy nhiên, tùy theo đặc điểm của từng lứa tuổi mà người chơi sử dụng nhiều hoặc ít cá, với trò chơi Vây lưới bắt cá, các người chơi chỉ cần nhanh tay để bắt được nhiều cá.
 Hướng dẫn cách chơi và luật
@@ -610,9 +612,9 @@ Sau đó đến lượt người chơi thứ hai cũng thực hiện như vậy 
 Trong lúc này, người chơi muốn bắt bao nhiêu con cá cũng được, nhưng chỉ được phép bắt một tay.
 Đội thắng cuộc là đội không vi phạm luật chơi và bắt được nhiều cá có màu được quy định và cá của đội đối phương.
 <img class="ls-is-cached lazyload" title="Trò chơi Vây lưới bắt cá" alt="Trò chơi Vây lưới bắt cá" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-49-800x450.jpg">
-Trò chơi Vây lưới bắt cá
-Có thể bạn quan tâm: Mách ba mẹ 15 cách làm đồ chơi bằng chai nhựa cho trẻ vừa học vừa chơi
-50Cá sấu lên bờ
+
+
+50. Cá sấu lên bờ
 Giới thiệu trò chơi
 Người chơi phải chạy nhanh chóng tìm bờ để trước khi bị bắt. Nếu là người thua, người chơi phải xác định một người chơi nào chưa tìm được bờ và nhanh chóng bắt người đó lại thay thế cho mình.
 Trò chơi này đòi hỏi người chơi phải tinh ý và nhanh nhẹn để trở thành người thắng cuộc.
@@ -620,9 +622,9 @@ Hướng dẫn cách chơi và luật
 Một người chơi sẽ làm cá sấu di chuyển dưới nước, những người chơi còn lại chia nhau đứng trên bờ, sau đó các người chơi chọc tức cá sấu bằng cách đợi cá sấu ở xa thì thò một chân xuống nước hoặc nhảy xuống nước và vỗ tay hát “Cá sấu, cá sấu lên bờ”. Khi nào cá sấu chạy đến bắt thì phải nhảy ngay lên bờ.
 Người chơi nào nhảy lên bờ không kịp bị cá sấu bắt được thì thua và phải thay làm cá sấu.&nbsp;
 <img class="ls-is-cached lazyload" title="Trò chơi Cá sấu lên bờ" alt="Trò chơi Cá sấu lên bờ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-50-800x450.jpg">
-Trò chơi Cá sấu lên bờ
-Có thể bạn quan tâm: Ba mẹ bỏ túi 15 cách làm đồ chơi bằng que kem đơn giản cho con
-51Keng trái cây
+
+
+51. Keng trái cây
 Giới thiệu trò chơi
 Người chơi phải suy nghĩ các loại trái cây có sẵn trong nước, trong quá trình chơi nên lắng nghe người chơi khác hô tên trái cây gì để biết tránh ra và không gọi tên trái cây đó.
 Hướng dẫn cách chơi và luật
@@ -630,9 +632,9 @@ Khi chơi, một người chơi sẽ đi bắt những người còn lại. Ngư
 Trong quá trình chơi, người chơi không được hô tên của loại trái cây mà người trước đã hô và chỉ gọi tên những trái cây trong nước, không được lấy tên trái cây nhập khẩu quốc tế (như me Thái, mận Ấn Độ,…).
 Và khi người chơi đã hô tên trái cây mà di chuyển là bị mất lượt.
 <img class="ls-is-cached lazyload" title="Trò chơi Ken trái cây" alt="Trò chơi Ken trái cây" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-51-800x450.jpg">
-Trò chơi Ken trái cây
-Có thể bạn quan tâm: Hướng dẫn cách làm đồ chơi từ ống hút giúp bé phát triển khả năng sáng tạo
-52Một hai ba
+
+
+52. Một hai ba
 Giới thiệu trò chơi
 Người bị thua đầu tiên nên lắng nghe tiếng bước chân di chuyển của người chơi khác để biết quay lại kịp thời, người chơi khác phải nhanh nhạy di chuyển thật nhanh và tránh bị người thua đầu tiên bắt trúng.
 Hướng dẫn cách chơi và luật
@@ -643,20 +645,20 @@ Trò chơi cứ thế diễn ra khi người chơi di chuyển đến gần ngư
 Và người đi bắt sẽ đuổi theo, người đi bắt đụng vào ai thì người đó sẽ bị thua và trở thành người đi bắt.
 Trong quá trình chơi, người bị phạt phải úp mặt vào tường và hô “một – hai – ba”, sau tiếng “ba” mới được quay lại để bắt người chơi.
 <img class="ls-is-cached lazyload" title="Trò chơi Một hai ba" alt="Trò chơi Một hai ba" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-52-800x450.jpg">
-Trò chơi Một hai ba
-Có thể bạn quan tâm: Mách mẹ 12 cách làm đồ chơi từ lá cây cho trẻ cực hay và đơn giản
-53Đánh đáo
+
+
+53. Đánh đáo
 Giới thiệu trò chơi
 Đây là một trò chơi khá đơn giản rất được các bé gái yêu thích. Người chơi chỉ cần lựa chọn vị trí tốt để chọi trúng đáo, tránh để bị mất lượt.
 Hướng dẫn cách chơi và luật
-Đầu tiên, các người chơi vạch hai lằn mức cách nhau khoảng 2m.&nbsp;
+Đầu tiên, các người chơi vạch hai lằn mức cách nhau khoảng 2m. 
 Sau đó, người chơi đứng ở vạch thứ hai sẽ thảy những đồng tiền vào phía trên vạch thứ nhất, đồng tiền nào rơi vào giữa hai vạch coi như loại và người đi sau có thể ăn đồng tiền này.
 Sau đó, người chơi thứ hai sẽ bắt đầu và nhắm vào những đồng tiền trên mức thứ nhất, dùng đáo chọi vào những đồng tiền đó.
 Nếu người chơi chọi trúng thì được “ăn” những đồng tiền đó và có quyền chọi tiếp. Nếu chọi không trúng thì phải nhường quyền chọi đáo cho người kế tiếp.
 <img class="ls-is-cached lazyload" title="Trò chơi Đánh đáo" alt="Trò chơi Đánh đáo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-53-800x450.jpg">
-Trò chơi Đánh đáo
-Có thể bạn quan tâm: Mách ba mẹ 12 cách làm đồ chơi bằng giấy siêu đơn giản cho bé yêu
-54Nu na nu nống
+
+
+54. Nu na nu nống
 Giới thiệu trò chơi
 Trò chơi này không còn xa lạ với các bạn nhỏ hiện nay, với trò chơi này người chơi phải vừa đọc bài đồng dao vừa thực hiện trò chơi. Trò chơi mang lại cảm giác tươi vui, hấp dẫn nên rất thu hút được rất nhiều các bạn nhỏ chơi.
 Hướng dẫn cách chơi và luật
@@ -686,87 +688,88 @@ Gặp phường trống quân
 Có chân thì rụt.”
 Mỗi từ trong bài đồng dao được đập nhẹ vào một chân theo thứ tự từ đầu đến cuối rồi lại quay ngược lại cho đến chữ “rút” hoặc “rụt”. Chân ai gặp từ “rút” hoặc “rụt” nhịp trúng thì co chân lại. Cứ thế cho đến khi các chân co lại hết lại thì người chơi còn chân thẳng sẽ thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Nu na nu nống" alt="Trò chơi Nu na nu nống" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-54-800x450.jpg">
-Trò chơi Nu na nu nống
-Có thể bạn quan tâm: Hướng dẫn ba mẹ 4 cách tự làm đồ chơi cho bé sơ sinh đơn giản tại nhà
-55Máy bay xuất kích
+
+
+55. Máy bay xuất kích
 Giới thiệu trò chơi
 Người chơi tấn công nên có sức mạnh và hơi tốt để khi “u” được kéo dài hơn, nếu người chơi hết hơi phải chạy thật nhanh về trước đích. Trong khi tấn công, nếu có đồng đội bị bắt thì nên cứu về, sau đó mới bắt đầu tấn công đội đối phương
 Hướng dẫn cách chơi và luật
-Các người chơi chia ra thành hai đội, mỗi đội đứng trong khu vực của mình. Các người chơi quyết định lượt chơi bằng cách khi oẳn tù tì, bên thắng đi trước bằng cách cho một máy bay xuất kích.&nbsp;
-Người làm máy bay phải kêu “u” liên tục khi rời khỏi lãnh thổ của mình. Nếu hết hơi trước khi vào trong vạch coi như máy bay bị rơi và sẽ bị bắt làm tù binh.&nbsp;
+Các người chơi chia ra thành hai đội, mỗi đội đứng trong khu vực của mình. Các người chơi quyết định lượt chơi bằng cách khi oẳn tù tì, bên thắng đi trước bằng cách cho một máy bay xuất kích. 
+Người làm máy bay phải kêu “u” liên tục khi rời khỏi lãnh thổ của mình. Nếu hết hơi trước khi vào trong vạch coi như máy bay bị rơi và sẽ bị bắt làm tù binh. 
 Máy bay muốn hạ đối phương thì phải chạm được vào đối phương, người bị hạ phải qua lãnh thổ đối phương để làm tù binh.
 Trong lúc lâm chiến, bên đối phương có thể ùa ra bắt máy bay bằng cách giữ không cho máy bay về được lãnh thổ của mình, cho đến khi máy bay hết hơi không kêu “u” được nữa.
-Ngược lại, nếu đối phương giữ không chặt để máy bay trốn thoát về lãnh thổ của mình thì những người giữ máy bay đều bị bắt làm tù binh.&nbsp;
+Ngược lại, nếu đối phương giữ không chặt để máy bay trốn thoát về lãnh thổ của mình thì những người giữ máy bay đều bị bắt làm tù binh. 
 Tù binh được giải cứu bằng cách cố chìa tay ra để cho máy bay đội mình chạm đến được. Trong quá trình chơi, nếu nhiều tù binh bị bắt và muốn cứu được hết thì các tù binh phải nắm tay nhau lại, sau đó máy bay chỉ cần chạm vào một người là tất cả được cứu.
 <img class="ls-is-cached lazyload" title="Trò chơi Máy bay xuất kích" alt="Trò chơi Máy bay xuất kích" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-55-800x450-1.jpg">
-Trò chơi Máy bay xuất kích
-Có thể bạn quan tâm: Mách ba mẹ 11 cách làm đồ chơi từ bìa cát tông cực hay cho bé chơi cả ngày không chán
-56Bong bóng nước
+
+
+56. Bong bóng nước
 Giới thiệu trò chơi
 Người chơi nên bắt bóng chính xác để tránh bóng rơi và bị phạt, nếu muốn thắng hoặc loại người chơi khác, thì nên chuyền bóng theo mẹo để đối phương không chụp được.
 Hướng dẫn cách chơi và luật
 Đầu tiên, người chơi đổ nước vào quả bong bóng, sau đó các người chơi đứng thành vòng tròn và người chơi lần lượt thảy bóng vào các người chơi đứng trong vòng tròn.
 Người chơi nào được thảy bóng tới thì phải chụp chính xác.
-Ai bắt không trúng bóng, làm bóng rớt thì bóng sẽ nổ và bị dính nước là thua.&nbsp;
+Ai bắt không trúng bóng, làm bóng rớt thì bóng sẽ nổ và bị dính nước là thua. 
 <img class="ls-is-cached lazyload" title="Trò chơi Bong bóng nước" alt="Trò chơi Bong bóng nước" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-56-800x450.jpg">
-Trò chơi Bong bóng nước
-Có thể bạn quan tâm: Hướng dẫn 10 cách làm đồ chơi từ thùng sữa sáng tạo và đơn giản tại nhà
-57Đi cà kheo
+
+
+57. Đi cà kheo
 Giới thiệu trò chơi
 Trò chơi này thường được chơi ở bãi biển để nếu người chơi có bị ngã thì không bị đau, trong quá trình chơi, người chơi nên kết hợp tay và chân hài hòa để di chuyển được nhanh chóng và giành chiến thắng.
 Hướng dẫn cách chơi và luật
-Tất cả các người chơi có thể chia làm hai đội để thi đấu với nhau (vd: thi chạy, đi nhanh,…). Cây cà kheo được làm bằng tre, và mỗi cây cà kheo có độ cao cách mặt đất khoảng 1,5m – 2m.&nbsp;
+Tất cả các người chơi có thể chia làm hai đội để thi đấu với nhau (vd: thi chạy, đi nhanh,…). Cây cà kheo được làm bằng tre, và mỗi cây cà kheo có độ cao cách mặt đất khoảng 1,5m – 2m. 
 Các thành viên tham gia thi đấu sẽ di chuyển trên cà kheo
 Nếu ai ngã khi đang thi đấu hoặc di chuyển chậm không đến đích thì đội đó thua.
 <img class="ls-is-cached lazyload" title="Trò chơi Đi cà kheo" alt="Trò chơi Đi cà kheo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-57-800x450.jpg">
+
 Trò chơi Đi cà kheo
 Có thể bạn quan tâm: Mách ba mẹ 12 cách làm đồ chơi từ cốc giấy siêu hay cho bé
-58Tập tầm vông
+58. Tập tầm vông
 Giới thiệu trò chơi
 Trò chơi này rất đơn giản, phụ thuộc nhiều vào đánh lừa người chơi khác và tinh ý xem người chơi kia giấu đồ vật ở tay nào. Nếu không biết, người chơi nên thử đoán tâm ý của người giấu và ngược lại.
 Hướng dẫn cách chơi và luật
 Trò chơi này rất đơn giản, các người chơi đề cử ra một người nắm giữ đồ vật (như viên sỏi, viên bi,...) trong bàn tay, người giữ có thể sử dụng tay trái hoặc tay phải để giấu. Sau đó, tất cả mọi người sẽ đọc to bài đồng dao:
-“TẬP TẦM VÔNG
-TAY KHÔNG TAY CÓ
-TẬP TẦM VÓ
-TAY CÓ TAY KHÔNG
-TAY KHÔNG TAY CÓ
-TAY CÓ TAY KHÔNG?”
+“Tập tầm vông
+Tay không tay có
+Tập tầm vó
+Tay có tay không
+Tay không tay có
+Tay có tay không?”
 Lúc này, người giữ đồ vật sẽ đưa hai tay ra. Và những người chơi còn lại sẽ đoán xem tay nào đang giữ đồ vật.
 Nếu người chơi bị đoán trúng tay nắm viên sỏi thì người chơi thắng, hoặc ngược lại những người chơi còn lại không đoán được tay nào nắm viên sỏi thì người giữ viên sỏi thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Tập tầm vông" alt="Trò chơi Tập tầm vông" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-58-800x450.jpg">
-Trò chơi Tập tầm vông
-Có thể bạn quan tâm: Mách ba mẹ 7 cách làm đồ chơi từ vỏ hộp sữa bột cho bé siêu đơn giản
-59Nhảy dây
+
+
+59. Nhảy dây
 Giới thiệu trò chơi
 Với trò chơi này, người chơi phải tính toán sợi dây để nhảy qua khi dây tới, trong quá trình nhảy người chơi nên nhảy cao lên để tránh bị vướng vào sợi dây và thua.
 Hướng dẫn cách chơi và luật
 Tất cả người chơi lần lượt vào vòng quay của dây để nhảy qua, các người chơi cứ tiếp tục nhảy đúng theo số lần quy định của cuộc chơi. Nếu vướng dây thì đội chơi đó sẽ bị thua.
 <img class="ls-is-cached lazyload" title="Trò chơi Nhảy dây" alt="Trò chơi Nhảy dây" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-59-800x450.jpg">
-Trò chơi Nhảy dây
-Có thể bạn quan tâm: 10 cách làm đồ chơi bằng lá dừa thú vị, dễ làm cho mẹ cùng bé vui chơi
-60Ken con vật
+
+
+60. Ken con vật
 Giới thiệu trò chơi
 Giống với trò chơi ken trái cây, trò chơi ken con vật người chơi cũng phải suy nghĩ trước các con vật có hai từ sẵn. Nếu người chơi có nguy cơ bị bắt thì nên đọc tên con vật đó lên ngay lập tức. Trong quá trình chơi, nếu muốn cứu người khác, người chơi chỉ cần chạm vào người chơi đó là được.
-Hướng dẫn cách chơi và luật&nbsp;
-Đầu tiên, tất cả các người chơi chọn ra một người đầu tiên sẽ đứng giữa và dí bắt các người chơi khác.&nbsp;
+Hướng dẫn cách chơi và luật 
+Đầu tiên, tất cả các người chơi chọn ra một người đầu tiên sẽ đứng giữa và dí bắt các người chơi khác. 
 Nếu các người chơi có nguy cơ bị bắt thì có thể đứng lại và nói 2 chữ về một con vật nào đó (ví dụ: gà con, chó sói, vịt bầu, heo mọi,…), sau khi hô xong, người chơi phải đứng im không nhúc nhích, nếu muốn chơi trở lại người chơi phải chờ người khác đến cứu, muốn cứu chỉ cần người chơi khác chạm vào bạn là được.
-Lúc này người đi bắt sẽ không được bắt người chơi đó và di chuyển đi bắt người khác.&nbsp;
+Lúc này người đi bắt sẽ không được bắt người chơi đó và di chuyển đi bắt người khác. 
 Nếu người đi bắt chạm vào người chơi nào mà người chơi đó không kịp ken thì người chơi đó sẽ bị thua và ra thay thế cho người đi bắt trước đó.
 <img class="ls-is-cached lazyload" title="Trò chơi Ken con vật" alt="Trò chơi Ken con vật" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-60-800x450.jpg">
-Trò chơi Ken con vật
-Có thể bạn quan tâm: Những cách làm đồ chơi từ ống nước thú vị bé sẽ thích mê
-61Bún dây thun
-Giới thiệu&nbsp; trò chơi
+
+
+61. Bún dây thun
+Giới thiệu  trò chơi
 Trò chơi này vô cùng đơn giản từ cách chơi đến dụng cụ chơi, người chơi chỉ cần canh chuẩn vị trí để bắn thun sao cho hai sợi dây đan vào nhau là được.
 Hướng dẫn cách chơi và luật
 Đầu tiên, mỗi người chơi sử dụng từ 5 đến 10 sợi dây thun rồi thảy tất cả xuống đất.
 Sau đó người chơi này sẽ dùng ngón tay bún sợi dây thun của mình sao cho các sợi thun đan vào nhau.
 Trong quá trình chơi, ai bún được 2 sợi thun đan vào nhau trước thì sẽ ăn được hai sợi đó. Và người nào giữ được nhiều dây thun nhất thì là người thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Bún dây thun" alt="Trò chơi Bún dây thun" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-61-800x450.jpg">
-Trò chơi Bún dây thun
-Có thể bạn quan tâm: 15 Cách làm đồ chơi từ khay đựng trứng thú vị cho bé
-62Du de du dích
+
+
+62. Du de du dích
 Giới thiệu trò chơi
 Nếu là người xòe tay, người chơi nên hát câu cuối vừa xong là nắm lại lập tức để bắt tay của người chơi kia. Nếu bạn là người đưa ngón tay vào, thì nên rút tay ra thật nhanh khi nghe câu hát cuối. của người xòe tay ra.
 Hướng dẫn cách chơi và luật
@@ -774,9 +777,9 @@ Hướng dẫn cách chơi và luật
 “Du de – du dích – bán mít chợ đông – bán hàng chợ cũ - bán hũ nước tương”. Sau đó, người chơi thứ hai sẽ đưa 1 ngón tay vào lòng bàn tay của người chơi thứ nhất.
 Khi người chơi thứ nhất hát đến chữ “tương” sẽ nắm tay lại nếu bắt trúng được ngón tay của người chơi thứ hai, xem như người chơi thứ hai sẽ bị thua.
 <img class="ls-is-cached lazyload" title="Trò chơi Du de du dích" alt="Trò chơi Du de du dích" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-62-800x450.jpg">
-Trò chơi Du de du dích
-Có thể bạn quan tâm: Top 8 ý tưởng làm đồ chơi từ lá chuối cực dễ cho bé yêu
-63Thìa la thìa lảy
+
+
+63. Thìa la thìa lảy
 Giới thiệu trò chơi
 Đây là một trò chơi thú vị và vui vẻ rất được nhiều bé gái ưa thích, với lối chơi đơn giản, mọi người cùng nhau hát đồng ca, giúp người chơi biết thêm những từ ngữ, ca dao mới và hòa nhập với tập thể hơn.
 Hướng dẫn cách chơi và luật
@@ -790,15 +793,15 @@ An quà là bốn
 Trốn việc là năm
 Hay nằm là sáu
 Láu táu là bảy.”
-Sau khi hát đến từ “bảy” trúng tay ai thì người đó phải rút nắm tay ra. Cứ như thế cho đến hết năm tay thì trò chơi chấm dứt.
+Sau khi hát đến từ “bảy” trúng tay ai thì người đó phải rút nắm tay ra. Cứ thế cho đến hết năm tay thì trò chơi chấm dứt.
 <img class="ls-is-cached lazyload" title="Trò chơi Thìa la thìa lảy" alt="Trò chơi Thìa la thìa lảy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-63-800x450.jpg">
-Trò chơi Thìa la thìa lảy
-Có thể bạn quan tâm: Hướng dẫn ba mẹ 7 cách làm đồ chơi từ vỏ hộp sữa tươi cho bé
-64Úp lá khoai
+
+
+64. Úp lá khoai
 Giới thiệu trò chơi
-Trò chơi này cũng thuộc kiểu tập thể, được nhiều trẻ em ưa thích, với lối chơi đơn giản, cả tập thể cùng hát đồng ca vui nhộn và sinh động, giúp mọi người chơi có những phút giây vui vẻ và thoải mái.
+Đây là một trò chơi thuộc kiểu tập thể, được nhiều trẻ em ưa thích, với lối chơi đơn giản, cả tập thể cùng hát đồng ca vui nhộn và sinh động, giúp mọi người chơi có những phút giây vui vẻ và thoải mái.
 Hướng dẫn cách chơi và luật
-Mỗi người chơi ngồi thành vòng tròn, úp 2 bàn tay xuống đất. Khi bắt đầu đọc “úp lá khoai” thì 1 người lấy tay của mình phủ lên tay của tất cả mọi người. Đồng thời, lúc đó mọi người ngửa hết bàn tay lên. Một người lấy tay của mình chỉ lần lượt từng bàn tay, vừa chỉ vừa hát:&nbsp;
+Mỗi người chơi ngồi thành vòng tròn, úp 2 bàn tay xuống đất. Khi bắt đầu đọc “úp lá khoai” thì 1 người lấy tay của mình phủ lên tay của tất cả mọi người. Đồng thời, lúc đó mọi người ngửa hết bàn tay lên. Một người lấy tay của mình chỉ lần lượt từng bàn tay, vừa chỉ vừa hát: 
 “Mười hai chong chóng
 Đứa mặc áo trắng
 Đứa mặc áo đen
@@ -810,12 +813,12 @@ Có thằng té xuống sình
 Úi chà , úi da!”
 Hát đến chữ cuối cùng, người chỉ mà chỉ vào tay của người nào thì người đó bị thua.
 <img class="ls-is-cached lazyload" title="Trò chơi Úp lá khoai" alt="Trò chơi Úp lá khoai" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-64-800x450.jpg">
-Trò chơi Úp lá khoai
-Có thể bạn quan tâm: Mách ba mẹ cách làm đồ chơi từ quả cầu lông đơn giản cho bé thỏa sức sáng tạo
-65Oẳn tù tì (Đồng dao)
+
+
+65. Oẳn tù tì (Đồng dao)
 Giới thiệu trò chơi
 Trò chơi này có lối chơi vô cùng đơn giản, người chơi chỉ cần lắng nghe giai điệu bài hát để thực hiện tư thế được chính xác là được.
-Hướng dẫn cách chơi và luật&nbsp;
+Hướng dẫn cách chơi và luật 
 Đầu tiên, hai người chơi sẽ đứng đối diện nhau. Sau đó tất cả cùng hát:
 “Búp bê nhảy
 Búp bê xoay
@@ -828,9 +831,9 @@ Khi hát đến từ “xin chữ ký” thì người chơi xòe bàn tay ra đ
 Khi được hát đến từ “không biết gì” thì người chơi sẽ oẳn tù tì như bình thường.
 Người chơi nào oẳn tù tì thua hoặc làm không đúng bộ dáng như vậy thì là người thua.
 <img class="ls-is-cached lazyload" title="Trò chơi Oẳn tù tì (Đồng dao)" alt="Trò chơi Oẳn tù tì (Đồng dao)" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-65-800x450.jpg">
-Trò chơi Oẳn tù tì (Đồng dao)
-Có thể bạn quan tâm: Mách mẹ 5 cách làm con rối bằng giấy cho bé vui sáng tạo
-66Tung đồng đáo
+
+
+66. Tung đồng đáo
 Giới thiệu trò chơi
 Khi chơi trò chơi này người chơi nên canh vị trí của lỗ để có thể thả đồng xu được chính xác hơn. Đánh đáo thường được các bé trai ưa thích với lối chơi đơn giản, phụ thuộc nhiều vào tính toán và sự tinh ý.
 Hướng dẫn cách chơi và luật
@@ -841,9 +844,9 @@ Người chơi đứng nhất sẽ được cầm tất cả số tiền, sau đ
 Còn những đồng nằm xung quanh lỗ phải qua lần thử thách mới do trọng tài đề ra. Nếu không được thì người đứng nhì nhặt những đồng tiền còn lại để đi tiếp (đi theo kiểu như người đứng nhất).
 Trò chơi cứ thế tiếp tục cho đến khi tất cả đồng xu được các người chơi ăn hết mới chấm dứt.
 <img class="ls-is-cached lazyload" title="Trò chơi Tung đồng đáo" alt="Trò chơi Tung đồng đáo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-66-800x450.jpg">
-Trò chơi Tung đồng đáo
-Có thể bạn quan tâm: Mách mẹ 4 cách làm diều giấy cho bé tại nhà cực đơn giản
-67Me me de de
+
+
+67. Me me de de
 Giới thiệu trò chơi
 Lại một trò chơi đơn giản nữa mà tất cả mọi người đều chơi được, người chơi chỉ cần vừa hát vừa oẳn tù tì là được.
 Hướng dẫn cách chơi và luật
@@ -854,37 +857,37 @@ Me me de de
 Cham bồ chát chát.”
 Người chơi nào oẳn tù tì thắng sẽ là người thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Me me de de" alt="Trò chơi Me me de de" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-67-800x450.jpg">
-Trò chơi Me me de de
-Có thể bạn quan tâm: Hướng dẫn làm đồ chơi âm nhạc cho trẻ mầm non siêu đơn giản
-68Đá gà
+
+
+68. Đá gà
 Giới thiệu trò chơi
 Trò chơi này đòi hỏi người chơi giữ được thăng bằng tốt, không những người chơi phải có thể lực để trụ tốt, mà còn phải có kỹ thuật để loại bỏ nhanh chóng những người chơi khác.
-Hướng dẫn cách chơi và luật&nbsp;
+Hướng dẫn cách chơi và luật 
 Đầu tiên, các người chơi gập 1 chân của mình lại, chân còn lại giữ nguyên.
 Sau đó, người chơi sẽ nhảy lò cò đi đá chân của người khác.
 Muốn đá được chân của người chơi khác, thì người chơi chỉ cần dùng chân gập đó đá vào chân gập của đối phương.
 Trong quá trình chơi người chơi nào mà ngã trước, hoặc thả chân xuống trước thì là người thua cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Đá gà" alt="Trò chơi Đá gà" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-68-800x450.jpg">
-Trò chơi Đá gà
-Có thể bạn quan tâm: Bật mí cách làm đồ chơi Montessori siêu đơn giản tại nhà
-69Nhảy cóc
+
+
+69. Nhảy cóc
 Giới thiệu trò chơi
 Trò chơi này rất được nhiều bạn nhỏ ưa thích, không chỉ vui, đơn giản mà còn rèn luyện được thể lực. Khi được nhảy cóc, người chơi nên lấy đà để được nhảy xa hơn, trong quá trình chơi, tránh để tay chạm xuống đất.
 Hướng dẫn cách chơi và luật
 Đầu tiên, hai người chơi sẽ đứng đối diện nhau ở hai đầu sân chơi và vạch hai mức đích, một mức bắt đầu và một mức về đích. Sau đó cả hai người chơi cùng chơi oẳn tù tì để quyết định ai là người đi trước.
-Người thắng được quyền nhảy cóc về phía trước 1 nhịp. Khi nhảy, người chơi chụm 2 chân lại để nhảy.&nbsp;
+Người thắng được quyền nhảy cóc về phía trước 1 nhịp. Khi nhảy, người chơi chụm 2 chân lại để nhảy. 
 Nhảy xong nhịp này, người chơi lại oẳn tù tì tiếp, người thắng lại được quyền nhảy cóc tiếp 1 nhịp, trò chơi cứ thế tiếp diễn cho đến khi người nào về đích trước thì sẽ là người thắng cuộc.
 Người chơi khi nhảy 2 chân phải chụm lại, và người oẳn tù tì thắng có quyền nhảy cóc ngắn hoặc dài tùy theo sức của mình. Nhưng trong quá trình nhảy, người chơi nào chống (chạm) tay xuống đất trước thì coi như không được nhảy bước đó (phải trở về vị trí cũ trước khi nhảy bước đó).
 <img class="ls-is-cached lazyload" title="Trò chơi Nhảy cóc" alt="Trò chơi Nhảy cóc" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-69-800x450.jpg">
-Trò chơi Nhảy cóc
-Có thể bạn quan tâm: Tổng hợp những cách làm đồ chơi từ vật liệu tái chế đơn giản để vui chơi cùng bé
-70Đi tàu hỏa
+
+
+70. Đi tàu hỏa
 Giới thiệu trò chơi
 Trò chơi đi tàu hỏa là một trò chơi mang tính tập thể, trong quá trình chơi người chơi vừa phải thực hiện đúng động tác và vừa hát đồng dao.
 Hướng dẫn cách chơi và luật
-Tất cả các người chơi đứng thành một hàng dọc, người đứng sau để tay lên vai người đứng trước để tạo thành hình tàu hỏa.&nbsp;
+Tất cả các người chơi đứng thành một hàng dọc, người đứng sau để tay lên vai người đứng trước để tạo thành hình tàu hỏa. 
 Sau đó, người dẫn đầu sẽ vừa chạy vừa hô lệnh “Tàu lên dốc” hoặc “Tàu xuống dốc”.
-Khi nghe lệnh “Tàu lên dốc” tất cả người chơi sẽ chạy chậm lại, bàn chân nhón lên và được chạy bằng mũi bàn chân.&nbsp;
+Khi nghe lệnh “Tàu lên dốc” tất cả người chơi sẽ chạy chậm lại, bàn chân nhón lên và được chạy bằng mũi bàn chân. 
 Ngược lại, khi nghe lệnh “Tàu xuống dốc”, tất cả người chơi sẽ chạy chậm chậm lại bằng gót chân.
 Đồng thời, trong lúc chạy, mọi người cùng hát bài đồng dao:
 “Đi cầu đi quán
@@ -901,14 +904,13 @@ Mua cặp cài đầu
 Kẻo trời sắp tối.”
 Cả đoàn tàu vừa chạy theo lệnh của đầu tàu vừa hát bài đồng dao. Nếu người chơi nào hát nhỏ hoặc không làm đúng động tác chạy thì sẽ bị cả tàu phạt (hình thức phạt nhẹ nhàng tùy đoàn tàu đề ra).
 <img class="ls-is-cached lazyload" title="Trò chơi Đi tàu hỏa" alt="Trò chơi Đi tàu hỏa" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-70-800x450.jpg">
-Trò chơi Đi tàu hỏa
-Có thể bạn quan tâm: Mách ba mẹ 5 cách làm nhà đồ chơi cho bé siêu đơn giản và thú vị
-71Đi câu ếch
+
+71. Đi câu ếch
 Giới thiệu trò chơi
 Trò chơi đi câu ếch giống với tên gọi của nó, trong quá trình chơi, người chơi phân ra làm người đi câu và người làm ếch (bị câu). Người đi câu thì cố gắng bắt ếch, còn ếch thì cố gắng tránh xa ra cần câu của người đi câu.
 Hướng dẫn cách chơi và luật
 Trước khi chơi, người chơi nên chuẩn bị các dụng cụ sau: Một cái que khoảng 1m, một sợi dây khoảng 1m và một tờ giấy.
-Sau đó, các người chơi sẽ vẽ một vòng tròn xuống đất để làm ao.&nbsp;
+Sau đó, các người chơi sẽ vẽ một vòng tròn xuống đất để làm ao. 
 Tiếp đến, các người chơi sẽ làm cần câu. Cần câu là một cây que 1m buộc với một sợi dây dài 1m và đầu sợi dây người chơi sẽ buộc thêm một miếng giấy gấp nhỏ.
 Sau đó, để bắt đầu vào trò chơi thì tất cả người chơi dùng trò chơi oẳn tù tì để xem ai là người đi câu đầu tiên.
 Người đi câu đầu tiên sẽ cầm cần câu và đi bên ngoài vòng tròn, các người chơi còn lại sẽ vào trong vòng tròn (trong ao) làm ếch.
@@ -922,26 +924,27 @@ Thấy bác đi câu
 Rủ nhau trốn mau
 Ếch kêu ộp ộp
 Ếch kêu oạp oạp.”
-Trong khi hát, các người chơi sẽ làm động tác như ếch đang nhảy (tay chống nạnh, chân chụm lại và nhún xuống) và nhảy lung tung trong vòng tròn.&nbsp;
-Nếu thấy người đi câu còn ở xa thì người chơi có thể nhảy lên bờ (ra khỏi vòng tròn) để trêu người đi câu.&nbsp;
-Nhưng người chơi phải cảnh giác người đi câu, vì nếu người chơi đang ở trên bờ mà để người đi câu quăng dây trúng là sẽ bị bắt và bị loại.&nbsp;
+Trong khi hát, các người chơi sẽ làm động tác như ếch đang nhảy (tay chống nạnh, chân chụm lại và nhún xuống) và nhảy lung tung trong vòng tròn. 
+Nếu thấy người đi câu còn ở xa thì người chơi có thể nhảy lên bờ (ra khỏi vòng tròn) để trêu người đi câu. 
+Nhưng người chơi phải cảnh giác người đi câu, vì nếu người chơi đang ở trên bờ mà để người đi câu quăng dây trúng là sẽ bị bắt và bị loại. 
 Trong quá trình chơi, người đi câu nếu không câu được con ếch nào thì người đi câu sẽ bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Đi câu ếch" alt="Trò chơi Đi câu ếch" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-71-800x450.jpg">
-Trò chơi Đi câu ếch
-Có thể bạn quan tâm: Các hoạt động thú vị giúp phát triển nhận thức ở trẻ mầm non theo từng giai đoạn
-72Cắp cua
+
+
+72. Cắp cua
 Giới thiệu trò chơi
 Với trò chơi này, khi chơi người chơi nên khéo léo và thao tác nhẹ nhàng để tránh đụng phải những viên sỏi khác. Nên giữ vững viên sỏi bạn đã cắp được vào tay, đừng để sỏi rơi ra ngoài.
-Hướng dẫn cách chơi và luật&nbsp;
+Hướng dẫn cách chơi và luật 
 Đầu tiên, người chơi dùng trò chơi oẳn tù tì để xác định người đi trước. Người đi trước bốc 10 viên sỏi lên thả xuống đất. Sau đó, người chơi sẽ đan và nắm mười ngón tay vào nhau, chỉ để 2 ngón duỗi thẳng ra làm càng cua.
 Người chơi dùng hai ngón tay để cắp từng viên sỏi, trong lúc này, người chơi không được chạm trúng vào các viên sỏi khác. Nếu người chơi cắp được viên sỏi nào thì sẽ để các viên sỏi đó sang một bên.
 Trong quá trình chơi, lượt một người chơi sẽ cắp 1 viên, lượt hai sẽ cắp 2 viên,... cứ tiếp tục như vậy cho đến khi cắp 10 viên.
 Nếu người chơi khi đang cắp sỏi mà chạm vào viên khác thì phải nhường cho người kế tiếp đi.
 Sau khi cắp hết 10 viên, đếm xem ai cắp được nhiều nhất thì người đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Cắp cua" alt="Trò chơi Cắp cua" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-72-800x450-1.jpg">
+
 Trò chơi Cắp cua
 Có thể bạn quan tâm: 7 cách hiệu quả để thúc đẩy sự phát triển thể chất ở trẻ em
-73Lùa vịt
+73. Lùa vịt
 Giới thiệu trò chơi
 Trò chơi này không còn quá xa lạ với các bạn nhỏ, khi chơi các người chơi chỉ cần chia làm 2 trạng thái, người chơi bên trong vòng tròn cố tránh khỏi người bên ngoài vòng tròn và ngược lại, người bên ngoài vòng tròn cố gắng đập vào người bên trong vòng tròn.
 Hướng dẫn cách chơi và luật
@@ -949,20 +952,20 @@ Tất cả các người chơi cử một người chơi làm nhân vật ngư�
 Khi bắt đầu trò chơi, người lùa vịt sẽ chạy quanh vòng tròn, tìm cách đập vào các người chơi làm vịt đứng trong vòng tròn.
 Trong quá trình chơi, người lùa vịt đập trúng vào người làm vịt thì người chơi làm vịt đó sẽ bị thua và loại khỏi cuộc chơi.
 <img class="ls-is-cached lazyload" title="Trò chơi Lùa vịt" alt="Trò chơi Lùa vịt" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-73-800x450.jpg">
-Trò chơi Lùa vịt
-Có thể bạn quan tâm: Mách ba mẹ 8 cách phát triển EQ cho trẻ siêu hiệu quả
-74Ném vòng
+
+
+74. Ném vòng
 Giới thiệu trò chơi
 Với trò chơi này, người chơi chỉ cần canh chuẩn xác vị trí để ném vòng lọt vào chai, trò chơi này thường thu hút được rất nhiều các đối tượng tham gia vào những dịp lễ.
 Hướng dẫn cách chơi và luật
 Trước khi chơi, các người chơi nên chuẩn bị những dụng cụ sau: 3 cái chai, 9 cái vòng cỡ vừa được làm bằng tre hoặc bằng nhựa (những dụng cụ này người chơi có thể chuẩn bị nhiều hay ít tùy theo sở thích).
-Sau đó, các người chơi đặt 3 cái chai thành một hàng thẳng và cách nhau khoảng 50 đến 60 cm.&nbsp;
-Tiếp theo, người chơi sẽ vẽ vạch một đường mức cách xa vị trí đặt chai một khoảng cách nhất định.&nbsp;
+Sau đó, các người chơi đặt 3 cái chai thành một hàng thẳng và cách nhau khoảng 50 đến 60 cm.
+Tiếp theo, người chơi sẽ vẽ vạch một đường mức cách xa vị trí đặt chai một khoảng cách nhất định.
 Và sau đó, các người chơi sẽ bắt đầu dùng vòng ném vào những cái chai này, người chơi nào ném vòng vào chai nhiều nhất là người thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Ném vòng" alt="Trò chơi Ném vòng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-74-800x450.jpg">
-Trò chơi Ném vòng
-Có thể bạn quan tâm: Mách mẹ 9 cách đơn giản giúp phát triển tư duy cho trẻ hiệu quả
-75Lựa đậu
+
+
+75. Lựa đậu
 Giới thiệu trò chơi
 Trò chơi lựa đậu cũng giống như tên gọi của nó, các người chơi chỉ cần lựa đậu, đội nào lựa được nhanh và chính xác là thắng.
 Hướng dẫn cách chơi và luật
@@ -972,8 +975,9 @@ Sau đó, người chơi sẽ trộn chung ba loại hạt này vào cùng một
 Sau khi nghe tiếng còi báo hiệu bắt đầu thì các đội sẽ phân loại hạt ra và bỏ từng loại hạt riêng biệt vào mỗi chén khác nhau.
 Trong quá trình chơi, đội nào phân loại hạt xong trước thì đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Lựa đậu" alt="Trò chơi Lựa đậu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-75-800x450.jpg">
-Trò chơi Lựa đậu
-76Dẫn nước
+
+
+76. Dẫn nước
 Giới thiệu trò chơi
 Thêm một trò chơi đơn giản cho mọi người là dẫn nước, tên trò chơi đã bao quát hết quá trình chơi. Người chơi chỉ cần đào đường dẫn nước vào bên trong hố, người chơi cũng phải đào hố để lưu giữ nước, hố càng sâu giữ nước càng nhiều.
 Hướng dẫn cách chơi và luật
@@ -981,8 +985,9 @@ Tất cả các người chơi chia ra thành nhiều đội chơi khác nhau, c
 Khi có tín hiệu bắt đầu, thì các đội phân công 1 người chịu trách nhiệm đào hố chứa nước, những người còn lại đào đường dẫn nước vào hố.
 Thực hiện trò chơi theo một thời gian quy định, đội nào đào hố sâu, rộng chứa nhiều nước thì đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Dẫn nước" alt="Trò chơi Dẫn nước" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-76-800x450.jpg">
-Trò chơi Dẫn nước
-77Tùm nụm, tùm nịu
+
+
+77. Tùm nụm, tùm nịu
 Giới thiệu trò chơi
 Với trò chơi này, người chơi chỉ cần giấu đồ vật trong tay nào để không bị đối phương phát hiện, còn người chơi nào đoán đồ vật thì nên dò xét thử phản ứng đối phương để đoán được chính xác.
 Hướng dẫn cách chơi và luật
@@ -1006,8 +1011,9 @@ Trái mít rụng.”
 Khi đọc đến câu “Tay nào có? Tay nào không?” thì người giữ đồ vật sẽ nắm một vật nào đó trong tay và chìa hai nắm tay. Các người chơi còn lại sẽ chọn đồ vật bằng một trong hai nắm tay này.
 Người chơi chọn đúng sẽ được thưởng, chọn sai sẽ bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Tùm nụm, tùm nịu" alt="Trò chơi Tùm nụm, tùm nịu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-77-800x450.jpg">
-Trò chơi Tùm nụm, tùm nịu
-78Trốn tìm
+
+
+78. Trốn tìm
 Giới thiệu trò chơi
 Trò chơi trốn tìm không còn quá xa lạ với mọi người, người tìm chỉ cần tìm hết các người trốn, người trốn thì phải tìm chỗ trốn để người tìm không tìm thấy. Vì hai nhóm người trốn và tìm này nên trò chơi được gọi là trốn tìm.
 Hướng dẫn cách chơi và luật
@@ -1016,8 +1022,9 @@ Nếu đếm đủ 100 người đi tìm có thể bắt đầu mở mắt đi t
 Trong khoảng thời gian quy định, người chơi đi tìm tìm thấy người chơi nào thì người chơi ấy thua cuộc, nếu không tìm thấy người chơi nào thì người đi tìm phải chịu phạt.
 Người chơi đi tìm trong thời gian quy định tìm thấy hết các bạn chơi thì người đi tìm thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Trốn tìm" alt="Trò chơi Trốn tìm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-78-800x450.jpg">
-Trò chơi Trốn tìm
-79Nhảy lò cò
+
+
+79. Nhảy lò cò
 Giới thiệu trò chơi
 Nhảy lò cò là trò chơi thiên về hoạt động thể chất và giữ cân bằng. Trò chơi này không giới hạn số lượng người chơi. Người chơi có thể nhảy lò cò một mình hoặc có thể tổ chức chơi với một
 nhóm nhiều người.
@@ -1025,42 +1032,46 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, người chơi kẻ 7 ô vuông và đánh số thứ tự từ 1 đến 7.
 Mỗi người chơi có một đồng chàm dùng để thảy vào ô thứ tự và người chơi nào đi hết vòng thì có thể xây nhà và đi tiếp cho đến khi mất lượt.
 Nhưng trong quá trình chơi, nếu người chơi đạp trúng vạch kẻ hay thảy đồng chàm ra ngoài thì người chơi đó sẽ bị mất lượt và đến phần người chơi khác.
-Nếu đồng chàm thảy ra ngoài hay vào nhà người khác thì mất lượt nhưng nếu đồng chàm hay người chơi đó mà nhảy lò cò vào nhà thay vì phải mất lượt thì được xem như nhà bị cháy.&nbsp;
+Nếu đồng chàm thảy ra ngoài hay vào nhà người khác thì mất lượt nhưng nếu đồng chàm hay người chơi đó mà nhảy lò cò vào nhà thay vì phải mất lượt thì được xem như nhà bị cháy.
 Người chơi nào có đồng chàm nhiều nhất trong các ô vuông thì thắng cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Nhảy lò cò" alt="Trò chơi Nhảy lò cò" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-79-800x450.jpg">
-Trò chơi Nhảy lò cò
-80Khiêng kiệu
+
+
+80. Khiêng kiệu
 Giới thiệu trò chơi
 Trò chơi này các người chơi chỉ cần làm kiệu và nâng 1 thành viên của đội đối phương lên và di chuyển, trong quá trình di chuyển tránh cho thành viên này bị ngã là được.
 Hướng dẫn cách chơi và luật
-Tất cả người chơi chia làm nhiều đội chơi nhưng mỗi đội sẽ có 3 người chơi. Và 2 người chơi đứng đối mặt nhau lấy tay phải nắm vào giữa tay ngay cùi chỏ của mình và tay trái thì nắm vào tay phải của người đối diện để làm kiệu.&nbsp;
+Tất cả người chơi chia làm nhiều đội chơi nhưng mỗi đội sẽ có 3 người chơi. Và 2 người chơi đứng đối mặt nhau lấy tay phải nắm vào giữa tay ngay cùi chỏ của mình và tay trái thì nắm vào tay phải của người đối diện để làm kiệu.
 Sau đó người chơi còn lại của đội này ngồi lên kiệu của đội kia và người chơi phải giữ thăng bằng để không bị ngã.
 Người làm kiệu phải giữ kiệu cho chắc, nếu kiệu bị hỏng hoặc người ngồi kiệu bị ngã thì đội đó thua.
 <img class="ls-is-cached lazyload" title="Trò chơi Khiêng kiệu" alt="Trò chơi Khiêng kiệu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-80-800x450.jpg">
-Trò chơi Khiêng kiệu
-81Thảy đá
+
+
+81. Thảy đá
 Giới thiệu trò chơi
 Trò chơi này có thể chơi nhiều người, với lối chơi đơn giản người chơi chỉ cần thảy đá chuẩn sao cho các viên đá về lại bàn tay của bạn là được.
 Hướng dẫn cách chơi và luật
 Đầu tiên, các người chơi chuẩn bị 5 viên đá.
-Sau đó, tất cả người chơi phải cầm đá thảy lên rồi úp bàn tay lại, tiếp đó người chơi phải chụp đá về như cũ. Lúc này, nếu người chơi nào có đá nhiều khi chụp về thì người đó sẽ được chơi trước.&nbsp;
+Sau đó, tất cả người chơi phải cầm đá thảy lên rồi úp bàn tay lại, tiếp đó người chơi phải chụp đá về như cũ. Lúc này, nếu người chơi nào có đá nhiều khi chụp về thì người đó sẽ được chơi trước.
 Người chơi trước đầu tiên sẽ rải đá ra, rồi nhặt 1 viên đá bất kỳ. Sau đó, người chơi thảy đá lên và nhặt từng viên đá lần lượt cho đến hết.
-Đầu tiên sẽ là 1 viên đá, sau đó đến 2 viên đá, 3 viên đá, 4 viên đá và 5 viên đá.&nbsp;
+Đầu tiên sẽ là 1 viên đá, sau đó đến 2 viên đá, 3 viên đá, 4 viên đá và 5 viên đá.
 Kết thúc các màn chơi trên, người chơi bắt đầu thảy đá như lúc đầu để lấy điểm (1 viên đá tính 1 điểm).
 Trong quá trình chơi, nếu người chơi chụp hụt hay rớt đá thì mất lượt và khi cân đá trên tay mà đá rớt hết thì không có điểm.
 <img class="ls-is-cached lazyload" title="Trò chơi Thảy đá" alt="Trò chơi Thảy đá" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-81-800x450.jpg">
-Trò chơi Thảy đá
-82Tạt lon
+
+
+82. Tạt lon
 Giới thiệu trò chơi
-Với trò chơi này, người chơi có thể chơi đông người hoặc ít người, người chơi phải ném chính xác vào vị trí lon để lon văng ra khỏi khung kẻ, người giữ lon phải chạy thật nhanh đi nhặt lon và đi bắt người chơi khác.&nbsp;
+Với trò chơi này, người chơi có thể chơi đông người hoặc ít người, người chơi phải ném chính xác vào vị trí lon để lon văng ra khỏi khung kẻ, người giữ lon phải chạy thật nhanh đi nhặt lon và đi bắt người chơi khác.
 Hướng dẫn cách chơi và luật
 Các người chơi đầu tiên sẽ kẻ một vòng và đặt lon vào trong vòng đã kẻ, sau đó sẽ kẻ một vạch mức trước lon một đoạn.
 Sau đó, các người chơi sẽ cử ra một người giữ lon, và tất cả người chơi còn lại sẽ đứng ở vạch mức để thảy lon, người chơi có thể dùng dép hoặc những đồ vật khác để thảy.
 Nếu người chơi thảy dép trúng lon và lon văng ra khỏi vòng thì người giữ lon phải tìm lon về đặt lại chỗ cũ. Trong lúc đó, người giữ lon phải tìm cách chạm vào người tạt trúng lon trước khi người đó chạy về vạch. Đồng thời, người tạt trúng lon phải nhặt dép và chạy về vạch để người giữ lon không bắt được thì xem như thắng cuộc.
 Nếu người chơi nào tạt không trúng lon hoặc người giữ lon chạm trúng người nào mà trước khi người đó chạy về vạch thì người đó sẽ bị bắt giữ lon.
 <img class="ls-is-cached lazyload" title="Trò chơi Tạt lon" alt="Trò chơi Tạt lon" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-82-800x450.jpg">
-Trò chơi Tạt lon
-83Thả diều
+
+
+83. Thả diều
 Giới thiệu trò chơi
 Trò chơi này không chỉ mang lại cảm giác tươi vui cho các bạn nhỏ, mà thêm vào đó, các người chơi cũng rèn cho mình được sự tinh ý và nhanh nhẹn. Thả diều được chơi rất đơn giản, người chơi chỉ cần giấu diều hoặc đi tìm diều là được.
 Hướng dẫn cách chơi và luật
@@ -1072,43 +1083,48 @@ Lúc lắc cho đều
 Kiếm gạo con ăn.”
 Lúc này, người chơi chủ sẽ phải lựa chọn và giấu đi bất kỳ con diều nào, khi bài hát chấm dứt thì mọi người chơi phải tìm diều của mình và giơ cao lên, người nào không có diều thì phải tìm ra người chơi chủ, nếu bài hát hết một lần nữa mà chưa tìm thấy người chơi chủ thì các người chơi xem như thua và bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Thả diều" alt="Trò chơi Thả diều" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-83-800x450.jpg">
-Trò chơi Thả diều
-84De - ùm
+
+
+84. De - ùm
 Giới thiệu trò chơi
 Khi chơi trò chơi này, người chơi phải có phản xạ nhanh nhạy để rút tay ra nhanh chóng, tránh bị người chơi chủ bắt được. Để tránh được dễ dàng, người chơi nên lắng nghe người chơi chủ hô khẩu hiệu và lui tay về.
 Hướng dẫn cách chơi và luật
-Đầu tiêm, tất cả người chơi cử ra một người làm nhà cái, nhà cái sẽ lật bàn tay của mình lên và tất cả người chơi khác sẽ đặt ngón tay trỏ của mình vào bàn tay của nhà cái. Khi nhà cái hô to “de - ùm” thì tất cả người chơi phải mau chóng rút tay của mình ra để không cho nhà cái chụp được.
-Các người chơi phải thực hiện động tác nhanh và tay của người chơi nào bị nhà cái chụp được thì xem như thua cuộc
+Đầu tiên, tất cả người chơi cử ra một người làm nhà cái, nhà cái sẽ lật bàn tay của mình lên và tất cả người chơi khác sẽ đặt ngón tay trỏ của mình vào bàn tay của nhà cái. Khi nhà cái hô to “de - ùm” thì tất cả người chơi phải mau chóng rút tay của mình ra để không cho nhà cái chụp được.
+Các người chơi phải thực hiện động tác nhanh và tay của người chơi nào bị nhà cái chụp được thì xem như thua cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi De - ùm" alt="Trò chơi De - ùm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-84-800x450.jpg">
-Trò chơi De - ùm
-85Tán ua
+
+
+85. Tán ua
 Giới thiệu trò chơi
 Đối với trò chơi này, khi người chơi ua qua đội đối phương thì người chơi này nên có hơi dài để liên tục phát ra tiếng ua. Khi tấn công, nếu có đồng đội bị bắt, người chơi nên ưu tiên cứu đồng đội trước rồi sau đó mới bắt các thành viên của đội đối phương.
 Hướng dẫn cách chơi và luật
 Đầu tiên, tất cả người chơi chia làm 2 đội chơi và các người chơi sẽ kẻ một vạch ngang ở giữa 2 đội.
 Sau đó, một người chơi của đội A sẽ chạy ra khỏi vạch để sang đội đối phương B, đồng thời miệng vẫn phải liên tục phát ra tiếng “ua” và người chơi này phải cố gắng chạm vào người của các thành viên đội B.
-Nếu chạm vào được thành viên của đội đối phương, người chơi này phải nhanh chóng tìm cách chạy về đội của mình.&nbsp;
+Nếu chạm vào được thành viên của đội đối phương, người chơi này phải nhanh chóng tìm cách chạy về đội của mình.
 Riêng đội B khi người chơi bên đội A này chạy sang thì phải tìm cách giữ lại cho đến khi người đó ngừng ua. Nếu người chơi của đội A bị bắt thì người chơi khác bên đội A có thể chạy sang cứu nhưng vẫn phải ua và làm sao chạm được vào người của thành viên bên đội mình thì người kia sẽ được cứu.
 Nếu người chơi đội nào không còn thành viên để chơi nữa thì xem như đội đó thua cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Tán ua" alt="Trò chơi Tán ua" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-85-800x450.jpg">
-Trò chơi Tán ua
-86Trồng nụ trồng hoa
+
+
+86. Trồng nụ trồng hoa
 Giới thiệu trò chơi
 Hình thức chơi trò chơi này cũng giống như tên gọi của trò chơi, các người chơi phải trồng nụ và trồng hoa để người chơi khác nhảy qua, nếu người chơi nào nhảy qua không được sẽ vào làm nụ làm hoa cho người chơi đó nhảy.
 Hướng dẫn cách chơi và luật
-Đầu tiên, hai người chơi sẽ ngồi đối diện nhau, hai chân duỗi thẳng và chạm vào bàn chân của nhau.
-Bàn chân của người này chồng lên bàn chân của người kia (bàn chân dựng đứng). Sau đó, hai người chơi khác sẽ nhảy qua rồi lại nhảy về.&nbsp;
-Lúc này, một người lại chồng 1 nắm tay lên ngón chân của người kia làm nụ. Hai người chơi lúc nãy lại nhảy qua, nhảy về. Rồi người đối diện người làm nụ sẽ dựng thẳng tiếp 1 bàn tay lên trên bàn tay nụ để làm hoa. 2 người lại nhảy qua, nếu chạm vào nụ hoặc hoa thì mất lượt phải ngồi thay cho một trong 2 người ngồi.
+Đầu tiên, hai người chơi sẽ ngồi đối diện nhau, hai chân duỗi thẳng và chạm vào bàn chân của nhau.
+Bàn chân của người này chồng lên bàn chân của người kia (bàn chân dựng đứng). Sau đó, hai người chơi khác sẽ nhảy qua rồi lại nhảy về.
+Lúc này, một người lại chồng 1 nắm tay lên ngón chân của người kia làm nụ. Hai người chơi lúc nãy lại nhảy qua, nhảy về. Rồi người đối diện người làm nụ sẽ dựng thẳng tiếp 1 bàn tay lên trên bàn tay nụ để làm hoa. 2 người lại nhảy qua, nếu chạm vào nụ hoặc hoa thì mất lượt phải ngồi thay cho một trong 2 người ngồi.
 <img class="ls-is-cached lazyload" title="Trò chơi Trồng nụ trồng hoa" alt="Trò chơi Trồng nụ trồng hoa" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-86-800x450.jpg">
-Trò chơi Trồng nụ trồng hoa
-87Kéo mo cau
+
+
+87. Kéo mo cau
 Giới thiệu trò chơi
 Vào mùa mo cau rụng, mọi người thường lấy những chiếc mo cau làm xe kéo. Người kéo mo cau phải có thể lực tốt và lựa chọn hướng di chuyển chính xác. Đây là trò chơi được các bạn nhỏ ở nông thôn rất ưa chuộng.
 Hướng dẫn cách chơi và luật
-Người chơi chỉ cần sử dụng lá cau khô để làm thành một chiếc mo cau. Chiếc mo cau sẽ là ghế ngồi cho một hay nhiều người ngồi lên. Người kéo sẽ phải dùng sức kéo chiếc mo cau về phía trước theo hướng đi mình muốn.
+Người chơi chỉ cần sử dụng lá cau khô để làm thành một chiếc mo cau. Chiếc mo cau sẽ là ghế ngồi cho một hay nhiều người ngồi lên. Người kéo sẽ phải dùng sức kéo chiếc mo cau về phía trước theo hướng đi mình muốn.
 <img class="ls-is-cached lazyload" title="Trò chơi Kéo mo cau" alt="Trò chơi Kéo mo cau" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-87-800x450.jpg">
-Trò chơi Kéo mo cau
-88Lộn cầu vồng
+
+
+88. Lộn cầu vồng
 Giới thiệu trò chơi
 Trò chơi này chỉ cần hai người chơi là được, hai người chơi cùng hát đồng dao và cùng thực hiện động tác xoay người.
 Hướng dẫn cách chơi và luật
@@ -1121,22 +1137,24 @@ Cùng lộn cầu vồng”.
 Khi hát đến “cùng lộn cầu vồng”, thì cả 2 cùng xoay người và lộn đầu qua tay của người kia. Sau câu hát, người chơi đứng quay lưng vào nhau, sau đó hai người chơi sẽ tiếp tục hát bài đồng
 dao rồi quay trở lại vị trí cũ. Trò chơi cứ như thế tiếp diễn.
 <img class="ls-is-cached lazyload" title="Trò chơi Lộn cầu vồng" alt="Trò chơi Lộn cầu vồng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-88-800x450.jpg">
-Trò chơi Lộn cầu vồng
-89Thiên đàng hỏa ngục
+
+
+89. Thiên đàng hỏa ngục
 Giới thiệu trò chơi
 Đối với trò chơi này, người chơi đơn giản chỉ cần lựa chọn giữa “Thiên đàng” và “Địa ngục”, cách thức bị phạt hoặc được thưởng tùy vào sự lựa chọn của người chơi.
 Hướng dẫn cách chơi và luật
-Đầu tiên, tất cả các người chơi chọn ra hai người chơi để đứng giơ cao tay lên, và những người còn lại sẽ nối đuôi nhau đi xuyên qua vòng tay này, đồng thời vừa đi vừa đọc:&nbsp;
-“Thiên đàng địa ngục hai bên.&nbsp;
+Đầu tiên, tất cả các người chơi chọn ra hai người chơi để đứng giơ cao tay lên, và những người còn lại sẽ nối đuôi nhau đi xuyên qua vòng tay này, đồng thời vừa đi vừa đọc:
+“Thiên đàng địa ngục hai bên.
 Ai khôn thì nhờ
 Ai dại thì sa.”
-Khi đọc hết bài này, hai người chơi giơ tay sẽ lập tức hạ tay xuống, nếu người chơi nào bị chặn lại sẽ phải có hai lựa chọn là “Thiên đàng hay Địa ngục”.&nbsp;
+Khi đọc hết bài này, hai người chơi giơ tay sẽ lập tức hạ tay xuống, nếu người chơi nào bị chặn lại sẽ phải có hai lựa chọn là “Thiên đàng hay Địa ngục”.
 Nếu chọn Thiên đàng, người chơi sẽ được hai người giơ tay lúc đầu làm thành cái kiệu bằng tay và khiêng một bạn khác di chuyển.
-Nếu người chơi can đảm chọn Địa ngục thì sẽ bị người giơ hai tay lúc đầu phạt bằng cách làm động tác chặt cổ, chặt tay.&nbsp;
+Nếu người chơi can đảm chọn Địa ngục thì sẽ bị người giơ hai tay lúc đầu phạt bằng cách làm động tác chặt cổ, chặt tay.
 Cứ thế trò chơi sẽ tiếp tục cho đến khi tất cả thành viên để phải đưa ra chọn lựa: Thiên đàng hay Địa ngục.
 <img class="ls-is-cached lazyload" title="Trò chơi Thiên đàng hỏa ngục" alt="Trò chơi Thiên đàng hỏa ngục" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-89-800x450.jpg">
-Trò chơi Thiên đàng hỏa ngục
-90Đếm sao
+
+
+90. Đếm sao
 Giới thiệu trò chơi
 Đối với trò chơi đếm sao, các người chơi phải đếm từ một ông sao đến 10 ông sao, trong quá trình đếm, người chơi không được đếm nhầm hoặc đếm sai.
 Hướng dẫn cách chơi và luật
@@ -1151,8 +1169,9 @@ Hát đến từ nào sẽ đập vào vai của một người đó, liên tụ
 Trong quá trình đếm, người chơi này phải đếm một hơi không được nghỉ và phải luân phiên “sao sáng” với “sáng sao”.
 Nếu hết hơi hoặc đọc sai người chơi này sẽ bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Đếm sao" alt="Trò chơi Đếm sao" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-90-800x450.jpg">
-Trò chơi Đếm sao
-91Bầu cua cá cọp
+
+
+91. Bầu cua cá cọp
 Giới thiệu trò chơi
 Bầu cua cá cọp hay còn gọi là lắc bầu cua. Trò chơi này là một trò chơi rất phổ biến ở Việt Nam, thường được chơi vào các dịp lễ, đặc biệt là Tết Nguyên Đán. Người chơi dựa vào vận may lựa chọn đặt cược vào con vật trong bàn bầu cua, nếu lắc ra trúng con vật đó, người chơi sẽ thắng, nếu lắc không trúng, người chơi sẽ thua và bị phạt.
 Hướng dẫn cách chơi và luật
@@ -1162,8 +1181,9 @@ Sau đó, các người chơi khác sẽ đặt cược vào vị trí con vật
 Nếu trong ba viên xúc xắc xuất hiện con vật mà người chơi đã đặt cược, người chơi sẽ thắng. Nếu con vật người chơi chọn không xuất hiện, người chơi sẽ thua và nhà cái thắng.
 Nếu thua người chơi sẽ bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Bầu cua cá cọp" alt="Trò chơi Bầu cua cá cọp" data-src="https://cdnv2.tgdd.vn/mwg-static/common/News/1478960/Bau_cua_ca_cop.jpg">
-Trò chơi Bầu cua cá cọp
-92Chim bay cò bay
+
+
+92. Chim bay cò bay
 Giới thiệu trò chơi
 Đối với trò chơi này, người chơi cần phải lắng nghe thật kỹ trọng tài hô lên cái gì, nếu có từ “chim bay hoặc cò bay” thì người chơi phải hô lên theo và làm động tác bay. Và ngược lại nếu không phải từ trên thì người chơi không cần thực hiện.
 Hướng dẫn cách chơi và luật
@@ -1171,12 +1191,13 @@ Tất cả các người chơi chọn một người chơi chủ, người chơi
 Khi người chơi chủ hô “chim bay” đồng thời thực hiện động tác nhảy bật lên, giang hai cánh tay như chim đang bay, tất cả người chơi còn lại cũng phải hô lên và làm theo động tác này.
 Nếu người chơi chủ hô những vật không bay được như “ghế bay” hay “voi bay” mà những người chơi còn làm vẫn làm động tác bay hoặc những vật bay được mà lại không làm động tác bay thì các người chơi đó sẽ thua và bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Chim bay cò bay" alt="Trò chơi Chim bay cò bay" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-92-800x450.jpg">
-Trò chơi Chim bay cò bay
-93Thả đỉa ba ba
+
+
+93. Thả đỉa ba ba
 Giới thiệu trò chơi
 Trò chơi này thuộc dạng là trò chơi tập thể, số lượng người chơi có thể trên 10 người. Trong trò chơi, người hát bài đồng dao phải lưu loát hấp dẫn, người làm đỉa phải chạy được trong ao hoặc sông, không được lên bờ. Người chơi phải lội qua ao, không được đi hoặc đứng mãi trên bờ.
 Hướng dẫn cách chơi và luật
-Người chơi vẽ một vòng tròn rộng khoảng 3m hoặc vẽ 2 đường thẳng song song cách nhau 3m để làm sông (tùy theo số lượng người chơi để vẽ sông to hay nhỏ).&nbsp;
+Người chơi vẽ một vòng tròn rộng khoảng 3m hoặc vẽ 2 đường thẳng song song cách nhau 3m để làm sông (tùy theo số lượng người chơi để vẽ sông to hay nhỏ).
 Sau đó, các người chơi sẽ đề cử ra một người làm Đỉa để đứng vào giữa sông, và những người chơi còn lại sẽ đứng thành vòng tròn. Sau đó, tất cả các người chơi sẽ vừa di chuyển vừa hát:
 “Thả đỉa ba ba
 Chớ bắt đàn bà
@@ -1189,12 +1210,13 @@ Sang sông về đò
 Đổ niêu nước chè
 Đổ phải nhà nào
 Nhà đấy phải chịu”.
-Lúc này, các người chơi sẽ tìm cách lội qua sông, vừa lội vừa hát:&nbsp;
+Lúc này, các người chơi sẽ tìm cách lội qua sông, vừa lội vừa hát:
 “Đỉa ra xa tha hồ tắm mát”.
 Đỉa phải chạy đuổi bắt người qua sông. Nếu chạm được vào người chơi nào chưa lên bờ thì coi như người đó thua, phải làm đỉa thay, trò chơi lại tiếp tục.
 <img class="ls-is-cached lazyload" title="Trò chơi Thả đỉa ba ba" alt="Trò chơi Thả đỉa ba ba" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-93-800x450.jpg">
-Trò chơi Thả đỉa ba ba
-94Chọi dế
+
+
+94. Chọi dế
 Giới thiệu trò chơi
 Trò chơi chọi dế được rất nhiều đối tượng ưa thích, không chỉ vì vui vẻ và náo nhiệt, mà khi người chơi sở hữu con dế thắng cuộc cũng rất thỏa mãn và hài lòng.
 Hướng dẫn cách chơi và luật
@@ -1202,8 +1224,9 @@ Hướng dẫn cách chơi và luật
 Trong quá trình hai con dế chiến đấu, con dế thắng cuộc là con dế trụ lại sau cùng khi con còn lại đã không thể chiến đấu được nữa.
 Đồng thời, người chơi sở hữu con dế thắng cuộc cũng là người chơi thắng cuộc, người chơi sở hữu con dế thua cuộc sẽ là người chơi thua cuộc và bị phạt.
 <img class="ls-is-cached lazyload" title="Trò chơi Chọi dế" alt="Trò chơi Chọi dế" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-94-800x450.jpg">
-Trò chơi Chọi dế
-95Cáo và thỏ
+
+
+95. Cáo và thỏ
 Giới thiệu trò chơi
 Đây là trò chơi rất được các cô giáo mầm non sử dụng khi chơi trên lớp cho các trẻ, bởi trò chơi này không chỉ rèn luyện tính đồng đội, mà còn rèn luyện cho các trẻ phản xạ nhanh chóng, khéo léo và khả năng ghi nhớ.
 Hướng dẫn cách chơi và luật
@@ -1222,28 +1245,30 @@ Kẻo cáo gian
 Tha đi mất.”
 Khi đọc hết bài thì cáo sẽ xuất hiện, cáo sẽ chạy đi đuổi bắt thỏ. Đồng thời, khi thỏ nghe tiếng cáo, thỏ phải chạy nhanh về chuồng của mình. Những chú thỏ nào bị cáo bắt đều phải ra ngoài và bị mất lượt chơi.
 <img class="ls-is-cached lazyload" title="Trò chơi Cáo và thỏ" alt="Trò chơi Cáo và thỏ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-95-800x450.jpg">
-Trò chơi Cáo và thỏ
-96Bà Ba buồn bà Bảy
+
+
+96. Bà Ba buồn bà Bảy
 Giới thiệu trò chơi
 Đây là một trò chơi đơn giản, hai đội chơi chỉ cần suy nghĩ những câu từ hợp ý để đối đáp lại và cố gắng suy nghĩ thật nhanh.
 Hướng dẫn cách chơi và luật
 Hai đội chơi, mỗi đội mang tên bà Ba, đội còn lại sẽ mang tên bà Bảy. Hai đội sẽ đọc tên đội mình cộng thêm một từ có chữ đầu là chữ "B" và cuối câu là tên của đội kia
-Ví dụ:&nbsp;
-Bà ba buồn bà bảy ​
+Ví dụ:
+Bà ba buồn bà bảy
 Bà bảy bắn bà ba
 Trong quá trình chơi, trọng tài sẽ chỉ định đội nào nói trước thì đội đó sẽ cử 1 người đại diện đứng lên đối đáp. Đội nào không đáp lại được thì đội đó thua.
 Trong quá trình chơi, đội này không được trùng với câu của đội kia đã sử dụng.
 <img class="ls-is-cached lazyload" title="Trò chơi Bà Ba buồn bà Bảy" alt="Trò chơi Bà Ba buồn bà Bảy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-96-800x450.jpg">
-Trò chơi Bà Ba buồn bà Bảy
-97Múa hình tượng
+
+97. Múa hình tượng
 Giới thiệu trò chơi
 Trò chơi này không chỉ tạo sự vui nhộn cho mọi người, mà còn giúp người chơi ôn lại lịch sử, nhớ đến tên các danh nhân anh hùng dân tộc Việt Nam ta.
 Hướng dẫn cách chơi và luật
-Đầu tiên, các đội chơi sẽ cử một thành viên đại diện lên đứng trước đội mình để diễn tả hành động hay tạo dáng của một người anh hùng dân tộc nào đó để cho đội mình đoán và nêu tên.&nbsp;
+Đầu tiên, các đội chơi sẽ cử một thành viên đại diện lên đứng trước đội mình để diễn tả hành động hay tạo dáng của một người anh hùng dân tộc nào đó để cho đội mình đoán và nêu tên.
 Trong quá trình chơi, đội nào có nhiều câu trả lời đúng là đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Múa hình tượng" alt="Trò chơi Múa hình tượng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-97-800x450.jpg">
-Trò chơi Múa hình tượng
-98Thổi tắt ngọn đèn
+
+
+98. Thổi tắt ngọn đèn
 Giới thiệu trò chơi
 Với trò chơi này, người chơi nên tìm lỗ hỏng của đối phương để tắt ngọn đèn nhanh chóng, trong lúc đó, người chơi nên cẩn thận giữ ngọn đèn của mình để tránh bị tắt.
 Hướng dẫn cách chơi và luật
@@ -1251,8 +1276,9 @@ Tất cả người chơi sẽ chia thành hai đội, hai đội này sẽ cử
 Khi nghe tiếng bắt đầu, hai người chơi này phải dấu đèn của mình sau lưng và tìm cách thổi tắt đèn của đối phương.
 Người chơi nào để đèn tắt trước là thua cuộc.
 <img class="ls-is-cached lazyload" title="Trò chơi Thổi tắt ngọn đèn" alt="Trò chơi Thổi tắt ngọn đèn" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-98-800x450.jpg">
-Trò chơi Thổi tắt ngọn đèn
-99Tìm địa danh Việt Nam
+
+
+99. Tìm địa danh Việt Nam
 Giới thiệu trò chơi
 Với trò chơi này, không chỉ hấp dẫn và vui vẻ, người chơi còn có thể ghi nhớ và học thuộc tên các tỉnh/thành phố/huyện,... trên khắp cả nước Việt Nam.
 Hướng dẫn cách chơi và luật
@@ -1261,16 +1287,16 @@ Quy định ghi tên: Chữ đầu của từ cuối tỉnh trước là chữ �
 Ví dụ: Hà Nội, Nghệ An, An Lão (Huyện của Tỉnh Hải Phòng), Long Thành (Đồng Nai), ...
 Trong quá trình chơi, người chơi không được sử dụng các tỉnh/thành phố lập lại và đội nào có nhiều địa danh nhất đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Tìm địa danh Việt Nam" alt="Trò chơi Tìm địa danh Việt Nam" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-99-800x450.jpg">
-Trò chơi Tìm địa danh Việt Nam
-100Truyền tin
+
+
+100. Truyền tin
 Giới thiệu trò chơi
 Người chơi nên lắng nghe thật kỹ thông tin của người chơi trước để truyền tin cho đồng đội của mình được chính xác, tránh việc truyền tin không đúng và làm cho đội bị trừ điểm.
 Hướng dẫn cách chơi và luật
 Tất cả các người chơi sẽ chia làm nhiều đội chơi, các đội chơi sẽ đứng xếp thành một hàng dọc. Lúc này, trọng tài sẽ cho người đứng đầu hàng đọc nội dung của một thông tin nào đó (tất cả cùng chung 1 bản).
-Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng cách nói nhỏ vào tai người đó, trò chơi cứ tiếp tục như thế cho đến khi truyền tin đến cho người cuối cùng. Lúc này, người cuối cùng nhận được thông tin sẽ ghi vào giấy và đưa cho trọng tài.&nbsp;
+Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng cách nói nhỏ vào tai người đó, trò chơi cứ tiếp tục như thế cho đến khi truyền tin đến cho người cuối cùng. Lúc này, người cuối cùng nhận được thông tin sẽ ghi vào giấy và đưa cho trọng tài.
 Đội nào có nội dung bản thông tin giống bản gốc nhất là đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Truyền tin" alt="Trò chơi Truyền tin" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-100-800x450.jpg">
-Trò chơi Truyền tin
 `
 let chatHistory = [
     {
@@ -1311,6 +1337,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Luôn đưa ra hình ảnh minh họa cho trò chơi ("bắt buộc" sử dụng markdown image | chỉ nếu có hình ảnh, nếu không thì bỏ qua, đừng nói "Trò chơi này không có hình ảnh nên tôi sẽ không đề cập").
 - Hình ảnh bạn đưa ra có thể ở bất kì vị trí nào mà bạn cảm thấy hợp lí. Không nhất thiết là luôn ở đầu hoặc đuôi, bạn có thể để hình ảnh ở giữa câu trả lời, giúp người dùng cảm thấy trực quan, sinh động hơn. Url hình ảnh được đi kèm trong dataset.
 - Định dạng markdown hình ảnh: ![Image description](url)
+- URL hình ảnh phải chính xác y chang như đã được cung cấp trong dataset. Không được đưa ra các url bắt đầu bằng \"https://i.pinimg.com\"
 - Không trả lời lười biếng kiểu "như đã nêu ở trên".
 - Chỉ tập trung vào các trò chơi dân gian Việt Nam.
 - Sử dụng ngôn ngữ Việt Nam chính xác và rõ ràng.
@@ -1527,7 +1554,7 @@ function addMessage(content, isUser = false, imageBase64 = null) {
         // Configure marked to add the custom class to images
         const renderer = new marked.Renderer();
         renderer.image = (href, title, text) => {
-            return `<img src="${href}" alt="${text}" class="image-preview-container-bot" ${title ? `title="${title}"` : ''}>`;
+            return `<img src="${href}" onerror="this.style.display='none'" alt="${text}" class="image-preview-container-bot" ${title ? `title="${title}"` : ''}>`;
         };
         marked.setOptions({ renderer });
         
