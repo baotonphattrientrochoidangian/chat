@@ -1829,7 +1829,6 @@ function createSuggestionsUI() {
     welcome.className = 'welcome';
     welcome.innerHTML = `
         <h1><strong>Xin chào! 👋</strong></h1>
-        <h2 style="color: white; font-size: 1.5rem; margin-top: 15px"><strong>Chúc mừng năm mới 2025 🥳</strong></h2>
         <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
     `;
     
