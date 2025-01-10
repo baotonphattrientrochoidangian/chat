@@ -339,6 +339,15 @@ textarea::placeholder {
     align-items: center;
 }
 
+iframe{
+    position: relative;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 600px) {
     .image-preview-container-bot {
         width: 100%;
