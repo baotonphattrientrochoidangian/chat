@@ -259,7 +259,7 @@ Sau đó, nhà cái cầm gậy đẩy con gà ra khỏi lỗ, nhà con thì dù
 
 19. Đánh quay
 Giới thiệu trò chơi
-Trò chơi đánh quay được các người chơi nam rất ưa chuộng, với trò chơi này người chơi phải giữ được con quay của mình càng lâu càng tốt.
+Trò chơi \"đánh quay\" hay còn gọi là \"cù quay\" (sử dụng con cù để chơi) được các người chơi nam rất ưa chuộng, với trò chơi này người chơi phải giữ được con quay của mình càng lâu càng tốt.
 Hướng dẫn cách chơi và luật
 Con quay được làm bằng gỗ hay các đồ vật có hình nón cụt, chân bằng sắt. Sau đó, người chơi dùng một sợi dây, quấn từ dưới lên trên rồi cầm một đầu vào con quay.
 Người chơi quăng mạnh con quay xuống dưới đất cho con quay xoay tròn từng vòng, trong quá trình chơi, con quay của ai quay lâu nhất là người đó thắng.&nbsp;
@@ -1312,7 +1312,7 @@ let isProcessing = false;
 
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-001",
+    model: "gemini-2.0-flash-exp",
     systemInstruction: `
 # Character
 Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dân gian Việt Nam.  Bạn có khả năng giải thích luật chơi, nguồn gốc, và ý nghĩa văn hóa của các trò chơi một cách rõ ràng và dễ hiểu. Bạn cũng có thể gợi ý những trò chơi phù hợp với độ tuổi và sở thích của người dùng.
@@ -1353,7 +1353,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 });
 
 const generationConfig = {
-    temperature: 0.8,
+    temperature: 0.5,
     topP: 0.8,
     topK: 1,
     maxOutputTokens: 8192,
@@ -1364,7 +1364,7 @@ const checkConfig = {temperature: 0.5, topP: 1, topK: 1, responseMimeType: "text
 async function check(question) {
     let fastCheckModel = genAI.getGenerativeModel({
         model: "gemini-1.5-flash-8b",
-        systemInstruction: 'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian hoặc có cụm từ \"/Search\". Trả lời "false" (Ưu tiên để tối ưu thời gian) nếu đơn giản và có thể trả lời dựa vào dataset gồm có các trò: \"Chi chi chành chành ,  Cướp cờ ,  Dung dăng dung dẻ ,  Rồng rắn lên mây ,  Kéo co ,  Bịt mắt bắt dê ,  Đua thuyền trên cạn ,  Thả chó ,  Chùm nụm ,  Đúc cây dừa, chừa cây mỏng ,  Chơi chuyền ,  Nhảy bao bố ,  Ô ăn quan ,  Cướp cầu ,  Oẳn tù tì ,  Kể chuyện ,  Hội vật làng Hà ,  Tả cáy ,  Đánh quay ,  Thi thổi cơm ,  Thi diều sáo ,  Mèo đuổi chuột ,  Ném còn ,  Thi dưa hấu ,  Thi thơ ,  Đánh roi múa mọc ,  Thi thả chim ,  Nhún đu ,  Đấu vật ,  Vật cù ,  Kéo cưa lừa xẻ ,  Kéo chữ ,  Chơi hóp ,  Nhảy chồng cao ,  Đánh trỏng ,  Đánh banh thẻ ,  Xé giấy ,  Hú chuột ,  Hát sinh ,  Hát soong ,  Trống quân Đức Bác ,  Kéo song Hương Canh ,  Leo cầu ùm ,  Đả cầu cướp phết ,  Tứ thú nhân lương ,  Ném lon ,  Đánh quân ,  Hò dô ta ,  Vây lưới bắt cá ,  Cá sấu lên bờ ,  Ken trái cây ,  Một hai ba ,  Đánh đáo ,  Nu na nu nống ,  Máy bay xuất kích ,  Bong bóng nước ,  Đi cà kheo ,  Tập tầm vông ,  Nhảy dây ,  Ken con vật ,  Bún dây thun ,  Du de du dích ,  Thìa la thìa lảy ,  Úp lá khoai ,  Oẳn tù tì (Đồng dao) ,  Tung đồng đáo ,  Me me de de ,  Đá gà ,  Nhảy cóc ,  Đi tàu hỏa ,  Đi câu ếch ,  Cắp cua ,  Lùa vịt ,  Ném vòng ,  Lựa đậu ,  Dẫn nước ,  Tùm nụm, tùm nịu ,  Trốn tìm ,  Nhảy lò cò ,  Khiêng kiệu ,  Thảy đá ,  Tạt lon ,  Thả diều ,  De - ùm ,  Tán ua ,  Trồng nụ trồng hoa ,  Kéo mo cau ,  Lộn cầu vồng ,  Thiên đàng hỏa ngục ,  Đếm sao ,  Bầu cua cá cọp ,  Chim bay cò bay ,  Thả đỉa ba ba ,  Chọi dế ,  Cáo và thỏ ,  Bà Ba buồn bà Bảy ,  Múa hình tượng ,  Thổi tắt ngọn đèn ,  Tìm địa danh Việt Nam ,  Truyền tin \".'
+        systemInstruction: 'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian hoặc có cụm từ \"/Search\". Trả lời "false" (Ưu tiên để tối ưu thời gian) nếu đơn giản và có thể trả lời dựa vào dataset gồm có các trò: \"Chi chi chành chành ,  Cướp cờ ,  Dung dăng dung dẻ ,  Rồng rắn lên mây ,  Kéo co ,  Bịt mắt bắt dê ,  Đua thuyền trên cạn ,  Thả chó ,  Chùm nụm ,  Đúc cây dừa, chừa cây mỏng ,  Chơi chuyền ,  Nhảy bao bố ,  Ô ăn quan ,  Cướp cầu ,  Oẳn tù tì ,  Kể chuyện ,  Hội vật làng Hà ,  Tả cáy ,  Đánh quay (Cù quay) ,  Thi thổi cơm ,  Thi diều sáo ,  Mèo đuổi chuột ,  Ném còn ,  Thi dưa hấu ,  Thi thơ ,  Đánh roi múa mọc ,  Thi thả chim ,  Nhún đu ,  Đấu vật ,  Vật cù ,  Kéo cưa lừa xẻ ,  Kéo chữ ,  Chơi hóp ,  Nhảy chồng cao ,  Đánh trỏng ,  Đánh banh thẻ ,  Xé giấy ,  Hú chuột ,  Hát sinh ,  Hát soong ,  Trống quân Đức Bác ,  Kéo song Hương Canh ,  Leo cầu ùm ,  Đả cầu cướp phết ,  Tứ thú nhân lương ,  Ném lon ,  Đánh quân ,  Hò dô ta ,  Vây lưới bắt cá ,  Cá sấu lên bờ ,  Ken trái cây ,  Một hai ba ,  Đánh đáo ,  Nu na nu nống ,  Máy bay xuất kích ,  Bong bóng nước ,  Đi cà kheo ,  Tập tầm vông ,  Nhảy dây ,  Ken con vật ,  Bún dây thun ,  Du de du dích ,  Thìa la thìa lảy ,  Úp lá khoai ,  Oẳn tù tì (Đồng dao) ,  Tung đồng đáo ,  Me me de de ,  Đá gà ,  Nhảy cóc ,  Đi tàu hỏa ,  Đi câu ếch ,  Cắp cua ,  Lùa vịt ,  Ném vòng ,  Lựa đậu ,  Dẫn nước ,  Tùm nụm, tùm nịu ,  Trốn tìm ,  Nhảy lò cò ,  Khiêng kiệu ,  Thảy đá ,  Tạt lon ,  Thả diều ,  De - ùm ,  Tán ua ,  Trồng nụ trồng hoa ,  Kéo mo cau ,  Lộn cầu vồng ,  Thiên đàng hỏa ngục ,  Đếm sao ,  Bầu cua cá cọp ,  Chim bay cò bay ,  Thả đỉa ba ba ,  Chọi dế ,  Cáo và thỏ ,  Bà Ba buồn bà Bảy ,  Múa hình tượng ,  Thổi tắt ngọn đèn ,  Tìm địa danh Việt Nam ,  Truyền tin \".'
     });
     const chat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 5 } });
     const response = (await chat.sendMessage(`Câu lệnh này có cần sử dụng công cụ tìm kiếm không: ${question}`)).response;
