@@ -1538,7 +1538,7 @@ function addMessage(content, isUser = false, imageBase64 = null) {
     }
 
     const avatar = document.createElement('img');
-    avatar.src = isUser ? 'https://images.unsplash.com/photo-1618397746666-63405ce5d015?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' : 'https://api.dicebear.com/7.x/bottts/svg?seed=gemini';
+    avatar.src = isUser ? 'https://images.unsplash.com/photo-1618397746666-63405ce5d015?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' : './logo.png';
     avatar.className = 'avatar';
     messageContainer.appendChild(avatar);
 
@@ -1607,11 +1607,11 @@ async function processImageAndText(message, imageBase64 = null) {
         addMessage(message, true, imageBase64);
         
         const typingContainer = document.createElement('div');
-        typingContainer.className = 'message-container'
+        typingContainer.className = 'message-container';
         typingContainer.className = 'message-typing-area';
         
         const typingAvatar = document.createElement('img');
-        typingAvatar.src = 'https://api.dicebear.com/7.x/bottts/svg?seed=gemini';
+        typingAvatar.src = "./logo.png";
         typingAvatar.className = 'avatar';
         typingContainer.appendChild(typingAvatar);
         
@@ -1621,6 +1621,11 @@ async function processImageAndText(message, imageBase64 = null) {
         typingContainer.appendChild(typingDiv);
         
         document.getElementById('messages').appendChild(typingContainer);
+
+        // Add loading spinner
+        const loadingSpinner = document.createElement('div');
+        loadingSpinner.className = 'loading-spinner';
+        typingContainer.appendChild(loadingSpinner);
          
          const searchKeywords = await check(message);
          let searchResults = null;
@@ -1862,111 +1867,6 @@ function createSuggestionsUI() {
     
     messagesArea.appendChild(welcome);
     messagesArea.appendChild(suggestionsGrid);
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        .welcome {
-            margin-top: 2rem;
-            padding: 2rem 1rem;
-        }
-        
-        .welcome h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-        
-        .welcome h2 {
-            font-size: 1.5rem;
-            color: #666;
-            font-weight: 400;
-        }
-        
-        .dark-mode .welcome h2 {
-            color: #9aa0a6;
-        }
-        
-        .suggestions-grid {
-            display: grid;
-            gap: 1rem;
-            padding: 0 1rem;
-            margin-bottom: 100px;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        @media screen and (min-width: 768px) {
-            .suggestions-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            .suggestions-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .suggestion-card {
-                display: none;
-            }
-
-            .suggestion-card:nth-child(-n+3) {
-                display: block;
-            }
-        }
-
-        .suggestion-card {
-            background: var(--light-secondary-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid var(--light-border);
-        }
-        
-        .dark-mode .suggestion-card {
-            background: var(--dark-secondary-bg);
-            border-color: var(--dark-border);
-        }
-        
-        .suggestion-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .dark-mode .suggestion-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        .card-content {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .suggestion-preview {
-            font-size: 1rem;
-            color: #666;
-        }
-        
-        .dark-mode .suggestion-preview {
-            color: #9aa0a6;
-        }
-        textarea:disabled {
-            background-color: var(--light-secondary-bg);
-            cursor: not-allowed;
-        }
-        
-        .dark-mode textarea:disabled {
-            background-color: var(--dark-secondary-bg);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-    `;
-    
-    document.head.appendChild(style);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

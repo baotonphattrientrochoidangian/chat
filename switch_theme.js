@@ -4,22 +4,20 @@ const themeIcon = themeToggle.querySelector('i');
 
 // Load saved theme
 const savedTheme = localStorage.getItem('theme') || 'light';
-document.body.classList.add(`${savedTheme}-mode`);
+document.documentElement.setAttribute('data-theme', savedTheme);
 updateThemeIcon();
 
 // Theme toggle handler
 themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    document.body.classList.toggle('light-mode');
-    
-    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('theme', currentTheme);
-    
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
     updateThemeIcon();
 });
 
 function updateThemeIcon() {
-    const isDark = document.body.classList.contains('dark-mode');
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     themeIcon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
 }
 
