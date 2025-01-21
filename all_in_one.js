@@ -1297,23 +1297,31 @@ Tất cả các người chơi sẽ chia làm nhiều đội chơi, các đội 
 Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng cách nói nhỏ vào tai người đó, trò chơi cứ tiếp tục như thế cho đến khi truyền tin đến cho người cuối cùng. Lúc này, người cuối cùng nhận được thông tin sẽ ghi vào giấy và đưa cho trọng tài.
 Đội nào có nội dung bản thông tin giống bản gốc nhất là đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Truyền tin" alt="Trò chơi Truyền tin" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-100-800x450.jpg">
-`
+`;
 let chatHistory = [
-    {
-        role: 'user',
-        parts: [{ text: `LƯU Ý: Đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, không đề cập đến nếu người dùng hỏi!\nĐây là dataset của bạn:\n ${dataset}` }]
-    },
-    {
-    role: 'model',
-    parts: [{ text: "Được thôi! Tôi sẽ trả lời các các câu hỏi dựa vào dataset đã được cung cấp. Tối sẽ trả lời thật chính xác các thông tin về văn bản và hình ảnh! Và vì đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, tôi sẽ không đề cập đến nếu người dùng hỏi!\n"}]
-}];
+  {
+    role: "user",
+    parts: [
+      {
+        text: `LƯU Ý: Đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, không đề cập đến nếu người dùng hỏi!\nĐây là dataset của bạn:\n ${dataset}`,
+      },
+    ],
+  },
+  {
+    role: "model",
+    parts: [
+      {
+        text: "Được thôi! Tôi sẽ trả lời các các câu hỏi dựa vào dataset đã được cung cấp. Tối sẽ trả lời thật chính xác các thông tin về văn bản và hình ảnh! Và vì đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, tôi sẽ không đề cập đến nếu người dùng hỏi!",
+      },
+    ],
+  },
+];
 // Add a flag to track if a response is in progress
 let isProcessing = false;
 
-
 const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash-exp",
-    systemInstruction: `
+  model: "gemini-2.0-flash-exp",
+  systemInstruction: `
 # Character
 Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dân gian Việt Nam.  Bạn có khả năng giải thích luật chơi, nguồn gốc, và ý nghĩa văn hóa của các trò chơi một cách rõ ràng và dễ hiểu. Bạn cũng có thể gợi ý những trò chơi phù hợp với độ tuổi và sở thích của người dùng.
 
@@ -1340,6 +1348,11 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Đề xuất các trò chơi dân gian phù hợp với độ tuổi và sở thích đó.
 - Giải thích lý do tại sao các trò chơi đó phù hợp.
 
+### Một số link hữu ích
+- Thư viện số \"Sân đình\": https://baotonphattrientrochoidangian.github.io/
+- Cộng đồng \"Trò chơi dân gian - một thoáng tuổi thơ\": https://www.facebook.com/groups/1042422780910183
+- Kho truyện tranh eBook (thuộc Thư viện số Sân đình): https://pine-seatbelt-93d.notion.site/Kho-truy-n-tranh-Ebook-11cb9494e068817384d5ecc7637bdc1b
+
 ## Lưu ý:
 - Không trả lời lười biếng kiểu "như đã nêu ở trên".
 - Chỉ tập trung vào các trò chơi dân gian Việt Nam.
@@ -1349,546 +1362,603 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Sử dụng markdown để trả lời câu hỏi (Không sử dụng markdown bảng, text-box).
 - Cung cấp thông tin chính xác và đáng tin cậy, dựa vào thông tin dataset.
 - Khi phân tích hình ảnh, hãy nhận diện trò chơi chính xác, đối chiếu với các trò chơi được cung cấp, tránh mắc sai lầm.
+- Hãy đưa ra các link hữu ích như trên để người dùng có thể tìm hiểu thêm về trò chơi dân gian Việt Nam. Hãy ưu tiên đưa ra các link liên quan này ở cuỗi mỗi câu trả lời. Sử dụng định dạng markdown link.
 `,
 });
 
 const generationConfig = {
-    temperature: 0.5,
-    topP: 0.8,
-    topK: 1,
-    maxOutputTokens: 8192,
+  temperature: 0.5,
+  topP: 0.8,
+  topK: 1,
+  maxOutputTokens: 8192,
 };
 
-const checkConfig = {temperature: 0.5, topP: 1, topK: 1, responseMimeType: "text/plain"};
+const checkConfig = {
+  temperature: 0.5,
+  topP: 1,
+  topK: 1,
+  responseMimeType: "text/plain",
+};
 
 async function check(question) {
-    let fastCheckModel = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash-8b",
-        systemInstruction: 'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian hoặc có cụm từ \"/Search\". Trả lời "false" (Ưu tiên để tối ưu thời gian) nếu đơn giản và có thể trả lời dựa vào dataset gồm có các trò: \"Chi chi chành chành ,  Cướp cờ ,  Dung dăng dung dẻ ,  Rồng rắn lên mây ,  Kéo co ,  Bịt mắt bắt dê ,  Đua thuyền trên cạn ,  Thả chó ,  Chùm nụm ,  Đúc cây dừa, chừa cây mỏng ,  Chơi chuyền ,  Nhảy bao bố ,  Ô ăn quan ,  Cướp cầu ,  Oẳn tù tì ,  Kể chuyện ,  Hội vật làng Hà ,  Tả cáy ,  Đánh quay (Cù quay) ,  Thi thổi cơm ,  Thi diều sáo ,  Mèo đuổi chuột ,  Ném còn ,  Thi dưa hấu ,  Thi thơ ,  Đánh roi múa mọc ,  Thi thả chim ,  Nhún đu ,  Đấu vật ,  Vật cù ,  Kéo cưa lừa xẻ ,  Kéo chữ ,  Chơi hóp ,  Nhảy chồng cao ,  Đánh trỏng ,  Đánh banh thẻ ,  Xé giấy ,  Hú chuột ,  Hát sinh ,  Hát soong ,  Trống quân Đức Bác ,  Kéo song Hương Canh ,  Leo cầu ùm ,  Đả cầu cướp phết ,  Tứ thú nhân lương ,  Ném lon ,  Đánh quân ,  Hò dô ta ,  Vây lưới bắt cá ,  Cá sấu lên bờ ,  Ken trái cây ,  Một hai ba ,  Đánh đáo ,  Nu na nu nống ,  Máy bay xuất kích ,  Bong bóng nước ,  Đi cà kheo ,  Tập tầm vông ,  Nhảy dây ,  Ken con vật ,  Bún dây thun ,  Du de du dích ,  Thìa la thìa lảy ,  Úp lá khoai ,  Oẳn tù tì (Đồng dao) ,  Tung đồng đáo ,  Me me de de ,  Đá gà ,  Nhảy cóc ,  Đi tàu hỏa ,  Đi câu ếch ,  Cắp cua ,  Lùa vịt ,  Ném vòng ,  Lựa đậu ,  Dẫn nước ,  Tùm nụm, tùm nịu ,  Trốn tìm ,  Nhảy lò cò ,  Khiêng kiệu ,  Thảy đá ,  Tạt lon ,  Thả diều ,  De - ùm ,  Tán ua ,  Trồng nụ trồng hoa ,  Kéo mo cau ,  Lộn cầu vồng ,  Thiên đàng hỏa ngục ,  Đếm sao ,  Bầu cua cá cọp ,  Chim bay cò bay ,  Thả đỉa ba ba ,  Chọi dế ,  Cáo và thỏ ,  Bà Ba buồn bà Bảy ,  Múa hình tượng ,  Thổi tắt ngọn đèn ,  Tìm địa danh Việt Nam ,  Truyền tin \".'
-    });
-    const chat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 5 } });
-    const response = (await chat.sendMessage(`Câu lệnh này có cần sử dụng công cụ tìm kiếm không: ${question}`)).response;
-    const needSearch = response.text().trim() === "true";
+  let fastCheckModel = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash-8b",
+    systemInstruction:
+      'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian hoặc có cụm từ "/Search". Trả lời "false" (Ưu tiên để tối ưu thời gian) nếu đơn giản và có thể trả lời dựa vào dataset gồm có các trò: "Chi chi chành chành ,  Cướp cờ ,  Dung dăng dung dẻ ,  Rồng rắn lên mây ,  Kéo co ,  Bịt mắt bắt dê ,  Đua thuyền trên cạn ,  Thả chó ,  Chùm nụm ,  Đúc cây dừa, chừa cây mỏng ,  Chơi chuyền ,  Nhảy bao bố ,  Ô ăn quan ,  Cướp cầu ,  Oẳn tù tì ,  Kể chuyện ,  Hội vật làng Hà ,  Tả cáy ,  Đánh quay (Cù quay) ,  Thi thổi cơm ,  Thi diều sáo ,  Mèo đuổi chuột ,  Ném còn ,  Thi dưa hấu ,  Thi thơ ,  Đánh roi múa mọc ,  Thi thả chim ,  Nhún đu ,  Đấu vật ,  Vật cù ,  Kéo cưa lừa xẻ ,  Kéo chữ ,  Chơi hóp ,  Nhảy chồng cao ,  Đánh trỏng ,  Đánh banh thẻ ,  Xé giấy ,  Hú chuột ,  Hát sinh ,  Hát soong ,  Trống quân Đức Bác ,  Kéo song Hương Canh ,  Leo cầu ùm ,  Đả cầu cướp phết ,  Tứ thú nhân lương ,  Ném lon ,  Đánh quân ,  Hò dô ta ,  Vây lưới bắt cá ,  Cá sấu lên bờ ,  Ken trái cây ,  Một hai ba ,  Đánh đáo ,  Nu na nu nống ,  Máy bay xuất kích ,  Bong bóng nước ,  Đi cà kheo ,  Tập tầm vông ,  Nhảy dây ,  Ken con vật ,  Bún dây thun ,  Du de du dích ,  Thìa la thìa lảy ,  Úp lá khoai ,  Oẳn tù tì (Đồng dao) ,  Tung đồng đáo ,  Me me de de ,  Đá gà ,  Nhảy cóc ,  Đi tàu hỏa ,  Đi câu ếch ,  Cắp cua ,  Lùa vịt ,  Ném vòng ,  Lựa đậu ,  Dẫn nước ,  Tùm nụm, tùm nịu ,  Trốn tìm ,  Nhảy lò cò ,  Khiêng kiệu ,  Thảy đá ,  Tạt lon ,  Thả diều ,  De - ùm ,  Tán ua ,  Trồng nụ trồng hoa ,  Kéo mo cau ,  Lộn cầu vồng ,  Thiên đàng hỏa ngục ,  Đếm sao ,  Bầu cua cá cọp ,  Chim bay cò bay ,  Thả đỉa ba ba ,  Chọi dế ,  Cáo và thỏ ,  Bà Ba buồn bà Bảy ,  Múa hình tượng ,  Thổi tắt ngọn đèn ,  Tìm địa danh Việt Nam ,  Truyền tin ".',
+  });
+  const chat = await fastCheckModel.startChat({
+    generationConfig: { ...checkConfig, maxOutputTokens: 5 },
+  });
+  const response = (
+    await chat.sendMessage(
+      `Câu lệnh này có cần sử dụng công cụ tìm kiếm không: ${question}`
+    )
+  ).response;
+  const needSearch = response.text().trim() === "true";
 
-    if (!needSearch) return null;
+  if (!needSearch) return null;
 
-    fastCheckModel = genAI.getGenerativeModel({model: "gemini-1.5-flash-8b", systemInstruction: "Trả về từ khóa tìm kiếm cho câu hỏi"});
-    // Only proceed to get search keywords if needSearch is true
-    const searchChat = await fastCheckModel.startChat({ generationConfig: { ...checkConfig, maxOutputTokens: 50 } });
-    const searchKeywords = (await searchChat.sendMessage(`Hãy trả về từ khóa tìm kiếm cho: ${question}. Chỉ trả về từ khóa, không thêm giải thích. Ngắn gọn`)).response;
+  fastCheckModel = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash-8b",
+    systemInstruction: "Trả về từ khóa tìm kiếm cho câu hỏi",
+  });
+  // Only proceed to get search keywords if needSearch is true
+  const searchChat = await fastCheckModel.startChat({
+    generationConfig: { ...checkConfig, maxOutputTokens: 50 },
+  });
+  const searchKeywords = (
+    await searchChat.sendMessage(
+      `Hãy trả về từ khóa tìm kiếm cho: ${question}. Chỉ trả về từ khóa, không thêm giải thích. Ngắn gọn`
+    )
+  ).response;
 
-    return searchKeywords.text();
+  return searchKeywords.text();
 }
 
 async function getGoogleResults(searchQuery) {
-    try {
-        console.log('Starting search for:', searchQuery);
-        const encodedQuery = encodeURIComponent(searchQuery);
-        // Tăng số lượng kết quả lên 5
-        const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=10`;
-        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(googleUrl)}`;
-        
-        console.log('Fetching from proxy:', proxyUrl);
-        const response = await fetch(proxyUrl);
-        
-        if (!response.ok) {
-            console.error('Proxy request failed:', response.status, response.statusText);
-            return [];
+  try {
+    console.log("Starting search for:", searchQuery);
+    const encodedQuery = encodeURIComponent(searchQuery);
+    // Tăng số lượng kết quả lên 5
+    const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=10`;
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(
+      googleUrl
+    )}`;
+
+    console.log("Fetching from proxy:", proxyUrl);
+    const response = await fetch(proxyUrl);
+
+    if (!response.ok) {
+      console.error(
+        "Proxy request failed:",
+        response.status,
+        response.statusText
+      );
+      return [];
+    }
+
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const candidates = [];
+
+    // Thu thập tất cả các link tiềm năng
+    doc.querySelectorAll("a").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href?.startsWith("/url?q=")) {
+        let actualUrl = decodeURIComponent(href.substring(7));
+        const endIndex = actualUrl.indexOf("&");
+        if (endIndex !== -1) {
+          actualUrl = actualUrl.substring(0, endIndex);
         }
 
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const candidates = [];
-        
-        // Thu thập tất cả các link tiềm năng
-        doc.querySelectorAll('a').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href?.startsWith('/url?q=')) {
-                let actualUrl = decodeURIComponent(href.substring(7));
-                const endIndex = actualUrl.indexOf('&');
-                if (endIndex !== -1) {
-                    actualUrl = actualUrl.substring(0, endIndex);
-                }
-                
-                if (actualUrl.startsWith('http') && 
-                    !actualUrl.includes('facebook.com') && 
-                    !actualUrl.includes('youtube.com') && 
-                    !actualUrl.includes('instagram.com') && 
-                    !actualUrl.includes('maps.google.com')) {
-                    candidates.push({
-                        title: link.textContent.trim(),
-                        url: actualUrl
-                    });
-                }
-            }
+        if (
+          actualUrl.startsWith("http") &&
+          !actualUrl.includes("facebook.com") &&
+          !actualUrl.includes("youtube.com") &&
+          !actualUrl.includes("instagram.com") &&
+          !actualUrl.includes("maps.google.com")
+        ) {
+          candidates.push({
+            title: link.textContent.trim(),
+            url: actualUrl,
+          });
+        }
+      }
+    });
+
+    // Kiểm tra từng URL cho đến khi có 2 kết quả hợp lệ
+    const validResults = [];
+    for (const candidate of candidates) {
+      if (validResults.length >= 2) break;
+
+      try {
+        // Tạo một Promise với timeout
+        const timeout = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error("Timeout")), 2000);
         });
 
-        // Kiểm tra từng URL cho đến khi có 2 kết quả hợp lệ
-        const validResults = [];
-        for (const candidate of candidates) {
-            if (validResults.length >= 2) break;
-            
-            try {
-                // Tạo một Promise với timeout
-                const timeout = new Promise((_, reject) => {
-                    setTimeout(() => reject(new Error('Timeout')), 2000);
-                });
-                
-                // Race giữa fetch request và timeout
-                const urlCheck = await Promise.race([
-                    fetch(candidate.url),
-                    timeout
-                ]);
-                
-                if (urlCheck.ok) {
-                    validResults.push(candidate);
-                    console.log('Valid result found:', candidate.url);
-                } else {
-                    console.log('Skipping invalid URL:', candidate.url);
-                }
-            } catch (error) {
-                console.log('Error checking URL:', candidate.url, 
-                    error.message === 'Timeout' ? 'Request timed out (>2000ms)' : error.message);
-                continue;
-            }
+        // Race giữa fetch request và timeout
+        const urlCheck = await Promise.race([fetch(candidate.url), timeout]);
+
+        if (urlCheck.ok) {
+          validResults.push(candidate);
+          console.log("Valid result found:", candidate.url);
+        } else {
+          console.log("Skipping invalid URL:", candidate.url);
         }
-        
-        return validResults;
-    } catch (error) {
-        console.error('Search failed:', error);
-        return [];
+      } catch (error) {
+        console.log(
+          "Error checking URL:",
+          candidate.url,
+          error.message === "Timeout"
+            ? "Request timed out (>2000ms)"
+            : error.message
+        );
+        continue;
+      }
     }
+
+    return validResults;
+  } catch (error) {
+    console.error("Search failed:", error);
+    return [];
+  }
 }
 
 function processHTMLContent(html) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    doc.querySelectorAll('header, script').forEach(el => el.remove());
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  doc.querySelectorAll("header, script").forEach((el) => el.remove());
 
-    const processNode = (node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-            return node.textContent;
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            const childContent = Array.from(node.childNodes)
-                .map(child => processNode(child))
-                .join('');
-            return node.tagName.toLowerCase() === 'p' ? childContent + '\n' :
-                   node.tagName.toLowerCase() === 'span' ? childContent + ' ' :
-                   childContent;
-        }
-        return '';
-    };
+  const processNode = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.textContent;
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const childContent = Array.from(node.childNodes)
+        .map((child) => processNode(child))
+        .join("");
+      return node.tagName.toLowerCase() === "p"
+        ? childContent + "\n"
+        : node.tagName.toLowerCase() === "span"
+        ? childContent + " "
+        : childContent;
+    }
+    return "";
+  };
 
-    return processNode(doc.body)
-        .split('\n')
-        .map(line => line.trim())
-        .filter(line => line.length > 0)
-        .join('\n');
+  return processNode(doc.body)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .join("\n");
 }
 
 async function fetchAndProcessURL(url) {
-    try {
-        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-        const response = await fetch(proxyUrl);
+  try {
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(
+      url
+    )}`;
+    const response = await fetch(proxyUrl);
 
-        if (!response.ok) return null;
-        
-        const html = await response.text();
-        return processHTMLContent(html);
-    } catch (error) {
-        console.error(`Error processing ${url}:`, error);
-        return null;
-    }
+    if (!response.ok) return null;
+
+    const html = await response.text();
+    return processHTMLContent(html);
+  } catch (error) {
+    console.error(`Error processing ${url}:`, error);
+    return null;
+  }
 }
 
 async function performSearch(query) {
-    try {
-        const searchResults = await getGoogleResults(query);
-        let combinedContent = '';
+  try {
+    const searchResults = await getGoogleResults(query);
+    let combinedContent = "";
 
-        for (const [index, result] of searchResults.entries()) {
-            const content = await fetchAndProcessURL(result.url);
-            if (content) {
-                combinedContent += `# Trang ${index + 1}: [${result.title}](${result.url})\n${content}\n\n---\n\n`;
-            }
-        }
-        return combinedContent.trim() === "" ? null : combinedContent;
-
-    } catch (error) {
-        console.error("Search Error: ", error);
-        return null;
+    for (const [index, result] of searchResults.entries()) {
+      const content = await fetchAndProcessURL(result.url);
+      if (content) {
+        combinedContent += `# Trang ${index + 1}: [${result.title}](${
+          result.url
+        })\n${content}\n\n---\n\n`;
+      }
     }
+    return combinedContent.trim() === "" ? null : combinedContent;
+  } catch (error) {
+    console.error("Search Error: ", error);
+    return null;
+  }
 }
 
 async function initChat() {
-    chatSession = model.startChat({
-        generationConfig,
-        history: chatHistory,
-    });
-    return chatSession;
+  chatSession = model.startChat({
+    generationConfig,
+    history: chatHistory,
+  });
+  return chatSession;
 }
 
 function addMessage(content, isUser = false, imageBase64 = null) {
-    const messagesDiv = document.getElementById('messages');
-    const messageContainer = document.createElement('div');
-    messageContainer.className = 'message-container';
-    if (isUser) {
-        messageContainer.classList.add('user');
-    }
+  const messagesDiv = document.getElementById("messages");
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "message-container";
+  if (isUser) {
+    messageContainer.classList.add("user");
+  }
 
-    const avatar = document.createElement('img');
-    avatar.src = isUser ? 'https://images.unsplash.com/photo-1618397746666-63405ce5d015?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' : './logo.png';
-    avatar.className = 'avatar';
-    messageContainer.appendChild(avatar);
+  const avatar = document.createElement("img");
+  avatar.src = isUser
+    ? "https://images.unsplash.com/photo-1618397746666-63405ce5d015?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    : "./logo.png";
+  avatar.className = "avatar";
+  messageContainer.appendChild(avatar);
 
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-    
-    if (imageBase64) {
-        const imageElement = document.createElement('img');
-        imageElement.src = `data:image/jpeg;base64,${imageBase64}`;
-        imageElement.className = 'message-image';
-        messageDiv.appendChild(imageElement);
-    }
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `message ${isUser ? "user-message" : "bot-message"}`;
 
-    const textElement = document.createElement('div');
-    textElement.className = 'message-text';
-    if (content) {
-        // Configure marked to add the custom class to images
-        const renderer = new marked.Renderer();
-        renderer.image = (href, title, text) => {
-            return `<img src="${href}" onerror="this.style.display='none'" alt="${text}" class="image-preview-container-bot" ${title ? `title="${title}"` : ''}>`;
-        };
-        marked.setOptions({ renderer });
-        
-        textElement.innerHTML = marked.parse(content);
-    }
-    messageDiv.appendChild(textElement);
+  if (imageBase64) {
+    const imageElement = document.createElement("img");
+    imageElement.src = `data:image/jpeg;base64,${imageBase64}`;
+    imageElement.className = "message-image";
+    messageDiv.appendChild(imageElement);
+  }
 
-    messageContainer.appendChild(messageDiv);
-    messagesDiv.appendChild(messageContainer);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    
-    return textElement;
+  const textElement = document.createElement("div");
+  textElement.className = "message-text";
+  if (content) {
+    const renderer = new marked.Renderer();
+
+    // Xử lý hình ảnh
+    renderer.image = (href, title, text) => {
+      return `<img src="${href}" onerror="this.style.display='none'" alt="${text}" class="image-preview-container-bot" ${
+        title ? `title="${title}"` : ""
+      }>`;
+    };
+
+    // Thêm xử lý link ở đây
+    renderer.link = (href, title, text) => {
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer" ${
+        title ? `title="${title}"` : ""
+      }>${text}</a>`;
+    };
+
+    marked.setOptions({ renderer });
+    textElement.innerHTML = marked.parse(content);
+  }
+  messageDiv.appendChild(textElement);
+
+  messageContainer.appendChild(messageDiv);
+  messagesDiv.appendChild(messageContainer);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+  return textElement;
 }
 
 // Function to disable input elements
 function disableInput(disabled = true) {
-    const textarea = document.getElementById('input');
-    const sendButton = document.getElementById('send');
-    const uploadBtn = document.getElementById('uploadBtn');
-    
-    textarea.disabled = disabled;
-    sendButton.disabled = disabled;
-    uploadBtn.disabled = disabled;
-    
-    if (disabled) {
-        textarea.placeholder = 'Đang chờ phản hồi...';
-    } else {
-        textarea.placeholder = 'Nhập tin nhắn...';
-    }
+  const textarea = document.getElementById("input");
+  const sendButton = document.getElementById("send");
+  const uploadBtn = document.getElementById("uploadBtn");
+
+  textarea.disabled = disabled;
+  sendButton.disabled = disabled;
+  uploadBtn.disabled = disabled;
+
+  if (disabled) {
+    textarea.placeholder = "Đang chờ phản hồi...";
+  } else {
+    textarea.placeholder = "Nhập tin nhắn...";
+  }
 }
 
 // Modify the processImageAndText function
 async function processImageAndText(message, imageBase64 = null) {
-    try {
-        if (isProcessing) {
-            return; // Prevent multiple simultaneous messages
-        }
-        
-        isProcessing = true;
-        disableInput(true);
-
-        if (!chatSession) {
-            await initChat();
-        }
-
-        addMessage(message, true, imageBase64);
-        
-        const typingContainer = document.createElement('div');
-        typingContainer.className = 'message-container';
-        typingContainer.className = 'message-typing-area';
-        
-        const typingAvatar = document.createElement('img');
-        typingAvatar.src = "./logo.png";
-        typingAvatar.className = 'avatar';
-        typingContainer.appendChild(typingAvatar);
-        
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'typing';
-        typingDiv.innerHTML = '<span class="typing-dots"></span>';
-        typingContainer.appendChild(typingDiv);
-        
-        document.getElementById('messages').appendChild(typingContainer);
-
-        // Add loading spinner
-        const loadingSpinner = document.createElement('div');
-        loadingSpinner.className = 'loading-spinner';
-        typingContainer.appendChild(loadingSpinner);
-         
-         const searchKeywords = await check(message);
-         let searchResults = null;
-          if(searchKeywords) {
-             searchResults = await performSearch(searchKeywords);
-          }
-
-        let prompt = message;
-
-        if (searchResults) {
-            prompt = `Yêu cầu của người dùng: ${message}\n\nĐây là thông tin tìm kiếm web thu thập được:\n${searchResults}`;
-        }
-
-        let result;
-        let responseText = '';
-
-        if (imageBase64) {
-            result = await model.generateContentStream([
-                prompt || "Tell me about this image (in Vietnamese)",
-                {
-                    inlineData: {
-                        data: imageBase64,
-                        mimeType: 'image/jpeg'
-                    },
-                }
-            ]);
-        } else {
-            result = await chatSession.sendMessageStream(prompt);
-        }
-
-        typingContainer.remove();
-         
-        const botTextElement = addMessage(null, false)
-
-         for await (const chunk of result.stream) {
-            const chunkText = chunk.text();
-            responseText += chunkText;
-            botTextElement.innerHTML = marked.parse(responseText);
-            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
-        }
-
-        chatHistory.push({
-            role: 'user',
-            parts: [{ text: message }]
-        });
-
-        if (imageBase64) {
-            chatHistory.push({
-                role: 'user',
-                parts: [
-                    { text: message },
-                    { 
-                        inlineData: {
-                            mimeType: 'image/jpeg',
-                            data: imageBase64
-                        }
-                    }
-                ]
-            });
-        }
-
-        chatHistory.push({
-            role: 'model',
-            parts: [{ text: responseText }]
-        });
-
-        await initChat();
-
-    } catch (error) {
-        console.error('Error:', error);
-        const typingContainer = document.querySelector('.message-typing-area');
-        if (typingContainer?.querySelector('.typing')) {
-            typingContainer.remove();
-        }
-        addMessage('Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.', false);
-    } finally {
-        isProcessing = false;
-        disableInput(false);
-        
-        const imagePreviewContainer = document.querySelector('.image-preview-container');
-        if (imagePreviewContainer) {
-            imagePreviewContainer.remove();
-        }
-        uploadedImage = null;
+  try {
+    if (isProcessing) {
+      return; // Prevent multiple simultaneous messages
     }
+
+    isProcessing = true;
+    disableInput(true);
+
+    if (!chatSession) {
+      await initChat();
+    }
+
+    addMessage(message, true, imageBase64);
+
+    const typingContainer = document.createElement("div");
+    typingContainer.className = "message-container";
+    typingContainer.className = "message-typing-area";
+
+    const typingAvatar = document.createElement("img");
+    typingAvatar.src = "./logo.png";
+    typingAvatar.className = "avatar";
+    typingContainer.appendChild(typingAvatar);
+
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "typing";
+    typingDiv.innerHTML = '<span class="typing-dots"></span>';
+    typingContainer.appendChild(typingDiv);
+
+    document.getElementById("messages").appendChild(typingContainer);
+
+    // Add loading spinner
+    const loadingSpinner = document.createElement("div");
+    loadingSpinner.className = "loading-spinner";
+    typingContainer.appendChild(loadingSpinner);
+
+    const searchKeywords = await check(message);
+    let searchResults = null;
+    if (searchKeywords) {
+      searchResults = await performSearch(searchKeywords);
+    }
+
+    let prompt = message;
+
+    if (searchResults) {
+      prompt = `Yêu cầu của người dùng: ${message}\n\nĐây là thông tin tìm kiếm web thu thập được:\n${searchResults}`;
+    }
+
+    let result;
+    let responseText = "";
+
+    if (imageBase64) {
+      result = await model.generateContentStream([
+        prompt || "Tell me about this image (in Vietnamese)",
+        {
+          inlineData: {
+            data: imageBase64,
+            mimeType: "image/jpeg",
+          },
+        },
+      ]);
+    } else {
+      result = await chatSession.sendMessageStream(prompt);
+    }
+
+    typingContainer.remove();
+
+    const botTextElement = addMessage(null, false);
+
+    for await (const chunk of result.stream) {
+      const chunkText = chunk.text();
+      responseText += chunkText;
+      botTextElement.innerHTML = marked.parse(responseText);
+      document.getElementById("messages").scrollTop =
+        document.getElementById("messages").scrollHeight;
+    }
+
+    chatHistory.push({
+      role: "user",
+      parts: [{ text: message }],
+    });
+
+    if (imageBase64) {
+      chatHistory.push({
+        role: "user",
+        parts: [
+          { text: message },
+          {
+            inlineData: {
+              mimeType: "image/jpeg",
+              data: imageBase64,
+            },
+          },
+        ],
+      });
+    }
+
+    chatHistory.push({
+      role: "model",
+      parts: [{ text: responseText }],
+    });
+
+    await initChat();
+  } catch (error) {
+    console.error("Error:", error);
+    const typingContainer = document.querySelector(".message-typing-area");
+    if (typingContainer?.querySelector(".typing")) {
+      typingContainer.remove();
+    }
+    addMessage("Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.", false);
+  } finally {
+    isProcessing = false;
+    disableInput(false);
+
+    const imagePreviewContainer = document.querySelector(
+      ".image-preview-container"
+    );
+    if (imagePreviewContainer) {
+      imagePreviewContainer.remove();
+    }
+    uploadedImage = null;
+  }
 }
 
-const uploadBtn = document.getElementById('uploadBtn');
-const imageUpload = document.getElementById('imageUpload');
-const textarea = document.getElementById('input');
+const uploadBtn = document.getElementById("uploadBtn");
+const imageUpload = document.getElementById("imageUpload");
+const textarea = document.getElementById("input");
 
-uploadBtn.addEventListener('click', () => {
-    imageUpload.click();
+uploadBtn.addEventListener("click", () => {
+  imageUpload.click();
 });
 
-imageUpload.addEventListener('change', async (e) => {
-    try {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = async () => {
-                uploadedImage = reader.result.split(',')[1];
+imageUpload.addEventListener("change", async (e) => {
+  try {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        uploadedImage = reader.result.split(",")[1];
 
-                const imagePreviewContainer = document.createElement('div');
-                imagePreviewContainer.className = 'image-preview-container';
-                const imagePreview = document.createElement('img');
-                imagePreview.src = reader.result;
-                imagePreview.className = 'image-preview';
-                
-                const removeBtn = document.createElement('button');
-                removeBtn.innerHTML = '×';
-                removeBtn.className = 'remove-image-btn';
-                removeBtn.addEventListener('click', () => {
-                    uploadedImage = null;
-                    imagePreviewContainer.remove();
-                    document.getElementById('send').disabled = true;
-                });
+        const imagePreviewContainer = document.createElement("div");
+        imagePreviewContainer.className = "image-preview-container";
+        const imagePreview = document.createElement("img");
+        imagePreview.src = reader.result;
+        imagePreview.className = "image-preview";
 
-                imagePreviewContainer.appendChild(imagePreview);
-                imagePreviewContainer.appendChild(removeBtn);
+        const removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "×";
+        removeBtn.className = "remove-image-btn";
+        removeBtn.addEventListener("click", () => {
+          uploadedImage = null;
+          imagePreviewContainer.remove();
+          document.getElementById("send").disabled = true;
+        });
 
-                const existingPreview = document.querySelector('.image-preview-container');
-                if (existingPreview) {
-                    existingPreview.remove();
-                }
-                
-                const inputWrapper = document.querySelector('.input-wrapper');
-                inputWrapper.insertBefore(imagePreviewContainer, inputWrapper.firstChild);
+        imagePreviewContainer.appendChild(imagePreview);
+        imagePreviewContainer.appendChild(removeBtn);
 
-                document.getElementById('send').disabled = false;
-            };
-            reader.readAsDataURL(file);
-            imageUpload.value = '';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
-
-textarea.addEventListener('input', function() {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
-});
-
-textarea.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        const welcomeSection = document.querySelector('.welcome');
-        const suggestionsSection = document.querySelector('.suggestions-grid');
-        if (welcomeSection) welcomeSection.remove();
-        if (suggestionsSection) suggestionsSection.remove();
-
-        const existingPreview = document.querySelector('.image-preview-container');
+        const existingPreview = document.querySelector(
+          ".image-preview-container"
+        );
         if (existingPreview) {
-            existingPreview.remove();
+          existingPreview.remove();
         }
-        const message = e.target.value.trim();
-        if (message || uploadedImage) {
-            processImageAndText(message, uploadedImage);
-            e.target.value = '';
-            e.target.style.height = 'auto';
-        }
+
+        const inputWrapper = document.querySelector(".input-wrapper");
+        inputWrapper.insertBefore(
+          imagePreviewContainer,
+          inputWrapper.firstChild
+        );
+
+        document.getElementById("send").disabled = false;
+      };
+      reader.readAsDataURL(file);
+      imageUpload.value = "";
     }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 });
 
-document.getElementById('send').addEventListener('click', (e) => {
-    e.preventDefault();
+textarea.addEventListener("input", function () {
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
 
-    const welcomeSection = document.querySelector('.welcome');
-    const suggestionsSection = document.querySelector('.suggestions-grid');
+textarea.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    const welcomeSection = document.querySelector(".welcome");
+    const suggestionsSection = document.querySelector(".suggestions-grid");
     if (welcomeSection) welcomeSection.remove();
     if (suggestionsSection) suggestionsSection.remove();
 
-    const existingPreview = document.querySelector('.image-preview-container');
+    const existingPreview = document.querySelector(".image-preview-container");
     if (existingPreview) {
-        existingPreview.remove();
+      existingPreview.remove();
     }
-    const input = document.getElementById('input');
-    const message = input.value.trim();
+    const message = e.target.value.trim();
     if (message || uploadedImage) {
-        processImageAndText(message, uploadedImage);
-        input.value = '';
-        input.style.height = 'auto';
+      processImageAndText(message, uploadedImage);
+      e.target.value = "";
+      e.target.style.height = "auto";
     }
+  }
+});
+
+document.getElementById("send").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const welcomeSection = document.querySelector(".welcome");
+  const suggestionsSection = document.querySelector(".suggestions-grid");
+  if (welcomeSection) welcomeSection.remove();
+  if (suggestionsSection) suggestionsSection.remove();
+
+  const existingPreview = document.querySelector(".image-preview-container");
+  if (existingPreview) {
+    existingPreview.remove();
+  }
+  const input = document.getElementById("input");
+  const message = input.value.trim();
+  if (message || uploadedImage) {
+    processImageAndText(message, uploadedImage);
+    input.value = "";
+    input.style.height = "auto";
+  }
 });
 
 const suggestions = [
-    {
-        icon: "fas fa-gamepad", // Icon mới
-        title: "Trò chơi phổ biến",
-        content: "Giới thiệu một số trò chơi dân gian phổ biến nhất ở Việt Nam"
-    },
-    {
-        icon: "fas fa-running",
-        title: "Trò chơi vận động",
-        content: "Những trò chơi dân gian nào giúp rèn luyện thể chất cho trẻ em?"
-    },
-    {
-        icon: "fas fa-chess-queen",
-        title: "Trò chơi trí tuệ",
-        content: "Giới thiệu các trò chơi dân gian giúp phát triển tư duy và trí tuệ"
-    },
-    {
-        icon: "fas fa-users",
-        title: "Trò chơi tập thể",
-        content: "Những trò chơi dân gian nào phù hợp cho nhóm đông người chơi?"
-    }
+  {
+    icon: "fas fa-gamepad", // Icon mới
+    title: "Trò chơi phổ biến",
+    content: "Giới thiệu một số trò chơi dân gian phổ biến nhất ở Việt Nam",
+  },
+  {
+    icon: "fas fa-running",
+    title: "Trò chơi vận động",
+    content: "Những trò chơi dân gian nào giúp rèn luyện thể chất cho trẻ em?",
+  },
+  {
+    icon: "fas fa-chess-queen",
+    title: "Trò chơi trí tuệ",
+    content:
+      "Giới thiệu các trò chơi dân gian giúp phát triển tư duy và trí tuệ",
+  },
+  {
+    icon: "fas fa-users",
+    title: "Trò chơi tập thể",
+    content: "Những trò chơi dân gian nào phù hợp cho nhóm đông người chơi?",
+  },
 ];
 
 function createSuggestionsUI() {
-    const messagesArea = document.getElementById('messages');
-    
-    const welcome = document.createElement('div');
-    welcome.className = 'welcome';
-    welcome.innerHTML = `
+  const messagesArea = document.getElementById("messages");
+
+  const welcome = document.createElement("div");
+  welcome.className = "welcome";
+  welcome.innerHTML = `
         <h1><strong>Xin chào! 👋</strong></h1>
         <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
     `;
-    
-    const suggestionsGrid = document.createElement('div');
-    suggestionsGrid.className = 'suggestions-grid';
-    
-    suggestions.forEach((suggestion, index) => {
-        const card = document.createElement('div');
-        card.className = 'suggestion-card';
-        card.setAttribute('data-index', index);
-        card.innerHTML = `
+
+  const suggestionsGrid = document.createElement("div");
+  suggestionsGrid.className = "suggestions-grid";
+
+  suggestions.forEach((suggestion, index) => {
+    const card = document.createElement("div");
+    card.className = "suggestion-card";
+    card.setAttribute("data-index", index);
+    card.innerHTML = `
             <div class="icon-wrapper">
                 <i class="${suggestion.icon}"></i>
             </div>
             <div class="card-content">${suggestion.title}</div>
             <div class="suggestion-preview">${suggestion.content}</div>
         `;
-        
-        // Phần xử lý click giữ nguyên
-        card.addEventListener('click', () => {
-            const welcomeSection = document.querySelector('.welcome');
-            const suggestionsSection = document.querySelector('.suggestions-grid');
-            if (welcomeSection) welcomeSection.remove();
-            if (suggestionsSection) suggestionsSection.remove();
-            
-            processImageAndText(suggestion.content);
-        });
-        
-        suggestionsGrid.appendChild(card);
+
+    // Phần xử lý click giữ nguyên
+    card.addEventListener("click", () => {
+      const welcomeSection = document.querySelector(".welcome");
+      const suggestionsSection = document.querySelector(".suggestions-grid");
+      if (welcomeSection) welcomeSection.remove();
+      if (suggestionsSection) suggestionsSection.remove();
+
+      processImageAndText(suggestion.content);
     });
-    
-    messagesArea.appendChild(welcome);
-    messagesArea.appendChild(suggestionsGrid);
+
+    suggestionsGrid.appendChild(card);
+  });
+
+  messagesArea.appendChild(welcome);
+  messagesArea.appendChild(suggestionsGrid);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    createSuggestionsUI();
-    
-    const textarea = document.getElementById('input');
-    textarea.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey && textarea.value.trim()) {
-            const welcomeSection = document.querySelector('.welcome');
-            const suggestionsSection = document.querySelector('.suggestions-grid');
-            if (welcomeSection) welcomeSection.remove();
-            if (suggestionsSection) suggestionsSection.remove();
-        }
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  createSuggestionsUI();
+
+  const textarea = document.getElementById("input");
+  textarea.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey && textarea.value.trim()) {
+      const welcomeSection = document.querySelector(".welcome");
+      const suggestionsSection = document.querySelector(".suggestions-grid");
+      if (welcomeSection) welcomeSection.remove();
+      if (suggestionsSection) suggestionsSection.remove();
+    }
+  });
 });
 
 initChat();
