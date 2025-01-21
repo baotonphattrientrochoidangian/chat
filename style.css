@@ -538,40 +538,82 @@ button:disabled {
   }
 }
 
+/* ========== MOBILE HORIZONTAL SCROLL ========== */
 @media (max-width: 768px) {
   .suggestions-grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    padding: 0 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem 0.5rem;
+    margin: 1rem 0 70px;
+    gap: 0.8rem;
+    
+    /* Ẩn hoàn toàn scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  /* Ẩn scrollbar cho Webkit browsers */
+  .suggestions-grid::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+
+  .suggestion-card {
+    flex: 0 0 240px;
+    height: 280px;
+    padding: 1.2rem;
+    border-radius: 1.5rem;
+    scroll-snap-align: start;
+  }
+
+  .icon-wrapper {
+    width: 3rem !important;    /* Tăng kích thước */
+    height: 3rem !important;   /* Giữ tỷ lệ vuông */
+    margin-bottom: 1rem;
+  }
+
+  .icon-wrapper i {
+    font-size: 1.6rem !important;  /* Icon lớn hơn */
+  }
+
+  .card-content {
+    font-size: 1.25rem;  /* Chữ tiêu đề to */
+    margin-bottom: 0.8rem;
+  }
+
+  .suggestion-preview {
+    font-size: 1rem;     /* Chữ nội dung to */
+    line-height: 1.4;
+    padding: 0 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .suggestion-card {
+    flex: 0 0 220px;
+    height: 260px;
+    padding: 1rem;
   }
   
-  .suggestion-card {
-    padding: 1.5rem;
-    border-radius: 1.5rem;
+  .icon-wrapper {
+    width: 2.8rem !important;
+    height: 2.8rem !important;
+  }
+  
+  .icon-wrapper i {
+    font-size: 1.4rem !important;
   }
   
   .card-content {
     font-size: 1.15rem;
   }
   
-  .icon-wrapper {
-    width: 3rem;
-    height: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .suggestion-card {
-    padding: 1.2rem;
-    border-radius: 1.2rem;
-  }
-  
-  .icon-wrapper {
-    width: 2.8rem;
-    height: 2.8rem;
-  }
-  
-  .card-content {
-    font-size: 1.1rem;
+  .suggestion-preview {
+    font-size: 0.95rem;
   }
 }
