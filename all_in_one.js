@@ -1814,19 +1814,23 @@ document.getElementById('send').addEventListener('click', (e) => {
 
 const suggestions = [
     {
-        title: "🎮 Trò chơi dân gian phổ biến",
-        content: "Giới thiệu cho tôi một số trò chơi dân gian phổ biến nhất ở Việt Nam"
+        icon: "fas fa-gamepad", // Icon mới
+        title: "Trò chơi phổ biến",
+        content: "Giới thiệu một số trò chơi dân gian phổ biến nhất ở Việt Nam"
     },
     {
-        title: "🏃 Trò chơi vận động",
+        icon: "fas fa-running",
+        title: "Trò chơi vận động",
         content: "Những trò chơi dân gian nào giúp rèn luyện thể chất cho trẻ em?"
     },
     {
-        title: "🧩 Trò chơi trí tuệ",
+        icon: "fas fa-chess-queen",
+        title: "Trò chơi trí tuệ",
         content: "Giới thiệu các trò chơi dân gian giúp phát triển tư duy và trí tuệ"
     },
     {
-        title: "👥 Trò chơi tập thể",
+        icon: "fas fa-users",
+        title: "Trò chơi tập thể",
         content: "Những trò chơi dân gian nào phù hợp cho nhóm đông người chơi?"
     }
 ];
@@ -1849,10 +1853,14 @@ function createSuggestionsUI() {
         card.className = 'suggestion-card';
         card.setAttribute('data-index', index);
         card.innerHTML = `
+            <div class="icon-wrapper">
+                <i class="${suggestion.icon}"></i>
+            </div>
             <div class="card-content">${suggestion.title}</div>
             <div class="suggestion-preview">${suggestion.content}</div>
         `;
         
+        // Phần xử lý click giữ nguyên
         card.addEventListener('click', () => {
             const welcomeSection = document.querySelector('.welcome');
             const suggestionsSection = document.querySelector('.suggestions-grid');
