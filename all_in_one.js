@@ -1884,24 +1884,23 @@ document.getElementById("send").addEventListener("click", (e) => {
 const suggestions = [
   {
     icon: "fas fa-gamepad", // Icon mới
-    title: "Trò chơi phổ biến",
+    title: "Các trò chơi dân gian phổ biến",
     content: "Giới thiệu một số trò chơi dân gian phổ biến nhất ở Việt Nam",
   },
   {
-    icon: "fas fa-running",
-    title: "Trò chơi vận động",
-    content: "Những trò chơi dân gian nào giúp rèn luyện thể chất cho trẻ em?",
+    icon: "fas fa-music",
+    title: "Trò chơi dân gian dùng lời nói bài đồng dao",
+    content: "Những trò chơi sử dụng bài đồng dao quen thuộc của trẻ em Việt Nam",
   },
   {
-    icon: "fas fa-chess-queen",
-    title: "Trò chơi trí tuệ",
-    content:
-      "Giới thiệu các trò chơi dân gian giúp phát triển tư duy và trí tuệ",
+    icon: "fas fa-cube",
+    title: "Trò chơi dân gian dùng dụng cụ",
+    content: "Khám phá các trò chơi dân gian thú vị cần sử dụng dụng cụ",
   },
   {
-    icon: "fas fa-users",
-    title: "Trò chơi tập thể",
-    content: "Những trò chơi dân gian phù hợp cho nhóm đông người chơi?",
+    icon: "fas fa-people-group",
+    title: "Trò chơi của đồng bào các dân tộc thiểu số",
+    content: "Tìm hiểu về những trò chơi đặc sắc của các dân tộc thiểu số Việt Nam",
   },
 ];
 

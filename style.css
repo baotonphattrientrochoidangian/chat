@@ -149,21 +149,27 @@ code {
 }
 
 .input-area {
-  padding: 1rem;
-  border-top: 1px solid var(--border);
-  background: var(--secondary-bg);
+  padding: 10px 15px; /* Kết hợp padding trên dưới và trái phải */
+  border: 1px solid var(--border);
+  border-radius: 30px;
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  bottom: 20px;
+  left: 50%;
+  width: calc(100% - 40px); /* Kết hợp margin trái phải thành 40px trừ vào width */
   z-index: 10;
+  transform: translateX(-50%);
+  background: rgba(181, 156, 74, 0.1);
+  max-width: 750px;
+  min-height: 70px;
+  box-sizing: border-box;
 }
 
 /* Chat Form */
 .chat-form {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 1rem;
+  height: 100%;
 }
 
 /* Input Wrapper */
@@ -181,7 +187,7 @@ code {
 /* Textarea */
 textarea {
   width: 100%;
-  padding: 1rem 3rem 1rem 1rem;
+  padding: 14px;
   border: none;
   border-radius: 24px;
   resize: none;
@@ -190,7 +196,6 @@ textarea {
   color: inherit;
   font-size: 1rem;
   line-height: 1.5;
-  max-height: 150px;
 }
 
 textarea::placeholder {
@@ -203,7 +208,7 @@ textarea::placeholder {
 .send-btn {
   padding: 0.5rem;
   border: none;
-  border-radius: 50%;
+  border-radius: 15px;
   width: 40px;
   height: 40px;
   aspect-ratio: 1 / 1;
@@ -214,6 +219,7 @@ textarea::placeholder {
   transition: all 0.2s ease;
   background: transparent;
   color: inherit;
+  margin-bottom: 6px;
 }
 
 .emoji-btn {
@@ -299,8 +305,8 @@ textarea::placeholder {
 .image-preview-container {
   position: relative;
   margin: 10px;
-  max-width: 80px;
-  max-height: 80px;
+  max-width: 128px;
+  max-height: 128px;
 }
 
 .image-preview {
@@ -603,7 +609,8 @@ button:disabled {
   .suggestion-card {
       aspect-ratio: auto;
       min-width: 100%;
-      max-height: 180px;
+      min-height: 180px;
+      height: fit-content;
       display: flex;
       flex-direction: row;
       text-align: left;
