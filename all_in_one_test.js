@@ -206,8 +206,6 @@ Người chơi vẽ một hình chữ nhật được chia đôi theo chiều d�
 Sau đó, hai người chơi đi hai bên, người thứ nhất đi quan với nắm sỏi trong ô vuông nhỏ, các sỏi được rải đều xung quanh từng viên một, khi đến hòn sỏi cuối cùng người chơi vẫn đi ô bên cạnh và cứ thế tiếp tục đi quan (bỏ những viên sỏi nhỏ vào từng ô liên tục). Vậy là những viên sỏi đó đã thuộc về người chơi đó, lúc này người đối diện mới được bắt đầu.
 Đến lượt đối phương đi quan cũng như người đầu tiên, cả hai thay phiên nhau đi quan cho đến khi nào nhặt được phần ô quan lớn và lấy được hết phần của đối phương. Phân thắng thua theo số lượng của các viên sỏi.
 <img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cầu" alt="Trò chơi Ô ăn quan" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg">
-<iframe src="https://codekitten.vn/projects/113cbc16-4706-4485-98ee-7832dbaf1f9f/embed" allowtransparency="true" width="768" height="576" frameborder="0" scrolling="no" allowfullscreen muted></iframe>
-
 
 14. Cướp cầu
 Giới thiệu trò chơi
@@ -1298,7 +1296,7 @@ Tất cả các người chơi sẽ chia làm nhiều đội chơi, các đội 
 Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng cách nói nhỏ vào tai người đó, trò chơi cứ tiếp tục như thế cho đến khi truyền tin đến cho người cuối cùng. Lúc này, người cuối cùng nhận được thông tin sẽ ghi vào giấy và đưa cho trọng tài.
 Đội nào có nội dung bản thông tin giống bản gốc nhất là đội đó thắng.
 <img class="ls-is-cached lazyload" title="Trò chơi Truyền tin" alt="Trò chơi Truyền tin" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-100-800x450.jpg">
-`
+`;
 let chatHistory = [
     {
         role: 'user',

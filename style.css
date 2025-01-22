@@ -125,7 +125,7 @@ code {
 /* Messages */
 .message {
   padding: 10px 15px;
-  border-radius: 20px;
+  border-radius: 15px;
   font-size: 17px;
   line-height: 1.6;
   position: relative;
@@ -138,14 +138,12 @@ code {
 .user-message {
   background: var(--primary-color);
   color: white;
-  border-bottom-right-radius: 5px;
   margin-left: auto;
 }
 
 .bot-message {
   background: var(--secondary-bg);
   color: var(--text);
-  border-bottom-left-radius: 5px;
 }
 
 /* Input Area */
@@ -354,8 +352,8 @@ iframe {
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: rgba(255, 0, 0, 0.7);
-  color: white;
+  background-color: white;
+  color: black;
   border: none;
   border-radius: 50%;
   width: 25px;
@@ -364,13 +362,8 @@ iframe {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 20px;
   z-index: 10;
-}
-
-.remove-image-btn:hover {
-  background-color: rgba(255, 0, 0, 0.9);
 }
 
 /* Điều chỉnh style cho hình ảnh trong tin nhắn */
@@ -652,4 +645,180 @@ button:disabled {
   .welcome{
     margin-top: 10px;
   }
+}
+
+/* Tạo biến chung cho animation */
+:root {
+  --animation-standard: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-smooth: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Animation cơ bản */
+.base-animation {
+  transition: all var(--animation-standard);
+  transform-origin: center;
+}
+
+/* 1. Animation cho input-area */
+.input-area {
+  composes: base-animation;
+  animation: inputAreaEntrance 1s var(--animation-smooth) forwards;
+  opacity: 0;
+}
+
+.input-area:focus-within {
+  transform: translateX(-50%) scale(1.02);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background: var(--secondary-bg);
+}
+
+@keyframes inputAreaEntrance {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 100px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+/* 2. Animation cho các nút */
+.action-btn, .send-btn {
+  composes: base-animation;
+}
+
+.action-btn:hover {
+  transform: scale(1.15);
+  background: rgba(181, 156, 74, 0.1);
+}
+
+.send-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(181, 156, 74, 0.3);
+}
+
+.send-btn:active {
+  transform: scale(0.95);
+}
+
+/* 3. Animation cho ảnh */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.image-preview-container {
+  animation: slideIn var(--animation-standard);
+}
+
+.image-preview-container.remove {
+  animation: slideOut var(--animation-standard) forwards;
+}
+
+.image-preview-container.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.image-preview-container.loading .image-preview {
+  filter: brightness(0.8) blur(2px);
+}
+
+/* 5. Animation cho tin nhắn */
+@keyframes messageFlyUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message-container {
+  animation: messageFlyUp var(--animation-smooth) forwards;
+  opacity: 0;
+}
+
+.message-container.user {
+  animation-delay: 0.1s;
+}
+
+/* Hiệu ứng mobile */
+@media (max-width: 768px) {
+  @keyframes messageFlyUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .message-container {
+    animation-duration: 0.4s;
+  }
+}
+
+
+/* Thêm các animation ẩn/hiện */
+@keyframes inputAreaHide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, 100px) scale(0.9);
+  }
+}
+
+@keyframes inputAreaShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 100px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+.input-area.hidden {
+  animation: inputAreaHide 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.input-area.visible {
+  animation: inputAreaShow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Thêm transition mặc định */
+.input-area {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

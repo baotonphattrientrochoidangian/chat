@@ -1362,7 +1362,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Sử dụng markdown để trả lời câu hỏi (Không sử dụng markdown bảng, text-box).
 - Cung cấp thông tin chính xác và đáng tin cậy, dựa vào thông tin dataset.
 - Khi phân tích hình ảnh, hãy nhận diện trò chơi chính xác, đối chiếu với các trò chơi được cung cấp, tránh mắc sai lầm.
-- Hãy đưa ra các link hữu ích như trên để người dùng có thể tìm hiểu thêm về trò chơi dân gian Việt Nam. Hãy ưu tiên đưa ra các link liên quan này ở cuỗi mỗi câu trả lời. Sử dụng định dạng <a> của HTML. Sử dụng liệt kê.
+- Hãy đưa ra các link hữu ích như trên để người dùng có thể tìm hiểu thêm về trò chơi dân gian Việt Nam. Hãy ưu tiên đưa ra các link liên quan này ở cuỗi mỗi câu trả lời. Sử dụng định dạng <a> của HTML. Sử dụng liệt kê. Tuy nhiên, dựa vào ngữ cảnh mà đưa ra, tránh bị dài dòng.
 `,
 });
 
@@ -1589,7 +1589,7 @@ function addMessage(content, isUser = false, imageBase64 = null) {
 
   const avatar = document.createElement("img");
   avatar.src = isUser
-    ? "https://images.unsplash.com/photo-1618397746666-63405ce5d015?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ? "./user.png"
     : "./logo.png";
   avatar.className = "avatar";
   messageContainer.appendChild(avatar);
@@ -1640,6 +1640,19 @@ function disableInput(disabled = true) {
   const textarea = document.getElementById("input");
   const sendButton = document.getElementById("send");
   const uploadBtn = document.getElementById("uploadBtn");
+  const inputArea = document.querySelector(".input-area");
+
+  if (disabled) {
+    // Thêm timeout 1 giây trước khi ẩn
+    setTimeout(() => {
+      inputArea.classList.remove("visible");
+      inputArea.classList.add("hidden");
+    }, 1000); // 1000ms = 1 giây
+  } else {
+    // Hiển thị ngay lập tức khi enable
+    inputArea.classList.remove("hidden");
+    inputArea.classList.add("visible");
+  }
 
   textarea.disabled = disabled;
   sendButton.disabled = disabled;
@@ -1656,11 +1669,11 @@ function disableInput(disabled = true) {
 async function processImageAndText(message, imageBase64 = null) {
   try {
     if (isProcessing) {
-      return; // Prevent multiple simultaneous messages
+      return; // Ngăn chặn gửi nhiều tin nhắn cùng lúc
     }
 
     isProcessing = true;
-    disableInput(true);
+    disableInput(true); // Ẩn input-area với animation
 
     if (!chatSession) {
       await initChat();
@@ -1669,8 +1682,7 @@ async function processImageAndText(message, imageBase64 = null) {
     addMessage(message, true, imageBase64);
 
     const typingContainer = document.createElement("div");
-    typingContainer.className = "message-container";
-    typingContainer.className = "message-typing-area";
+    typingContainer.className = "message-container message-typing-area";
 
     const typingAvatar = document.createElement("img");
     typingAvatar.src = "./logo.png";
@@ -1683,11 +1695,6 @@ async function processImageAndText(message, imageBase64 = null) {
     typingContainer.appendChild(typingDiv);
 
     document.getElementById("messages").appendChild(typingContainer);
-
-    // Add loading spinner
-    const loadingSpinner = document.createElement("div");
-    loadingSpinner.className = "loading-spinner";
-    typingContainer.appendChild(loadingSpinner);
 
     const searchKeywords = await check(message);
     let searchResults = null;
@@ -1756,6 +1763,7 @@ async function processImageAndText(message, imageBase64 = null) {
     });
 
     await initChat();
+
   } catch (error) {
     console.error("Error:", error);
     const typingContainer = document.querySelector(".message-typing-area");
@@ -1763,13 +1771,15 @@ async function processImageAndText(message, imageBase64 = null) {
       typingContainer.remove();
     }
     addMessage("Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.", false);
+    
   } finally {
+    // Thêm delay để animation mượt mà
+    await new Promise(resolve => setTimeout(resolve, 300));
+    
     isProcessing = false;
-    disableInput(false);
-
-    const imagePreviewContainer = document.querySelector(
-      ".image-preview-container"
-    );
+    disableInput(false); // Hiện lại input-area với animation
+    
+    const imagePreviewContainer = document.querySelector(".image-preview-container");
     if (imagePreviewContainer) {
       imagePreviewContainer.remove();
     }
@@ -1781,7 +1791,8 @@ const uploadBtn = document.getElementById("uploadBtn");
 const imageUpload = document.getElementById("imageUpload");
 const textarea = document.getElementById("input");
 
-uploadBtn.addEventListener("click", () => {
+uploadBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // Thêm dòng này
   imageUpload.click();
 });
 
@@ -1789,12 +1800,19 @@ imageUpload.addEventListener("change", async (e) => {
   try {
     const file = e.target.files[0];
     if (file) {
+      // Xóa preview cũ trước khi xử lý ảnh mới
+      const existingPreview = document.querySelector(".image-preview-container");
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
       const reader = new FileReader();
       reader.onload = async () => {
         uploadedImage = reader.result.split(",")[1];
 
         const imagePreviewContainer = document.createElement("div");
         imagePreviewContainer.className = "image-preview-container";
+        
         const imagePreview = document.createElement("img");
         imagePreview.src = reader.result;
         imagePreview.className = "image-preview";
@@ -1811,26 +1829,18 @@ imageUpload.addEventListener("change", async (e) => {
         imagePreviewContainer.appendChild(imagePreview);
         imagePreviewContainer.appendChild(removeBtn);
 
-        const existingPreview = document.querySelector(
-          ".image-preview-container"
-        );
-        if (existingPreview) {
-          existingPreview.remove();
-        }
-
         const inputWrapper = document.querySelector(".input-wrapper");
-        inputWrapper.insertBefore(
-          imagePreviewContainer,
-          inputWrapper.firstChild
-        );
+        inputWrapper.insertBefore(imagePreviewContainer, inputWrapper.firstChild);
 
         document.getElementById("send").disabled = false;
       };
       reader.readAsDataURL(file);
-      imageUpload.value = "";
     }
   } catch (error) {
     console.error("Error:", error);
+  } finally {
+    // Reset giá trị input sau khi xử lý xong
+    imageUpload.value = "";
   }
 });
 
