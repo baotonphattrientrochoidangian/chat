@@ -34,7 +34,7 @@ body {
 
 a{
   text-decoration: none;
-  color: var(--primary-hover);
+  color: var(--primary-color);
   font-weight: bold;
 }
 
@@ -498,8 +498,7 @@ button:disabled {
 
 .suggestion-card:hover .icon-wrapper {
   background: var(--primary-color);
-  transform: scale(1.1);
-  /* Bỏ rotate để tránh biến dạng */
+  transform: scale(1.15) rotate(5deg);
 }
 
 .icon-wrapper i {
@@ -533,11 +532,23 @@ button:disabled {
 /* Responsive như template */
 @media (max-width: 1200px) {
   .suggestions-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 800px;
-    margin: 2rem auto 100px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    align-items: start;
+    padding: 0;
+    height: 50vh;
   }
   
+  .suggestion-card {
+    max-width: 18rem;
+    aspect-ratio: 1/1 !important;
+    margin: 0 auto;
+  }
+
+  .suggestion-card:nth-child(3) { display: none; }
+
   .icon-wrapper {
     width: 3.5rem;
     height: 3.5rem;
@@ -546,41 +557,29 @@ button:disabled {
 
 /* ========== MOBILE HORIZONTAL SCROLL ========== */
 @media (max-width: 768px) {
-  .suggestions-grid {
+  .suggestions-grid{
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 1rem 0.5rem;
-    margin: 1rem 0 70px;
-    gap: 0.8rem;
-    
-    /* Ẩn hoàn toàn scrollbar */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-  }
-
-  /* Ẩn scrollbar cho Webkit browsers */
-  .suggestions-grid::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-    background: transparent;
+    flex-direction: column;
+    height: fit-content;
   }
 
   .suggestion-card {
-    flex: 0 0 240px;
-    height: 280px;
-    padding: 1.2rem;
-    border-radius: 1.5rem;
-    scroll-snap-align: start;
+    aspect-ratio: auto;
+    min-width: 95%;
+    max-height: 200px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding: 3rem;
+  }
+
+  .card-content-wrapper{
+    margin-left: 20px;
   }
 
   .icon-wrapper {
-    width: 3rem !important;    /* Tăng kích thước */
-    height: 3rem !important;   /* Giữ tỷ lệ vuông */
-    margin-bottom: 1rem;
+    width: 3.5rem !important;    /* Tăng kích thước */
+    height: 3.5rem !important;   /* Giữ tỷ lệ vuông */
   }
 
   .icon-wrapper i {
@@ -588,8 +587,9 @@ button:disabled {
   }
 
   .card-content {
-    font-size: 1.25rem;  /* Chữ tiêu đề to */
+    font-size: 1.45rem;  /* Chữ tiêu đề to */
     margin-bottom: 0.8rem;
+    padding: 0 0.8rem;
   }
 
   .suggestion-preview {
@@ -601,13 +601,23 @@ button:disabled {
 
 @media (max-width: 480px) {
   .suggestion-card {
-    flex: 0 0 220px;
-    height: 260px;
+      aspect-ratio: auto;
+      min-width: 100%;
+      max-height: 180px;
+      display: flex;
+      flex-direction: row;
+      text-align: left;
+      padding: 3rem;
     padding: 1rem;
+    padding-left: 1.3rem;
+  }
+
+  .card-content-wrapper{
+    margin-left: 10px;
   }
   
   .icon-wrapper {
-    width: 2.8rem !important;
+    width: 3rem !important;
     height: 2.8rem !important;
   }
   
@@ -621,5 +631,11 @@ button:disabled {
   
   .suggestion-preview {
     font-size: 0.95rem;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .welcome{
+    margin-top: 10px;
   }
 }

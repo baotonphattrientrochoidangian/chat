@@ -1901,7 +1901,7 @@ const suggestions = [
   {
     icon: "fas fa-users",
     title: "Trò chơi tập thể",
-    content: "Những trò chơi dân gian nào phù hợp cho nhóm đông người chơi?",
+    content: "Những trò chơi dân gian phù hợp cho nhóm đông người chơi?",
   },
 ];
 
@@ -1926,8 +1926,10 @@ function createSuggestionsUI() {
             <div class="icon-wrapper">
                 <i class="${suggestion.icon}"></i>
             </div>
-            <div class="card-content">${suggestion.title}</div>
-            <div class="suggestion-preview">${suggestion.content}</div>
+            <div class="card-content-wrapper">
+              <div class="card-content">${suggestion.title}</div>
+              <div class="suggestion-preview">${suggestion.content}</div>
+            </div>
         `;
 
     // Phần xử lý click giữ nguyên
