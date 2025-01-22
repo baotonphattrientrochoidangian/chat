@@ -618,15 +618,9 @@ const suggestions = [
     icon: "fas fa-people-group",
     title: "Đoán tên trò chơi",
     content: "Đây là trò chơi gì?",
+    image: "./o_an_quan.png", // Thêm trường image
     special: true // Đánh dấu card đặc biệt
   },
-];
-
-const GAME_IMAGES = [
-  './images/bit_mat_bat_de.png',
-  './images/keo_co.png',
-  './images/o_an_quan.png',
-  './images/oan_tu_ti.png'
 ];
 
 function createSuggestionsUI() {
@@ -635,9 +629,9 @@ function createSuggestionsUI() {
   const welcome = document.createElement("div");
   welcome.className = "welcome";
   welcome.innerHTML = `
-    <h1><strong>Xin chào! 👋</strong></h1>
-    <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
-  `;
+        <h1><strong>Xin chào! 👋</strong></h1>
+        <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
+    `;
 
   const suggestionsGrid = document.createElement("div");
   suggestionsGrid.className = "suggestions-grid";
@@ -646,49 +640,39 @@ function createSuggestionsUI() {
     const card = document.createElement("div");
     card.className = `suggestion-card ${suggestion.special ? 'special-card' : ''}`;
     card.setAttribute("data-index", index);
-
-    // Thêm hình nền random cho card đặc biệt
-    if (suggestion.special) {
-      const randomImage = GAME_IMAGES[Math.floor(Math.random() * GAME_IMAGES.length)];
-      card.style.setProperty('--random-image', `url(${randomImage})`);
-    }
-
     card.innerHTML = `
-      <div class="icon-wrapper">
-        <i class="${suggestion.icon}"></i>
-      </div>
-      <div class="card-content-wrapper">
-        <div class="card-content">${suggestion.title}</div>
-        <div class="suggestion-preview">${suggestion.content}</div>
-      </div>
-    `;
+            <div class="icon-wrapper">
+                <i class="${suggestion.icon}"></i>
+            </div>
+            <div class="card-content-wrapper">
+              <div class="card-content">${suggestion.title}</div>
+              <div class="suggestion-preview">${suggestion.content}</div>
+            </div>
+        `;
 
+    // Phần xử lý click giữ nguyên
     card.addEventListener("click", () => {
       const welcomeSection = document.querySelector(".welcome");
       const suggestionsSection = document.querySelector(".suggestions-grid");
       if (welcomeSection) welcomeSection.remove();
       if (suggestionsSection) suggestionsSection.remove();
-
+    
+      // Thêm điều kiện cho card đặc biệt
       if (suggestion.special) {
-        // Lấy lại hình ảnh đã random cho card này
-        const cardImage = card.style.getPropertyValue('--random-image').replace('url(', '').replace(')', '');
-        
-        // Tạo promise để xử lý ảnh
-        new Promise((resolve) => {
-          const img = new Image();
-          img.src = cardImage;
-          img.onload = resolve;
-        }).then(() => {
-          return fetch(cardImage);
-        }).then(res => res.blob())
-        .then(blob => {
+        const img = new Image();
+        img.src = suggestion.image;
+        img.onload = () => {
           const reader = new FileReader();
-          reader.readAsDataURL(blob);
-          reader.onloadend = () => {
-            const base64data = reader.result.split(',')[1];
-            processImageAndText(suggestion.content, base64data);
-          }
-        });
+          fetch(suggestion.image)
+            .then(res => res.blob())
+            .then(blob => {
+              reader.readAsDataURL(blob);
+              reader.onloadend = () => {
+                const base64data = reader.result.split(',')[1];
+                processImageAndText(suggestion.content, base64data);
+              }
+            })
+        }
       } else {
         processImageAndText(suggestion.content);
       }
