@@ -1,9 +1,9 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat | Dự án Bảo tồn và phát triển trò chơi dân gian</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
@@ -24,50 +24,49 @@
         }
       }
     </script>
-</head>
-<body class="light-mode">
-    <div class="container">
-        <div class="chat-container">
-            <!-- Theme Toggle Button (Optional, if you want to keep it) -->
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-sun"></i>
+  </head>
+  <body class="light-mode">
+    <div class="chat-container">
+      <!-- Theme Toggle Button (Optional, if you want to keep it) -->
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-sun"></i>
+      </button>
+
+      <!-- Messages Container -->
+      <div id="messages" class="messages-area"></div>
+      <div class="space"></div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <form id="chatForm" class="chat-form">
+          <div class="input-actions left">
+            <label for="imageUpload" id="uploadBtn" class="action-btn">
+              <i class="fa-regular fa-image"></i>
+            </label>
+            <input
+              type="file"
+              id="imageUpload"
+              accept="image/*"
+              class="d-none"
+            />
+          </div>
+          <div class="input-wrapper">
+            <textarea
+              id="input"
+              placeholder="Nhập tin nhắn..."
+              rows="1"
+            ></textarea>
+          </div>
+          <div class="input-actions right">
+            <button type="submit" id="send" class="send-btn" disabled>
+              <i class="fa fa-arrow-up"></i>
             </button>
-
-            <!-- Messages Container -->
-            <div id="messages" class="messages-area"></div>
-
-            <!-- Input Area -->
-            <div class="input-area">
-                <form id="chatForm" class="chat-form">
-                    <div class="input-actions left">
-                        <label for="imageUpload" id="uploadBtn" class="action-btn">
-                          <i class="fa-regular fa-image"></i>
-                        </label>
-                        <input
-                            type="file"
-                            id="imageUpload"
-                            accept="image/*"
-                            class="d-none"
-                        />
-                    </div>
-                    <div class="input-wrapper">
-                        <textarea
-                            id="input"
-                            placeholder="Nhập tin nhắn..."
-                            rows="1"
-                        ></textarea>
-                    </div>
-                    <div class="input-actions right">
-                        <button type="submit" id="send" class="send-btn" disabled>
-                            <i class="fa fa-arrow-up"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script type="module" src="./all_in_one.js"></script>
     <script src="./switch_theme.js"></script>
-</body>
+  </body>
 </html>
