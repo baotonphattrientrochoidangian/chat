@@ -254,8 +254,7 @@ textarea::placeholder {
 .typing {
   background: var(--secondary-bg);
   padding: 10px 15px;
-  border-radius: 20px;
-  border-bottom-left-radius: 5px;
+  border-radius: 15px;
   color: var(--text);
   font-size: 16px;
 }
@@ -375,7 +374,7 @@ iframe {
   height: auto;
   object-fit: contain;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .user-message .message-image {
@@ -603,6 +602,24 @@ button:disabled {
     font-size: 1rem;     /* Chữ nội dung to */
     line-height: 1.4;
     padding: 0 0.8rem;
+  }
+
+  .input-area {
+    padding: 10px 15px; /* Kết hợp padding trên dưới và trái phải */
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    width: calc(100% - 40px); /* Kết hợp margin trái phải thành 40px trừ vào width */
+    z-index: 10;
+    transform: translateX(-50%);
+    background: var(--secondary-bg-rgb);
+    backdrop-filter: blur(10px);
+    max-width: 750px;
+    min-height: 70px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -851,4 +868,59 @@ button:disabled {
   position: relative;
   z-index: 1;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-controls {
+  display: flex;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.control-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--secondary-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden; /* Ẩn text overflow */
+  font-size: 0; /* Ẩn text content */
+}
+
+.control-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.control-btn i {
+  font-size: 14px;
+}
+
+.control-btn.copied {
+  background: var(--primary-color);
+  color: white;
+}
+
+.control-btn .speech-spinner {
+  display: none;
+}
+
+.control-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.control-btn:disabled .speech-spinner {
+  display: inline-block;
+}
+
+.control-btn:disabled i {
+  display: none;
 }

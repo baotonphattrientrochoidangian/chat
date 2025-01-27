@@ -1320,7 +1320,7 @@ let chatHistory = [
 let isProcessing = false;
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash-002",
+  model: "gemini-2.0-flash-exp",
   systemInstruction: `
 # Character
 Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dân gian Việt Nam.  Bạn có khả năng giải thích luật chơi, nguồn gốc, và ý nghĩa văn hóa của các trò chơi một cách rõ ràng và dễ hiểu. Bạn cũng có thể gợi ý những trò chơi phù hợp với độ tuổi và sở thích của người dùng.
@@ -1367,7 +1367,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 });
 
 const generationConfig = {
-  temperature: 0.5,
+  temperature: 0.8,
   topP: 0.8,
   topK: 1,
   maxOutputTokens: 8192,
@@ -1576,6 +1576,12 @@ async function initChat() {
     generationConfig,
     history: chatHistory,
   });
+
+  // Khởi tạo ResponsiveVoice
+  if (typeof responsiveVoice !== "undefined") {
+     responsiveVoice.setDefaultVoice("Vietnamese Female");
+  }
+
   return chatSession;
 }
 
@@ -1588,9 +1594,7 @@ function addMessage(content, isUser = false, imageBase64 = null) {
   }
 
   const avatar = document.createElement("img");
-  avatar.src = isUser
-    ? "./user.png"
-    : "./logo.png";
+  avatar.src = isUser ? "./user.png" : "./logo.png";
   avatar.className = "avatar";
   messageContainer.appendChild(avatar);
 
@@ -1609,25 +1613,92 @@ function addMessage(content, isUser = false, imageBase64 = null) {
   if (content) {
     const renderer = new marked.Renderer();
 
-    // Xử lý hình ảnh
-    renderer.image = (href, title, text) => {
+      // Xử lý hình ảnh
+      renderer.image = (href, title, text) => {
       return `<img src="${href}" onerror="this.style.display='none'" alt="${text}" class="image-preview-container-bot" ${
-        title ? `title="${title}"` : ""
+      title ? `title="${title}"` : ""
       }>`;
-    };
+      };
 
-    // Thêm xử lý link ở đây
-    renderer.link = (href, title, text) => {
+      // Thêm xử lý link ở đây
+      renderer.link = (href, title, text) => {
       return `<a href="${href}" target="_blank" rel="noopener noreferrer" ${
-        title ? `title="${title}"` : ""
+      title ? `title="${title}"` : ""
       }>${text}</a>`;
-    };
+      };
 
-    marked.setOptions({ renderer });
-    textElement.innerHTML = marked.parse(content);
+      marked.setOptions({ renderer });
+      textElement.innerHTML = marked.parse(content);
+      // Thêm phần điều khiển cho bot message
+    if (!isUser) {
+      const controlsDiv = document.createElement("div");
+      controlsDiv.className = "message-controls";
+
+      // Nút phát âm thanh
+      const speakBtn = document.createElement("button");
+      speakBtn.className = "control-btn";
+      speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>' + '<div class="speech-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></div>';
+      speakBtn.title = "Phát âm thanh";
+      speakBtn.onclick = async () => {
+        const textElement = messageDiv.querySelector('.message-text');
+        const spinner = speakBtn.querySelector('.speech-spinner');
+        const icon = speakBtn.querySelector('.fa-volume-up');
+
+        // Hiển thị spinner và vô hiệu hóa nút
+        spinner.style.display = 'inline-block';
+        icon.style.display = 'none';
+        speakBtn.disabled = true;
+
+        // Xử lý văn bản
+        const plainText = textElement.textContent
+        .replace(/!\[.*?\]\(.*?\) /g, '')   // Loại bỏ hình ảnh markdown
+        .replace(/\[.*?\]\(.*?\) /g, '')   // Loại bỏ links markdown
+          .replace(/\n/g, ' ')
+          .trim();
+       
+          // Phát âm thanh với timeout
+          try {
+            await Promise.race([
+            responsiveVoice.speak(plainText, "Vietnamese Female"),
+             new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+           ]);
+         } catch (error) {
+            console.error('Lỗi phát âm thanh:', error);
+            alert('Không thể phát âm thanh do quá thời gian chờ');
+        }
+
+        // Khôi phục trạng thái nút
+          spinner.style.display = 'none';
+          icon.style.display = 'inline-block';
+          speakBtn.disabled = false;
+      };
+
+      // Nút sao chép
+      const copyBtn = document.createElement("button");
+      copyBtn.className = "control-btn";
+      copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+      copyBtn.title = "Sao chép";
+      copyBtn.onclick = () => {
+        const plainText = textElement.textContent.replace(/\[.*?\]\(.*?\) /g, '');
+        navigator.clipboard.writeText(plainText)
+        .then(() => {
+          copyBtn.classList.add('copied');
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Đã copy';
+              setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+              }, 2000);
+        })
+        .catch(err => console.error('Sao chép thất bại:', err));
+      };
+
+      controlsDiv.appendChild(speakBtn);
+      controlsDiv.appendChild(copyBtn);
+      messageDiv.appendChild(controlsDiv);
+    }
   }
-  messageDiv.appendChild(textElement);
 
+  messageDiv.appendChild(textElement);
   messageContainer.appendChild(messageDiv);
   messagesDiv.appendChild(messageContainer);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -1665,7 +1736,6 @@ function disableInput(disabled = true) {
   }
 }
 
-// Modify the processImageAndText function
 async function processImageAndText(message, imageBase64 = null) {
   try {
     if (isProcessing) {
@@ -1733,6 +1803,14 @@ async function processImageAndText(message, imageBase64 = null) {
       const chunkText = chunk.text();
       responseText += chunkText;
       botTextElement.innerHTML = marked.parse(responseText);
+
+       // Cập nhật lại controls sau mỗi chunk
+      const existingControls = botTextElement.parentElement.querySelector('.message-controls');
+      if (existingControls) {
+        existingControls.remove();
+      }
+      addMessageControls(botTextElement.parentElement, responseText);
+
       document.getElementById("messages").scrollTop =
         document.getElementById("messages").scrollHeight;
     }
@@ -1742,20 +1820,20 @@ async function processImageAndText(message, imageBase64 = null) {
       parts: [{ text: message }],
     });
 
-    if (imageBase64) {
-      chatHistory.push({
-        role: "user",
-        parts: [
-          { text: message },
-          {
-            inlineData: {
-              mimeType: "image/jpeg",
-              data: imageBase64,
+     if (imageBase64) {
+        chatHistory.push({
+            role: "user",
+            parts: [
+            { text: message },
+            {
+                inlineData: {
+                mimeType: "image/jpeg",
+                data: imageBase64,
             },
-          },
-        ],
-      });
-    }
+            },
+            ],
+        });
+      }
 
     chatHistory.push({
       role: "model",
@@ -1770,8 +1848,7 @@ async function processImageAndText(message, imageBase64 = null) {
     if (typingContainer?.querySelector(".typing")) {
       typingContainer.remove();
     }
-    addMessage("Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.", false);
-    
+      addMessage("Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.", false);
   } finally {
     // Thêm delay để animation mượt mà
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -1785,6 +1862,74 @@ async function processImageAndText(message, imageBase64 = null) {
     }
     uploadedImage = null;
   }
+}
+
+function addMessageControls(messageDiv, content) {
+  const controlsDiv = document.createElement("div");
+  controlsDiv.className = "message-controls";
+
+   // Thêm spinner khi đang xử lý
+  const spinner = '<div class="speech-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></div>';
+
+  // Nút phát âm thanh
+  const speakBtn = document.createElement("button");
+  speakBtn.className = "control-btn";
+  speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>' + spinner;
+  speakBtn.title = "Phát âm thanh";
+  speakBtn.onclick = async () => {
+      const textElement = messageDiv.querySelector('.message-text');
+    const spinner = speakBtn.querySelector('.speech-spinner');
+      const icon = speakBtn.querySelector('.fa-volume-up');
+
+    // Hiển thị spinner và vô hiệu hóa nút
+    spinner.style.display = 'inline-block';
+      icon.style.display = 'none';
+    speakBtn.disabled = true;
+
+    // Xử lý văn bản
+      const plainText = textElement.textContent
+         .replace(/!\[.*?\]\(.*?\) /g, '')   // Loại bỏ hình ảnh markdown
+         .replace(/\[.*?\]\(.*?\) /g, '')   // Loại bỏ links markdown
+         .replace(/\n/g, ' ')
+         .replace(/\./g, '')   // Loại bỏ dấu chấm
+         .trim();
+       
+        // Phát âm thanh
+      try {
+         responsiveVoice.speak(plainText, "Vietnamese Female");
+      } catch (error) {
+         console.error('Lỗi phát âm thanh:', error);
+            alert('Không thể phát âm thanh');
+     }
+
+      // Khôi phục trạng thái nút
+      spinner.style.display = 'none';
+      icon.style.display = 'inline-block';
+      speakBtn.disabled = false;
+  };
+
+// Nút sao chép
+  const copyBtn = document.createElement("button");
+  copyBtn.className = "control-btn";
+  copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+  copyBtn.title = "Sao chép";
+      copyBtn.onclick = () => {
+          const plainText = messageDiv.querySelector('.message-text').textContent.replace(/\[.*?\]\(.*?\) /g, '');
+          navigator.clipboard.writeText(plainText)
+            .then(() => {
+              copyBtn.classList.add('copied');
+              copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+            }, 2000);
+        })
+      .catch(err => console.error('Sao chép thất bại:', err));
+      };
+
+  controlsDiv.appendChild(speakBtn);
+  controlsDiv.appendChild(copyBtn);
+  messageDiv.appendChild(controlsDiv);
 }
 
 const uploadBtn = document.getElementById("uploadBtn");
