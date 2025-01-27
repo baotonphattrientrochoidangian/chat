@@ -1654,6 +1654,7 @@ function addMessage(content, isUser = false, imageBase64 = null) {
         .replace(/!\[.*?\]\(.*?\) /g, '')   // Loại bỏ hình ảnh markdown
         .replace(/\[.*?\]\(.*?\) /g, '')   // Loại bỏ links markdown
           .replace(/\n/g, ' ')
+          .replace(/\./g, ',')   // Chuyển dấu chấm thành dấu phẩy
           .trim();
        
           // Phát âm thanh với timeout
