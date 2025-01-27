@@ -609,9 +609,9 @@ button:disabled {
     border: 1px solid var(--border);
     border-radius: 30px;
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
-    width: calc(100% - 40px); /* Kết hợp margin trái phải thành 40px trừ vào width */
+    width: calc(100% - 20px); /* Kết hợp margin trái phải thành 40px trừ vào width */
     z-index: 10;
     transform: translateX(-50%);
     background: var(--secondary-bg-rgb);
