@@ -1579,7 +1579,7 @@ async function initChat() {
 
   // Khởi tạo ResponsiveVoice
   if (typeof responsiveVoice !== "undefined") {
-     responsiveVoice.setDefaultVoice("Vietnamese Female");
+    responsiveVoice.setDefaultVoice("Vietnamese Female");
   }
 
   return chatSession;
@@ -1869,64 +1869,117 @@ function addMessageControls(messageDiv, content) {
   const controlsDiv = document.createElement("div");
   controlsDiv.className = "message-controls";
 
-   // Thêm spinner khi đang xử lý
+  // Add spinner for processing
   const spinner = '<div class="speech-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></div>';
 
-  // Nút phát âm thanh
+  // Create speech button with pause/play functionality
   const speakBtn = document.createElement("button");
   speakBtn.className = "control-btn";
   speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>' + spinner;
   speakBtn.title = "Phát âm thanh";
+  
+  // Track speech state
+  let isSpeaking = false;
+  let isPaused = false;
+  
   speakBtn.onclick = async () => {
-      const textElement = messageDiv.querySelector('.message-text');
+    const textElement = messageDiv.querySelector('.message-text');
     const spinner = speakBtn.querySelector('.speech-spinner');
-      const icon = speakBtn.querySelector('.fa-volume-up');
+    const icon = speakBtn.querySelector('i:not(.fa-spinner)');
+    
+    // If already speaking, handle pause/resume
+    if (isSpeaking) {
+      if (isPaused) {
+        // Resume speech
+        responsiveVoice.resume();
+        icon.className = 'fas fa-pause';
+        isPaused = false;
+      } else {
+        // Pause speech
+        responsiveVoice.pause();
+        icon.className = 'fas fa-play';
+        isPaused = true;
+      }
+      return;
+    }
 
-    // Hiển thị spinner và vô hiệu hóa nút
-    spinner.style.display = 'inline-block';
+    // Start new speech
+    try {
+      // Show spinner and disable button
+      spinner.style.display = 'inline-block';
       icon.style.display = 'none';
-    speakBtn.disabled = true;
+      speakBtn.disabled = true;
 
-    // Xử lý văn bản
+      // Process text content
       const plainText = textElement.textContent
-         .replace(/!\[.*?\]\(.*?\) /g, '')   // Loại bỏ hình ảnh markdown
-         .replace(/\[.*?\]\(.*?\) /g, '')   // Loại bỏ links markdown
-         .replace(/\n/g, ' ')
-         .replace(/\./g, '')   // Loại bỏ dấu chấm
-         .trim();
-       
-        // Phát âm thanh
-      try {
-         responsiveVoice.speak(plainText, "Vietnamese Female");
-      } catch (error) {
-         console.error('Lỗi phát âm thanh:', error);
-            alert('Không thể phát âm thanh');
-     }
+        .replace(/!\[.*?\]\(.*?\)/g, '')    // Remove image markdown
+        .replace(/\[.*?\]\(.*?\)/g, '')     // Remove link markdown
+        .replace(/\n/g, ' ')                // Replace newlines with spaces
+        .replace(/\./g, ',')                // Replace periods with commas
+        .trim();
 
-      // Khôi phục trạng thái nút
+      // Configure speech parameters
+      const speechParams = {
+        onstart: () => {
+          spinner.style.display = 'none';
+          icon.style.display = 'inline-block';
+          icon.className = 'fas fa-pause';
+          speakBtn.disabled = false;
+          isSpeaking = true;
+        },
+        onend: () => {
+          icon.className = 'fas fa-volume-up';
+          isSpeaking = false;
+          isPaused = false;
+          speakBtn.disabled = false;
+        },
+        onerror: (error) => {
+          console.error('Speech error:', error);
+          icon.className = 'fas fa-volume-up';
+          isSpeaking = false;
+          isPaused = false;
+          speakBtn.disabled = false;
+          alert('Không thể phát âm thanh');
+        }
+      };
+
+      // Start speaking with timeout protection
+      await Promise.race([
+        new Promise((resolve) => {
+          responsiveVoice.speak(plainText, "Vietnamese Female", speechParams);
+          resolve();
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+      ]);
+
+    } catch (error) {
+      console.error('Speech error:', error);
       spinner.style.display = 'none';
       icon.style.display = 'inline-block';
+      icon.className = 'fas fa-volume-up';
       speakBtn.disabled = false;
+      alert('Không thể phát âm thanh do quá thời gian chờ');
+    }
   };
 
-// Nút sao chép
+  // Create copy button (keeping existing functionality)
   const copyBtn = document.createElement("button");
   copyBtn.className = "control-btn";
   copyBtn.innerHTML = '<i class="far fa-copy"></i>';
   copyBtn.title = "Sao chép";
-      copyBtn.onclick = () => {
-          const plainText = messageDiv.querySelector('.message-text').textContent.replace(/\[.*?\]\(.*?\) /g, '');
-          navigator.clipboard.writeText(plainText)
-            .then(() => {
-              copyBtn.classList.add('copied');
-              copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-              setTimeout(() => {
-                copyBtn.classList.remove('copied');
-                copyBtn.innerHTML = '<i class="far fa-copy"></i>';
-            }, 2000);
-        })
+  copyBtn.onclick = () => {
+    const plainText = messageDiv.querySelector('.message-text').textContent.replace(/\[.*?\]\(.*?\)/g, '');
+    navigator.clipboard.writeText(plainText)
+      .then(() => {
+        copyBtn.classList.add('copied');
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+        }, 2000);
+      })
       .catch(err => console.error('Sao chép thất bại:', err));
-      };
+  };
 
   controlsDiv.appendChild(speakBtn);
   controlsDiv.appendChild(copyBtn);
