@@ -1,5 +1,90 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+//! --- Suggestions UI ---
+const suggestions = [
+  {
+    icon: "fas fa-gamepad",
+    title: "Các trò chơi dân gian phổ biến",
+    content: "Giới thiệu một số trò chơi dân gian phổ biến nhất ở Việt Nam",
+  },
+  {
+    icon: "fas fa-music",
+    title: "Trò chơi dân gian dùng lời nói bài đồng dao",
+    content: "Những trò chơi sử dụng bài đồng dao quen thuộc của trẻ em Việt Nam",
+  },
+  {
+    icon: "fas fa-cube",
+    title: "Trò chơi dân gian dùng dụng cụ",
+    content: "Khám phá các trò chơi dân gian thú vị cần sử dụng dụng cụ",
+  },
+  {
+    icon: "fas fa-people-group",
+    title: "Đoán tên trò chơi",
+    content: "Đây là trò chơi gì?",
+    image: "./o_an_quan.png",
+    special: true
+  },
+];
+
+function createSuggestionsUI() {
+  const messagesDiv = document.getElementById("messages");
+  if (!messagesDiv) return; //! Nếu chưa có, không làm gì
+  const fragment = document.createDocumentFragment();
+
+  const welcome = document.createElement("div");
+  welcome.className = "welcome";
+  welcome.innerHTML = `
+        <h1><strong>Xin chào! 👋</strong></h1>
+        <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
+    `;
+  fragment.appendChild(welcome);
+
+  const suggestionsGrid = document.createElement("div");
+  suggestionsGrid.className = "suggestions-grid";
+  suggestions.forEach((suggestion, index) => {
+    const card = document.createElement("div");
+    card.className = `suggestion-card${suggestion.special ? ' special-card' : ''}`;
+    card.setAttribute("data-index", index);
+    card.innerHTML = `
+            <div class="icon-wrapper">
+                <i class="${suggestion.icon}"></i>
+            </div>
+            <div class="card-content-wrapper">
+              <div class="card-content">${suggestion.title}</div>
+              <div class="suggestion-preview">${suggestion.content}</div>
+            </div>
+        `;
+    card.addEventListener("click", () => {
+      const welcomeSection = document.querySelector(".welcome");
+      const suggestionsSection = document.querySelector(".suggestions-grid");
+      if (welcomeSection) welcomeSection.remove();
+      if (suggestionsSection) suggestionsSection.remove();
+      if (suggestion.special) {
+        const img = new Image();
+        img.src = suggestion.image;
+        img.onload = () => {
+          const reader = new FileReader();
+          fetch(suggestion.image)
+            .then(res => res.blob())
+            .then(blob => {
+              reader.readAsDataURL(blob);
+              reader.onloadend = () => {
+                const base64data = reader.result.split(',')[1];
+                processImageAndText(suggestion.content, base64data);
+              };
+            });
+        };
+      } else {
+        processImageAndText(suggestion.content);
+      }
+    });
+    suggestionsGrid.appendChild(card);
+  });
+  fragment.appendChild(suggestionsGrid);
+  messagesDiv.appendChild(fragment);
+}
+
+//! Các khai báo và cấu hình ban đầu
 const apiKey = "AIzaSyDKuUZczmcIsNg8ewNnZzEBv0eNnNFgPkE";
 const genAI = new GoogleGenerativeAI(apiKey);
 let chatSession;
@@ -19,7 +104,7 @@ Chấp chế đi tìm
 Khi người xòe bàn tay đếm đến chữ “ập” thì người xòe tay sẽ nắm tay lại, còn những người khác phải cố gắng rút tay ra thật nhanh.
 Ai rút không kịp hoặc bị nắm trúng thì thua và phải làm người thay thế vào chỗ người xòe tay, sau đó người chơi này tiếp tục đọc bài đồng dao và làm cho những người khác chơi.
 Có thể bạn quan tâm: Làm sao để khuyến khích trẻ chơi trò chơi giả bộ của trẻ mầm non?
-<img class="ls-is-cached lazyloaded" title="Chi chi chành chành" alt="Chi chi chành chành" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-1-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-1-800x450.jpg">
+<img alt="Chi chi chành chành" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-1-800x450.jpg">
 
 
 2. Cướp cờ
@@ -31,7 +116,7 @@ Khi trọng tài gọi tới số nào thì người chơi của số đó phả
 Hoặc nếu trọng tài gọi số nào về thì số đó phải về, trong quá trình gọi số, trọng tài cũng có thể gọi hai ba bốn số cùng một lúc lên tranh cướp cờ.
 Trong quá trình chơi, khi đang cầm cờ mà nếu bị đối phương vỗ vào người thì người đó bị loại và ngược lại khi lấy được cờ phải chạy nhanh về vạch xuất phát của đội mình không bị đội bạn&nbsp;vỗ vào người thì người cầm cờ&nbsp;mới thắng.
 Có thể bạn quan tâm: 10 Trò chơi cho bé vui đêm trung thu và gợi ý những ý tưởng tổ chức trung thu cho bé
-<img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cờ" alt="Trò chơi Cướp cờ" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-2-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-2-800x450.jpg">
+<img alt="Trò chơi Cướp cờ" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-2-800x450.jpg">
 
 
 3. Dung dăng dung dẻ
@@ -49,7 +134,7 @@ Cho gà bới bếp
 Ngồi xẹp xuống đây.”&nbsp;
 Khi đọc hết chữ “đây” người chơi phải nhanh chóng tìm một vòng tròn và ngồi xuống. Nếu người chơi nào không tìm thấy được vòng tròn thì bị loại.
 Trò chơi cứ tiếp tục như thế đến khi tìm được người thắng cuộc.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Dung dăng dung dẻ" alt="Trò chơi Dung dăng dung dẻ" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-3-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-3-800x450.jpg">
+<img alt="Trò chơi Dung dăng dung dẻ" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-3-800x450.jpg">
 
 
 4. Rồng rắn lên mây
@@ -88,7 +173,7 @@ Kế đó, thì thầy thuốc đòi hỏi:
 “Tha hồ mà đuổi.”
 Lúc này người chơi làm thầy thuốc phải tìm cách bắt cho được người cuối cùng trong hàng, và người đứng đầu phải cản lại người thầy thuốc, cố ngăn cản không cho người thầy thuốc bắt được cái đuôi (người đứng cuối hàng) của mình.
 Hoặc người đứng cuối hàng phải chạy nhanh và tìm cách né tránh thầy thuốc. Nếu thầy thuốc bắt được người cuối cùng thì người đó sẽ bị loại.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Rồng rắn lên mây" alt="Trò chơi Rồng rắn lên mây" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-4-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-4-800x450.jpg">
+<img alt="Trò chơi Rồng rắn lên mây" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-4-800x450.jpg">
 
 
 5. Kéo co
@@ -97,7 +182,7 @@ Giới thiệu trò chơi
 Hướng dẫn cách chơi và luật
 Khi có tiếng bắt đầu của trọng tài, các đội bắt đầu túm lấy một sợi dây thừng để kéo.&nbsp;
 Hai bên phải ra sức kéo, sao cho đội đối phương bước qua vạch của mình là thắng.&nbsp;
-<img class="ls-is-cached lazyloaded" title="Trò chơi Rồng rắn lên mây" alt="Trò chơi Kéo co" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-5-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-5-800x450.jpg">
+<img alt="Trò chơi Kéo co" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-5-800x450.jpg">
 
 
 6. Bịt mắt bắt dê
@@ -107,7 +192,7 @@ Hướng dẫn cách chơi và luật
 Một người bịt mắt lại bằng một chiếc khăn, những người còn lại đứng thành vòng tròn quanh người bị bịt mắt.
 Sau đó, người bị bịt mắt bắt đầu di chuyển tìm kiếm mọi nơi để bắt người chơi, người chơi phải cố tránh để không bị bắt và có thể tạo ra nhiều tiếng động khác để đánh lạc hướng người bịt mắt.
 Đến khi người bịt mắt bắt được người chơi thì người chơi đó sẽ bị thua.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Bịt mắt bắt dê" alt="Trò chơi Bịt mắt bắt dê" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-6-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-6-800x450.jpg">
+<img alt="Trò chơi Bịt mắt bắt dê" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-6-800x450.jpg">
 
 
 7. Đua thuyền trên cạn
@@ -116,7 +201,7 @@ Các thuyền phải được dùng cơ thể của người chơi tạo thành,
 Hướng dẫn cách chơi và luật
 Trò chơi này có thể chia thành nhiều đội chơi khác nhau, mỗi đội chơi phải có số lượng người chơi bằng nhau.
 Các người chơi ngồi thành hàng dọc theo từng đội, người chơi ngồi sau cặp chân vào vòng bụng của người trước để tạo thành một chiếc thuyền đua. Khi nghe hiệu lệnh của trọng tài, tất cả các thuyền đua dùng sức bằng hai chân và hai tay di chuyển cơ thể nhanh chóng để tiến về phía trước cho đến đích. Đội nào đến đích trước sẽ giành chiến thắng.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Đua thuyền trên cạn" alt="Trò chơi Đua thuyền trên cạn" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-7-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-7-800x450.jpg">
+<img alt="Trò chơi Đua thuyền trên cạn" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-7-800x450.jpg">
 
 
 8. Thả chó
@@ -134,7 +219,7 @@ Sau đó, người làm ông chủ xòe ngửa bàn tay phải, người chơi k
 Người chơi nào bị ông chủ nắm được ngón tay, sẽ đóng vai chú chó, các người chơi còn lại sẽ làm thỏ.
 Sau đó, khi ông chủ diễn tả một vật nào đó thì các chú thỏ lập tức phải chạy nhanh tới chạm vào vật đó trước khoảng thời gian ông chủ sẽ thả chó.
 Trong quá trình chạy về, nếu thấy chú chó xuất hiện thì các con thỏ phải đi về ở tư thế 2 tay nắm lỗ tai.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Thả chó" alt="Trò chơi Thả chó" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-8-800x450-1.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-8-800x450-1.jpg">
+<img alt="Trò chơi Thả chó" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-8-800x450-1.jpg">
 
 
 9. Chùm nụm
@@ -152,7 +237,7 @@ Bù xe bù xít
 Con rắn con rít
 Nó rít tay này.”
 Đến từ “này” cuối cùng, trúng tay ai thì người đó phải rút nắm tay ra, sau đó trò chơi cứ thế tiếp tục. Nếu hết các nắm tay thì trò chơi kết thúc và ai trụ lại cuối cùng sẽ là người chiến thắng.
-<img class="ls-is-cached lazyloaded" title="Thả chó Chùm nụm" alt="Thả chó Chùm nụm" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-9-800x450-1.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-9-800x450-1.jpg">
+<img alt="Thả chó Chùm nụm" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-9-800x450-1.jpg">
 
 
 10. Đúc cây dừa, chừa cây mỏng
@@ -173,7 +258,7 @@ Bà già ứ ự
 Chùm rụm chùm rịu (rạ)
 Mà ra chân này.”
 Khi đọc hết câu “mà ra chân này”, tới chân người nào, thì người đó sẽ phải thụt chân vào, người nào thụt hết hai chân thì thua, người nào chưa thụt chân nào thì thắng.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Đúc cây dừa, chừa cây mỏng" alt="Trò chơi Đúc cây dừa, chừa cây mỏng" data-src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-10-800x450-1.jpg" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-10-800x450-1.jpg">
+<img alt="Trò chơi Đúc cây dừa, chừa cây mỏng" src="https://cdn.tgdd.vn//GameApp/-1//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-10-800x450-1.jpg">
 
 
 11. Chơi chuyền
@@ -185,7 +270,7 @@ Sau đó, người chơi cầm quả bóng và tung lên không trung, đồng t
 Trong quá trình chơi, người chơi bắt đầu chơi từ màng 1 (lấy một que một lần tung)
 Sau đó đến màng 2 (lấy hai que một lần),... cứ tiếp tục tung lên cho đến khi đủ 10 que.
 Khi người chơi không nhanh tay hay nhanh mắt để bắt được bóng và que cùng một lúc sẽ bị mất lượt, lượt chơi đó sẽ chuyển sang người bên cạnh.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Chơi chuyền" alt="Trò chơi Chơi chuyền" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-11-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-11-800x450.jpg">
+<img alt="Trò chơi Chơi chuyền" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-11-800x450.jpg">
 
 
 12. Nhảy bao bố
@@ -195,7 +280,7 @@ Hướng dẫn cách chơi và luật
 Tất cả người chơi chia thành nhiều đội chơi có số lượng bằng nhau, mỗi đội có một ô hàng dọc để nhảy và có hai lằn mức là một mức xuất phát và một mức về đích.&nbsp;
 Người đứng đầu bước vào trong bao bố, sau khi nghe lệnh xuất phát mới bắt đầu nhảy nhanh đến đích, tiếp đó sẽ đến người thứ 2 nhảy, người thứ 3,... cho đến hết người chơi. Đội nào về trước đội đó thắng.
 Trong quá trình chơi, người chơi nào nhảy trước hiệu lệnh xuất phát là phạm luật, người nhảy chưa đến mức quy định hoặc nhảy chưa đến đích mà bỏ bao ra cũng phạm luật.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Nhảy bao bố" alt="Trò chơi Nhảy bao bố" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-12-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-12-800x450.jpg">
+<img alt="Trò chơi Nhảy bao bố" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-12-800x450.jpg">
 
 
 13.Ô ăn quan
@@ -205,7 +290,7 @@ Hướng dẫn cách chơi và luật
 Người chơi vẽ một hình chữ nhật được chia đôi theo chiều dài và ngăn thành 5 hàng dọc cách khoảng đều nhau, để có được 10 ô vuông nhỏ.&nbsp;
 Sau đó, hai người chơi đi hai bên, người thứ nhất đi quan với nắm sỏi trong ô vuông nhỏ, các sỏi được rải đều xung quanh từng viên một, khi đến hòn sỏi cuối cùng người chơi vẫn đi ô bên cạnh và cứ thế tiếp tục đi quan (bỏ những viên sỏi nhỏ vào từng ô liên tục). Vậy là những viên sỏi đó đã thuộc về người chơi đó, lúc này người đối diện mới được bắt đầu.
 Đến lượt đối phương đi quan cũng như người đầu tiên, cả hai thay phiên nhau đi quan cho đến khi nào nhặt được phần ô quan lớn và lấy được hết phần của đối phương. Phân thắng thua theo số lượng của các viên sỏi.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cầu" alt="Trò chơi Ô ăn quan" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg">
+<img alt="Trò chơi Ô ăn quan" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-13-800x450.jpg">
 
 
 14. Cướp cầu
@@ -215,7 +300,7 @@ Trò chơi này mang tính đồng đội rất cao, nên người chơi phải 
 Hướng dẫn cách chơi và luật
 Khi quả cầu được trọng tài tung ra sân. Các nhóm người chơi phải tranh cướp quyết liệt để giành quả cầu. Và người chơi cùng mỗi đội phải tranh cướp cầu của đội khác và truyền ngay cho các thành viên trong đội của mình.
 Mỗi đội cướp cầu phải nhanh chóng ném vào điểm đích (rổ) của đội mình. Đội nào cướp được cầu và ném vào rổ của đội mình nhiều nhất là đội thắng cuộc.&nbsp;
-<img class="ls-is-cached lazyloaded" title="Trò chơi Cướp cầu" alt="Trò chơi Cướp cầu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-14-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-14-800x450.jpg">
+<img alt="Trò chơi Cướp cầu" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-14-800x450.jpg">
 
 
 15. Oẳn tù tì
@@ -228,7 +313,7 @@ Kéo: Người chơi phải nắm 3 ngón tay lại (gồm ngón cái, ngón áp
 Bao: Người chơi chỉ cần xòe cả 5 ngón tay ra.
 Trong quá trình chơi, nếu muốn thắng, người chơi nên ghi nhớ “búa thì đập được kéo, kéo thì cắt được bao, bao thì bao được búa.”
 Khi tất cả người chơi cùng đọc: “Oẳn tù tì, ra cái gì? ra cái này”, sau đó tất cả người chơi đưa tay ra cùng một lúc, sau đó phân định thắng thua theo kiểu hình thức là kéo, búa hoặc bao, khi hai bên ra một kiểu giống nhau thì được oẳn tù tì lại.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Oẳn tù tì" alt="Trò chơi Oẳn tù tì" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-15-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-15-800x450.jpg">
+<img alt="Trò chơi Oẳn tù tì" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-15-800x450.jpg">
 
 
 16. Kể chuyện
@@ -236,7 +321,7 @@ Giới thiệu trò chơi
 Trò chơi này rất đơn giản, một người kể chuyện cho cả một nhóm người nghe, người kể chuyện nên kể những câu chuyện thú vị, kịch tính và lôi cuốn để thu hút người nghe. Cứ vậy xoay vòng, đến lượt người nào thì người đó kể chuyện.
 Hướng dẫn cách chơi và luật
 Một người tiên phong làm người kể chuyện, kể các sự tích, câu chuyện dân gian nào đó để mọi người cùng nghe.
-<img class="ls-is-cached lazyloaded" title="Trò chơi Kể chuyện" alt="Trò chơi Kể chuyện" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-16-800x450.jpg" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-16-800x450.jpg">
+<img alt="Trò chơi Kể chuyện" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-16-800x450.jpg">
 
 
 17. Hội vật làng Hà
@@ -245,7 +330,7 @@ Hội vật làng Hà là một trò chơi truyền thống được diễn ra v
 Hướng dẫn cách chơi và luật
 Các người chơi phải tranh tài quyết liệt bằng các kỹ thuật, sức mạnh để đối chiến với nhau.
 Người chơi nào vật ngã đối phương xuống trước và đối phương không thể chiến đấu được nữa thì giành chiến thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Hội vật làng Hà" alt="Trò chơi Hội vật làng Hà" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-17-800x450.jpg">
+<img alt="Trò chơi Hội vật làng Hà" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-17-800x450.jpg">
 
 
 18. Tả cáy
@@ -254,7 +339,7 @@ Trò chơi tả cáy còn được gọi là đánh gà, đây là một trò ch
 Hướng dẫn cách chơi và luật
 Người chơi đào một cái lỗ to tròn cỡ hình cái bát, sau đó đặt “con gà” dưới lỗ. này, con gà có thể làm bằng chất liệu gỗ hoặc sử dụng quả bóng, đồ vật gì cũng được.
 Sau đó, nhà cái cầm gậy đẩy con gà ra khỏi lỗ, nhà con thì dùng gậy đẩy gà vào lỗ. Trong quá trình chơi, nhà cái phải vừa dùng gậy đẩy gà và vừa phải để ý đỡ đòn gậy của nhà con. Nếu nhà cái trụ được lâu và không có gà lọt xuống dưới thì thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Tả cáy" alt="Trò chơi Tả cáy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-18-800x450.jpg">
+<img alt="Trò chơi Tả cáy" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-18-800x450.jpg">
 
 
 19. Đánh quay
@@ -263,7 +348,7 @@ Trò chơi \"đánh quay\" hay còn gọi là \"cù quay\" (sử dụng con cù 
 Hướng dẫn cách chơi và luật
 Con quay được làm bằng gỗ hay các đồ vật có hình nón cụt, chân bằng sắt. Sau đó, người chơi dùng một sợi dây, quấn từ dưới lên trên rồi cầm một đầu vào con quay.
 Người chơi quăng mạnh con quay xuống dưới đất cho con quay xoay tròn từng vòng, trong quá trình chơi, con quay của ai quay lâu nhất là người đó thắng.&nbsp;
-<img class="ls-is-cached lazyload" title="Trò chơi Đánh quay" alt="Trò chơi Đánh quay" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-19-800x450.jpg">
+<img alt="Trò chơi Đánh quay" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-19-800x450.jpg">
 
 
 20. Thi thổi cơm
@@ -275,7 +360,7 @@ Cuộc thi thổi cơm có ba bước cho người chơi, đầu tiên là thi l
 Trong quá trình chơi, các đội phải đi tìm kiếm các nguyên liệu để nấu cơm.
 Các người chơi phải tự xay thóc, giã gạo, giần sàng, lấy lửa, lấy nước và nấu cơm.
 Đội nào làm được cơm trắng tinh, thơm, dẻo và chín nhất thì là đội thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Thi thổi cơm" alt="Trò chơi Thi thổi cơm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-20-800x450.jpg">
+<img alt="Trò chơi Thi thổi cơm" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-20-800x450.jpg">
 
 
 21. Thi diều sáo
@@ -287,7 +372,7 @@ Trò chơi có 3 hình thức chính được phân theo tiếng kêu:&nbsp;
 2. Sáo đẩu: tiếng kêu than như tiếng than thở
 3. Sáo còi: tiếng kêu chói tai như tiếng còi.
 Sau đó, ban giám khảo có thể chấm theo tiếng sáo, nhưng trước tiên bao giờ cũng phải xem diều của người chơi trước, nếu diều của người chơi đẹp mắt, bay bổng thì mới xem như đúng quy định.
-<img class="ls-is-cached lazyload" title="Trò chơi Thi diều sáo" alt="Trò chơi Thi diều sáo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-21-800x450.jpg">
+<img alt="Trò chơi Thi diều sáo" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-21-800x450.jpg">
 
 
 22. Mèo đuổi chuột
@@ -303,7 +388,7 @@ Chuột luồn lỗ hổng
 Mèo chạy đằng sau.”
 Sau đó, một người chơi được chọn làm mèo và một người chơi được chọn làm chuột sẽ đứng ở giữa vòng tròn và quay lưng vào nhau.&nbsp;
 Khi mọi người hát đến câu cuối thì chuột bắt đầu chạy, mèo phải chạy đằng sau. Tuy nhiên, mèo phải chạy đúng chỗ chuột đã chạy. Mèo thắng khi mèo bắt được chuột.&nbsp;
-<img class="ls-is-cached lazyload" title="Trò chơi Mèo đuổi chuột" alt="Trò chơi Mèo đuổi chuột" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-22-800x450.jpg">
+<img alt="Trò chơi Mèo đuổi chuột" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-22-800x450.jpg">
 
 
 23. Ném còn
@@ -311,7 +396,7 @@ Giới thiệu trò chơi
 Đối với các dân tộc Mường, Tày, H'mông, Thái,… ném còn là trò chơi thu hút các bạn trai và gái tham gia trong các dịp lễ. Không những thế, trò chơi này cũng được nhiều người lớn tuổi thích, bởi ngoài cầu duyên, ném còn còn mang ý nghĩa ấm no, mùa màng tươi tốt cho mọi người.
 Hướng dẫn cách chơi và luật
 Với trò chơi này, người chơi cắm một cây tre cao, trên đỉnh tre có vòng còn. Người chơi phải ném quả còn lọt qua vòng còn trên đỉnh cột là thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Ném còn" alt="Trò chơi Ném còn" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-23-800x450.jpg">
+<img alt="Trò chơi Ném còn" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-23-800x450.jpg">
 
 
 24. Thi dưa hấu
@@ -320,7 +405,7 @@ Vào khoảng đầu tháng ba âm lịch hàng năm tại Làng Thổ Tang, Vĩ
 Hướng dẫn cách chơi và luật
 Người chơi phải hái những quả dưa đẹp nhất để tham gia và các giám khảo sẽ xét thắng thua dựa theo các tiêu chuẩn gồm: giống tốt, đẹp, già, đầy đặn, bổ ra đỏ tươi vàng lại nhiều cát.&nbsp;
 Nếu dưa người chơi nào đạt đúng tiêu chuẩn trên thì là người thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Thi dưa hấu" alt="Trò chơi Thi dưa hấu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-24-800x450.jpg">
+<img alt="Trò chơi Thi dưa hấu" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-24-800x450.jpg">
 
 
 25. Thi thơ
@@ -328,7 +413,7 @@ Giới thiệu trò chơi
 Hàng năm nhân ngày hội đền vua Đinh, để giữ gìn nếp xưa và khuyến khích mọi người nên đi theo con đường văn học, dùi mài kinh sử, nên hội thi thơ được diễn ra và thu hút rất nhiều người đến tham gia.&nbsp;
 Hướng dẫn cách chơi và luật
 Chủ đề thi thơ tùy vào ban tổ chức đề ra. Thí sinh nào trúng giải thưởng sẽ được thưởng và mang vinh dự về cho bản thân.
-<img class="ls-is-cached lazyload" title="Trò chơi Thi thơ" alt="Trò chơi Thi thơ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-25-800x450.jpg">
+<img alt="Trò chơi Thi thơ" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-25-800x450.jpg">
 
 
 26. Đánh roi múa mọc
@@ -336,7 +421,7 @@ Giới thiệu trò chơi
 Trò chơi đánh roi múa mọc thường được tổ chức thi đấu vào những ngày đầu tháng giêng ở các hội lễ ở miền Bắc. Trò chơi này đòi hỏi phải có kỹ năng, sức mạnh nếu muốn giành chiến thắng.
 Hướng dẫn cách chơi và luật
 Roi bằng tre vót nhẵn và dẻo, đầu bịt vải đỏ, mộc cũng được sơn bằng sơn đỏ. Các người chơi đấu tay đôi với nhau. Vừa dùng roi để đánh, dùng mộc để đỡ, ai đánh trúng vào chỗ hiểm của đối phương nhiều thì thắng, với trò chơi này thường đánh trúng vào vai và sườn mới được nhiều điểm.
-<img class="ls-is-cached lazyload" title="Trò chơi Đánh roi múa mọc" alt="Trò chơi Đánh roi múa mọc" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-26-800x450.jpg">
+<img alt="Trò chơi Đánh roi múa mọc" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-26-800x450.jpg">
 
 
 27. Thi thả chim
@@ -344,7 +429,7 @@ Giới thiệu trò chơi
 Hàng năm trò chơi thi thả chim thường được tổ chức vào hai mùa: mùa hạ (tháng 3 - 4 âm lịch) và mùa thu (tháng 7 - 8 âm lịch).&nbsp; Trò chơi này không chỉ mang lại không khí vui vẻ và nhộn nhịp mà còn ca ngợi đức tính đoàn kết, chung thuỷ của người dân Việt Nam, nên rất thu hút rất nhiều người, nhiều nơi và mọi lứa tuổi tham gia.
 Hướng dẫn cách chơi và luật
 Chim phải bay đúng hướng xuất phát và về đích mới được xét giải.
-<img class="ls-is-cached lazyload" title="Trò chơi Thi thả chim" alt="Trò chơi Thi thả chim" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-27-800x450.jpg">
+<img alt="Trò chơi Thi thả chim" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-27-800x450.jpg">
 
 
 28. Nhún đu
@@ -352,7 +437,7 @@ Giới thiệu trò chơi
 Trong các ngày hội ở Việt Nam, các thôn làng thường trồng một vài cây đu để trai gái lên đu với nhau. Cây đu được trồng bởi bốn, sáu hay tám cây tre dài vững chắc để chịu đựng được sức nặng của hai người cùng với lực đẩy quán tính. Người chơi chỉ cần lên đu và vịn vào thân trẻ, trò chơi này cũng là một loại sinh hoạt trao đổi tình cảm của trai gái.
 Hướng dẫn cách chơi và luật&nbsp;
 Trong quá trình chơi, người chơi càng nhún mạnh, thì đu càng lên cao. Người chơi phải cho đu lên ngang với ngọn đu là tốt nhất và muốn chiến thắng thì phải đu càng cao càng tốt.&nbsp; Nhiều nơi còn treo giải thưởng ở ngang ngọn đu để người đu giật giải.
-<img class="ls-is-cached lazyload" title="Trò chơi Nhún đu" alt="Trò chơi Nhún đu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-28-800x450-1.jpg">
+<img alt="Trò chơi Nhún đu" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-28-800x450-1.jpg">
 
 
 29. Đấu vật
@@ -360,7 +445,7 @@ Giới thiệu trò chơi
 Đấu vật rất phổ biến ở nhiều hội xuân miền Bắc và miền Trung, nên trước khi hội đấu vật diễn ra, các đô vật từ khắp nơi kéo đến để tham gia rất đông đúc, náo nhiệt. Người chơi phải vận dụng các kỹ thuật và sức mạnh của mình để giành chiến thắng.
 Hướng dẫn cách chơi và luật
 Trong lúc thi đấu vật, các đô vật phải giằng co để bắt được lỗ hổng không phòng bị của đối phương, họ phải xông vào ôm lấy nhau. Họ lừa nhau, dùng những kỹ thuật để vật ngã đối thủ. Cả hai phòng thủ tấn công đến khi nào một bên không thể đấu được nữa mới ngừng lại.
-<img class="ls-is-cached lazyload" title="Trò chơi Đấu vật" alt="Trò chơi Đấu vật" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-29-800x450.jpg">
+<img alt="Trò chơi Đấu vật" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-29-800x450.jpg">
 
 30. Vật cù
 Giới thiệu trò chơi
@@ -368,7 +453,7 @@ Cả hai đội chơi phải giành và đưa được cù vào sọt (hay vào 
 Hướng dẫn cách chơi và luật
 Mỗi đội phải tìm cách lừa nhau để bỏ cho được quả cù vào hố của đối phương thì là thắng cuộc.
 Kết thúc cuộc chơi, đội nào có số lần đưa cù vào đích của đối phương nhiều hơn là đội thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Vật cù " alt="Trò chơi Vật cù " data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-30-800x450-1.jpg">
+<img alt="Trò chơi Vật cù " src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-30-800x450-1.jpg">
 
 
 31. Kéo cưa lừa xẻ
@@ -389,7 +474,7 @@ Nằm đâu ngủ đấy
 Nó lấy mất của
 Lấy gì mà kéo.”
 Mỗi lần hát một từ thì lại đẩy hoặc kéo về một lần.
-<img class="ls-is-cached lazyload" title="Trò chơi Kéo cưa lừa xẻ" alt="Trò chơi Kéo cưa lừa xẻ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-31-800x450.jpg">
+<img alt="Trò chơi Kéo cưa lừa xẻ" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-31-800x450.jpg">
 
 
 32. Kéo chữ
@@ -399,7 +484,7 @@ Hướng dẫn cách chơi và luật
 Tất cả người chơi được chia làm hai đội, mỗi đội có một người cầm đầu (tổng cờ tiền) và một người đứng cuối (tổng cờ hậu).
 Khi bắt đầu, các người chơi di chuyển dưới sự hướng dẫn của các tổng cờ để xếp thành các chữ khác nhau. Các tổng cờ vừa dẫn quân vừa múa hát.
 Đội quân theo tổng cờ để thực hiện những động tác khác nhau, để tạo ra các chữ (chữ Hán hoặc Nôm) theo ý nghĩa.
-<img class="ls-is-cached lazyload" title="Trò chơi Kéo chữ" alt="Trò chơi Kéo chữ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-32-800x450.jpg">
+<img alt="Trò chơi Kéo chữ" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-32-800x450.jpg">
 
 
 33. Chơi hóp
@@ -416,7 +501,7 @@ Người thua cuộc thì được đi đầu tiên, khảy hòn chì xuống vi
 Khi chơi người chơi bắt bồ và tìm cách cứu bồ. Khi hòn chì của người chơi đối phương khảy thua đội khác, người chơi có quyền xê dịch viên gạch xéo qua góc này hoặc góc khác với mục đích là để khảy hòn chì không theo đường thẳng chính diện (trực chỉ song song với hai cạnh bên của hình chữ nhật) mà chạy xéo góc hơn người chơi đội mình.
 Người thắng cuộc cầm hòn chì lên trên tay rồi vạch lằn mức ngay tâm hòn chì nằm (tức là vị trí của hòn chì năm trước khi được lượm lên tay). Người thắng cuộc có hai chân đứng ngay lằn mức gạch làm điểm với tay cầm hòn chì cố gắng sao cho hòn chì của mình trúng hòn chì của người khác. Nếu trúng chỗ chật thì không được quyền chơi nữa mà nhường người chơi kế tiếp.
 Xong bàn này người chơi tiếp tục chơi bàn khác và đi theo thứ tự, người thắng cuộc đi sau cùng.
-<img class="ls-is-cached lazyload" title="Trò Chơi hóp" alt="Trò Chơi hóp" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-a33-800x450.jpg">
+<img alt="Trò Chơi hóp" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-a33-800x450.jpg">
 
 
 34. Nhảy chồng cao
@@ -435,7 +520,7 @@ Người ngồi đối diện gác chân lên hàng tiếp tục lên canh 3 và
 Khi làm canh tư, hai người ngồi làm chồng những bàn chân lên nhau, gót chân chạm đầu ngón chân thành một tháp cao thẳng đứng.
 Sau cùng, người chơi phải đi qua sông nhỏ đến sông lớn là xong, hai người làm canh qua sông nhỏ bốn bàn chân chạm vào nhau bẹt ra hơi nhỏ để người đi bước vào cũng nói “đi canh nhỏ về canh nhỏ”.
 Khi tới canh lớn, hai người làm giang chân rộng ra để bên đi bước vào đi canh lớn. Khi về canh lớn hai người làm đưa tay lên cho nhà mẹ nắm và tất cả bắt đầu vụt chạy. Khi bắt được người nào thì người đó mất lượt chơi, bắt được hết là thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Nhảy chồng cao" alt="Trò chơi Nhảy chồng cao" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-34-800x450.jpg">
+<img alt="Trò chơi Nhảy chồng cao" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-34-800x450.jpg">
 
 
 35. Đánh trỏng
@@ -449,7 +534,7 @@ Trò chơi gồm có 4 phần:
 4. Phần u: Bên nào đánh thắng trước điểm đã giao kèo thì u bên thua, tùy theo người chơi để bắt cặp người thắng, người thua. Nếu bên thắng bắt đầu khắc bao nhiêu cái thì nhảy bao nhiêu bước khi u.
 Người thắng một tay cầm cây trỏng dài cho đầu trỏng ngắn bay đi thật xa, người thua lượm đầu trỏng ngắn cầm trên tay, người thắng bắt đầu nhảy từ vị trí đầu trỏng ngắn rớt xuống, nhảy bao nhiêu bước tùy thuộc vào khắc bao nhiêu cái ở trên.&nbsp;
 Khi nhảy xong rồi đặt cây trỏng dài xuống để cho người thua chơi, nếu trúng cây trỏng dài, thì người thua u một hơi dài về lỗ, người ăn chạy theo sau cầm cây trỏng dài đợi khi người thua tắt hơi để đánh người thua, rồi tiếp tục cặp khác u.&nbsp;
-<img class="ls-is-cached lazyload" title="Trò chơi Đánh trỏng" alt="Trò chơi Đánh trỏng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-35-800x450.jpg">
+<img alt="Trò chơi Đánh trỏng" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-35-800x450.jpg">
 
 
 36. Đánh banh thẻ
@@ -459,7 +544,7 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, người chơi đánh thẻ bắt đầu rải đều 10 cây thẻ xuống, nên rải các thẻ đều, tránh cho thẻ bị chồng nhau.
 Sau đó người chơi tung banh lên, tay cầm banh phải nhanh chóng nhặt từng thẻ, khi trái banh rớt xuống nền nhà và tung lên, thì tay phải của người chơi phải bắt kịp trái banh, không để banh rơi xuống đất. Người chơi cứ thao tác như thế cho hết số thẻ và trong quá trình chơi không được sang tay bên kia.
 Người chơi làm liên tục như thế đủ 10 thẻ, không bị rơi banh hoặc bắt sai thẻ lần nào thì thắng, nếu làm sai thì chuyển lượt cho người chơi khác.
-<img class="ls-is-cached lazyload" title="Trò chơi Đánh banh thẻ" alt="Trò chơi Đánh banh thẻ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-36-800x450.jpg">
+<img alt="Trò chơi Đánh banh thẻ" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-36-800x450.jpg">
 
 
 37. Xé giấy
@@ -468,7 +553,7 @@ Trò chơi xé giấy rất đơn giản nên được các nhiều người ưa
 Hướng dẫn cách chơi và luật
 Mỗi đội lần lượt cử hai người chơi lên thực hiện. Hai người chơi đứng xoay lưng lại với nhau.
 Sau đó, hai người chơi cầm 2 miếng giấy, trong đó đó một trong hai người sẽ ra lệnh cho người kia gấp giấy rồi xé. Trong quá trình chơi, người nào có số đôi (giấy xé giống nhau) nhiều là người đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Xé giấy" alt="Trò chơi Xé giấy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-37-800x450.jpg">
+<img alt="Trò chơi Xé giấy" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-37-800x450.jpg">
 
 
 38. Hú chuột
@@ -480,7 +565,7 @@ Người thực hiện vừa nhổ răng xong, sau đó đọc bài đồng dao 
 Hú chuột răng mới về tao răng cũ về mày
 Răng tao sao răng mày vậy.”
 Người xưa thường nói làm như thế để cho răng được mọc đều, mọc nhanh và đẹp hơn.
-<img class="ls-is-cached lazyload" title="Trò chơi Hú chuột" alt="Trò chơi Hú chuột" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-38-800x450.jpg">
+<img alt="Trò chơi Hú chuột" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-38-800x450.jpg">
 
 
 39. Hát sinh
@@ -497,7 +582,7 @@ Hát ba mươi sáu ngày đêm chưa hết”.
 Nhớ mãi câu hát của nàng
 Ngày mưa đội chung nón
 Ngày nắng che chung ô…”.
-<img class="ls-is-cached lazyload" title="Trò chơi Hát sinh" alt="Trò chơi Hát sinh" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-39-800x450.jpg">
+<img alt="Trò chơi Hát sinh" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-39-800x450.jpg">
 
 
 40. Hát soong
@@ -509,7 +594,7 @@ Chiều tối mọi người thường hát gọi để mời chơi, mời ngồ
 Nửa đêm khi hát mọi người thường hỏi, hỏi về quê quán, gia sự, nghề nghiệp, ý nguyện của nhau,…&nbsp;
 Cuối cùng là hát chào, hát xin về, hát níu giữ nhau,... Sau đó, họ vừa hát vừa tiễn nhau ra cổng và hát hẹn hò cuộc gặp mặt tới.
 Trong quá trình hát, phải hát nghiêm túc, không đùa giỡn, hát đối đáp hát theo giọng ví, còn hát cộc là hát kiểu kể lể. Trong các đám cưới, thường được hát ru. Người hát ru giọng phải ru dài ra, nếu một từ hát cộc kể ra rồi bắt ngay sang từ khác nhưng hát ru thì ru đi ru lại ngân nga luyến láy điệp khúc kéo dài gấp dăm bảy lần hát cộc.&nbsp;
-<img class="ls-is-cached lazyload" title="Trò chơi Hát soong" alt="Trò chơi Hát soong" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-40-800x450.jpg">
+<img alt="Trò chơi Hát soong" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-40-800x450.jpg">
 
 
 41. Trống quân Đức Bác
@@ -527,7 +612,7 @@ Cách sông cách đồng giờ mới tới đây.”
 Hát đế:
 “Kìa hỡi í a trống quân…”
 Cứ như thế hai bên đối đáp lời qua lời lại. Lời ca đối đáp thường mộc mạc nhưng chứa đầy tình ý mặn nồng.
-<img class="ls-is-cached lazyload" title="Trò chơi Trống quân Đức Bác" alt="Trò chơi Trống quân Đức Bác" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-41-800x450.jpg">
+<img alt="Trò chơi Trống quân Đức Bác" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-41-800x450.jpg">
 
 
 42. Kéo song Hương Canh
@@ -537,7 +622,7 @@ Hướng dẫn cách chơi và luật
 Số lượng thành viên đội chơi thường bằng nhau, mỗi người chơi được bịt đầu bằng khăn đỏ, lưng thắt bao đỏ.
 Dây song của mỗi bên có buộc một dải màu đỏ để đánh dấu. Trong quá trình chơi, nếu bị đội đối phương lôi mạnh chỗ đánh dấu chui vào lỗ cọc thì thua. Ngược lại, nếu đội nào kéo mạnh được đội đối phương vào lỗ cọc thì thắng.
 Trò chơi được diễn ra khoảng được 4 hiệp, mỗi hiệp được nghỉ giải lao 30 phút.
-<img class="ls-is-cached lazyload" title="Trò chơi Kéo song Hương Canh" alt="Trò chơi Kéo song Hương Canh" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-42-800x450.jpg">
+<img alt="Trò chơi Kéo song Hương Canh" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-42-800x450.jpg">
 
 
 43. Leo cầu ùm
@@ -545,7 +630,7 @@ Giới thiệu trò chơi
 Trò chơi này được bắt nguồn ở Bình Dương (Vĩnh Tường), Xuân Hoà (Lập Thạch), Đạo Đức (Bình Xuyên). Cầu ùm được dựng bằng một cây tre gác lên bờ ao và được chôn cọc xuống dưới giúp cố định hai bên, đầu ngọn được cột cố định bằng dây thừng. Người chơi khi chơi trò này thường bị ngã “ùm” xuống ao vì thế gọi trò chơi này là trò leo cầu ùm.
 Hướng dẫn cách chơi và luật
 Người chơi di chuyển lên cầu, giữ thăng bằng để tránh té ngã, sau đó người chơi phải di chuyển đến đầu cầu có cắm cờ để lấy lá cờ về là thắng.&nbsp;
-<img class="ls-is-cached lazyload" title="Trò chơi Leo cầu ùm" alt="Trò chơi Leo cầu ùm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-43-800x450.jpg">
+<img alt="Trò chơi Leo cầu ùm" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-43-800x450.jpg">
 
 
 44. Đả cầu cướp phết
@@ -553,7 +638,7 @@ Giới thiệu trò chơi
 Trò chơi đả cầu cướp phết được diễn ra hàng năm tại đền Đông Lai, xã Bàn Giản, huyện Lập Thạch, trò chơi này thu hút được rất nhiều người đến tham gia, bởi những người này tin rằng, trong dịp đầu năm mới nếu ai sờ được quả cầu thì sẽ gặp nhiều may mắn, thuận lợi trong năm tới.
 Hướng dẫn cách chơi và luật
 Tất cả mọi người đợi quả cầu được tung ra khi xong nghi thức làm lễ, đến khi quả cầu được tung ra thì tất cả mọi người diễn ra cuộc tranh cướp cầu. Người nào giành được quả cầu là giành được chiến thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Đả cầu cướp phết" alt="Trò chơi Đả cầu cướp phết" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-44-800x450.jpg">
+<img alt="Trò chơi Đả cầu cướp phết" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-44-800x450.jpg">
 
 
 45. Tứ thú nhân lương
@@ -564,7 +649,7 @@ Trò này được diễn ra có số lượng người dựa theo mỗi vở k�
 Sau đó, trong quá trình biểu diễn, các nhân vật đều đeo mặt nạ, và mặc y phục theo màu sắc và phong cách tuỳ từng nghề nghiệp.&nbsp;
 Nhân vật nam đóng giả nhân vật nữ, và những nhân vật làm trâu hoặc bò thì chỉ có phần đầu.&nbsp;
 Các nhóm người biểu diễn những vở kịch thời xưa, như: Thầy đồ dạy học, nông phu cấy cày, xúc tép, câu ếch; thương nhân đi buôn; thợ mộc đục bào,...
-<img class="ls-is-cached lazyload" title="Trò chơi Tứ thú nhân lương" alt="Trò chơi Tứ thú nhân lương" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-45-800x450.jpg">
+<img alt="Trò chơi Tứ thú nhân lương" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-45-800x450.jpg">
 
 
 46. Ném lon
@@ -575,7 +660,7 @@ Người chơi nên chuẩn bị 1 hoặc nhiều cái lon tùy theo sở thích
 Sau đó, người chơi kẻ một đường mức cách dãy lon một khoảng cố định. Sau đó các người chơi đứng ở vạch mức ném banh đến lon.
 Đội chơi nào ném hết số banh và có số lon ngã nhiều hơn là thắng.
 Trong quá trình chơi, người chơi đứng qua vạch mức để ném banh là không được tính lượt đó.
-<img class="ls-is-cached lazyload" title="Trò chơi Ném lon" alt="Trò chơi Ném lon" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-46-800x450.jpg">
+<img alt="Trò chơi Ném lon" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-46-800x450.jpg">
 
 
 47. Đánh quân
@@ -611,7 +696,7 @@ Sau khi bắt được cá, người chơi mang cá chạy nhanh đến vị tr�
 Sau đó đến lượt người chơi thứ hai cũng thực hiện như vậy và đến hết người chơi cuối cùng thì người chơi đó có quyền bắt màu cá chung và lúc này, người chơi còn có thể bắt cả cá của đôi đối phương.
 Trong lúc này, người chơi muốn bắt bao nhiêu con cá cũng được, nhưng chỉ được phép bắt một tay.
 Đội thắng cuộc là đội không vi phạm luật chơi và bắt được nhiều cá có màu được quy định và cá của đội đối phương.
-<img class="ls-is-cached lazyload" title="Trò chơi Vây lưới bắt cá" alt="Trò chơi Vây lưới bắt cá" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-49-800x450.jpg">
+<img alt="Trò chơi Vây lưới bắt cá" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-49-800x450.jpg">
 
 
 50. Cá sấu lên bờ
@@ -621,7 +706,7 @@ Trò chơi này đòi hỏi người chơi phải tinh ý và nhanh nhẹn để
 Hướng dẫn cách chơi và luật
 Một người chơi sẽ làm cá sấu di chuyển dưới nước, những người chơi còn lại chia nhau đứng trên bờ, sau đó các người chơi chọc tức cá sấu bằng cách đợi cá sấu ở xa thì thò một chân xuống nước hoặc nhảy xuống nước và vỗ tay hát “Cá sấu, cá sấu lên bờ”. Khi nào cá sấu chạy đến bắt thì phải nhảy ngay lên bờ.
 Người chơi nào nhảy lên bờ không kịp bị cá sấu bắt được thì thua và phải thay làm cá sấu.&nbsp;
-<img class="ls-is-cached lazyload" title="Trò chơi Cá sấu lên bờ" alt="Trò chơi Cá sấu lên bờ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-50-800x450.jpg">
+<img alt="Trò chơi Cá sấu lên bờ" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-50-800x450.jpg">
 
 
 51. Keng trái cây
@@ -631,7 +716,7 @@ Hướng dẫn cách chơi và luật
 Khi chơi, một người chơi sẽ đi bắt những người còn lại. Người chơi muốn tránh người bắt thì phải hô tên của một loại trái cây bất kỳ, và đứng yên tại chỗ, sau đó người chơi chỉ được di chuyển khi có người khác đến cứu và tiếp tục trò chơi.
 Trong quá trình chơi, người chơi không được hô tên của loại trái cây mà người trước đã hô và chỉ gọi tên những trái cây trong nước, không được lấy tên trái cây nhập khẩu quốc tế (như me Thái, mận Ấn Độ,…).
 Và khi người chơi đã hô tên trái cây mà di chuyển là bị mất lượt.
-<img class="ls-is-cached lazyload" title="Trò chơi Ken trái cây" alt="Trò chơi Ken trái cây" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-51-800x450.jpg">
+<img alt="Trò chơi Ken trái cây" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-51-800x450.jpg">
 
 
 52. Một hai ba
@@ -644,7 +729,7 @@ Sau tiếng “ba” kết thúc, người đi bắt sẽ quay lại, nếu lúc
 Trò chơi cứ thế diễn ra khi người chơi di chuyển đến gần người đi bắt, khi đến gần, người chơi sẽ đập vào lưng người đi bắt. Lúc này tất cả người chơi sẽ chạy thật nhanh về vạch mức ban đầu.&nbsp;
 Và người đi bắt sẽ đuổi theo, người đi bắt đụng vào ai thì người đó sẽ bị thua và trở thành người đi bắt.
 Trong quá trình chơi, người bị phạt phải úp mặt vào tường và hô “một – hai – ba”, sau tiếng “ba” mới được quay lại để bắt người chơi.
-<img class="ls-is-cached lazyload" title="Trò chơi Một hai ba" alt="Trò chơi Một hai ba" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-52-800x450.jpg">
+<img alt="Trò chơi Một hai ba" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-52-800x450.jpg">
 
 
 53. Đánh đáo
@@ -655,7 +740,7 @@ Hướng dẫn cách chơi và luật
 Sau đó, người chơi đứng ở vạch thứ hai sẽ thảy những đồng tiền vào phía trên vạch thứ nhất, đồng tiền nào rơi vào giữa hai vạch coi như loại và người đi sau có thể ăn đồng tiền này.
 Sau đó, người chơi thứ hai sẽ bắt đầu và nhắm vào những đồng tiền trên mức thứ nhất, dùng đáo chọi vào những đồng tiền đó.
 Nếu người chơi chọi trúng thì được “ăn” những đồng tiền đó và có quyền chọi tiếp. Nếu chọi không trúng thì phải nhường quyền chọi đáo cho người kế tiếp.
-<img class="ls-is-cached lazyload" title="Trò chơi Đánh đáo" alt="Trò chơi Đánh đáo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-53-800x450.jpg">
+<img alt="Trò chơi Đánh đáo" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-53-800x450.jpg">
 
 
 54. Nu na nu nống
@@ -687,7 +772,7 @@ Gặp gái giữa đường
 Gặp phường trống quân
 Có chân thì rụt.”
 Mỗi từ trong bài đồng dao được đập nhẹ vào một chân theo thứ tự từ đầu đến cuối rồi lại quay ngược lại cho đến chữ “rút” hoặc “rụt”. Chân ai gặp từ “rút” hoặc “rụt” nhịp trúng thì co chân lại. Cứ thế cho đến khi các chân co lại hết lại thì người chơi còn chân thẳng sẽ thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Nu na nu nống" alt="Trò chơi Nu na nu nống" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-54-800x450.jpg">
+<img alt="Trò chơi Nu na nu nống" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-54-800x450.jpg">
 
 
 55. Máy bay xuất kích
@@ -700,7 +785,7 @@ Máy bay muốn hạ đối phương thì phải chạm được vào đối ph�
 Trong lúc lâm chiến, bên đối phương có thể ùa ra bắt máy bay bằng cách giữ không cho máy bay về được lãnh thổ của mình, cho đến khi máy bay hết hơi không kêu “u” được nữa.
 Ngược lại, nếu đối phương giữ không chặt để máy bay trốn thoát về lãnh thổ của mình thì những người giữ máy bay đều bị bắt làm tù binh. 
 Tù binh được giải cứu bằng cách cố chìa tay ra để cho máy bay đội mình chạm đến được. Trong quá trình chơi, nếu nhiều tù binh bị bắt và muốn cứu được hết thì các tù binh phải nắm tay nhau lại, sau đó máy bay chỉ cần chạm vào một người là tất cả được cứu.
-<img class="ls-is-cached lazyload" title="Trò chơi Máy bay xuất kích" alt="Trò chơi Máy bay xuất kích" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-55-800x450-1.jpg">
+<img alt="Trò chơi Máy bay xuất kích" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-55-800x450-1.jpg">
 
 
 56. Bong bóng nước
@@ -710,7 +795,7 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, người chơi đổ nước vào quả bong bóng, sau đó các người chơi đứng thành vòng tròn và người chơi lần lượt thảy bóng vào các người chơi đứng trong vòng tròn.
 Người chơi nào được thảy bóng tới thì phải chụp chính xác.
 Ai bắt không trúng bóng, làm bóng rớt thì bóng sẽ nổ và bị dính nước là thua. 
-<img class="ls-is-cached lazyload" title="Trò chơi Bong bóng nước" alt="Trò chơi Bong bóng nước" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-56-800x450.jpg">
+<img alt="Trò chơi Bong bóng nước" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-56-800x450.jpg">
 
 
 57. Đi cà kheo
@@ -720,7 +805,7 @@ Hướng dẫn cách chơi và luật
 Tất cả các người chơi có thể chia làm hai đội để thi đấu với nhau (vd: thi chạy, đi nhanh,…). Cây cà kheo được làm bằng tre, và mỗi cây cà kheo có độ cao cách mặt đất khoảng 1,5m – 2m. 
 Các thành viên tham gia thi đấu sẽ di chuyển trên cà kheo
 Nếu ai ngã khi đang thi đấu hoặc di chuyển chậm không đến đích thì đội đó thua.
-<img class="ls-is-cached lazyload" title="Trò chơi Đi cà kheo" alt="Trò chơi Đi cà kheo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-57-800x450.jpg">
+<img alt="Trò chơi Đi cà kheo" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-57-800x450.jpg">
 
 Trò chơi Đi cà kheo
 Có thể bạn quan tâm: Mách ba mẹ 12 cách làm đồ chơi từ cốc giấy siêu hay cho bé
@@ -737,7 +822,7 @@ Tay không tay có
 Tay có tay không?”
 Lúc này, người giữ đồ vật sẽ đưa hai tay ra. Và những người chơi còn lại sẽ đoán xem tay nào đang giữ đồ vật.
 Nếu người chơi bị đoán trúng tay nắm viên sỏi thì người chơi thắng, hoặc ngược lại những người chơi còn lại không đoán được tay nào nắm viên sỏi thì người giữ viên sỏi thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Tập tầm vông" alt="Trò chơi Tập tầm vông" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-58-800x450.jpg">
+<img alt="Trò chơi Tập tầm vông" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-58-800x450.jpg">
 
 
 59. Nhảy dây
@@ -745,7 +830,7 @@ Giới thiệu trò chơi
 Với trò chơi này, người chơi phải tính toán sợi dây để nhảy qua khi dây tới, trong quá trình nhảy người chơi nên nhảy cao lên để tránh bị vướng vào sợi dây và thua.
 Hướng dẫn cách chơi và luật
 Tất cả người chơi lần lượt vào vòng quay của dây để nhảy qua, các người chơi cứ tiếp tục nhảy đúng theo số lần quy định của cuộc chơi. Nếu vướng dây thì đội chơi đó sẽ bị thua.
-<img class="ls-is-cached lazyload" title="Trò chơi Nhảy dây" alt="Trò chơi Nhảy dây" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-59-800x450.jpg">
+<img alt="Trò chơi Nhảy dây" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-59-800x450.jpg">
 
 
 60. Ken con vật
@@ -756,7 +841,7 @@ Hướng dẫn cách chơi và luật 
 Nếu các người chơi có nguy cơ bị bắt thì có thể đứng lại và nói 2 chữ về một con vật nào đó (ví dụ: gà con, chó sói, vịt bầu, heo mọi,…), sau khi hô xong, người chơi phải đứng im không nhúc nhích, nếu muốn chơi trở lại người chơi phải chờ người khác đến cứu, muốn cứu chỉ cần người chơi khác chạm vào bạn là được.
 Lúc này người đi bắt sẽ không được bắt người chơi đó và di chuyển đi bắt người khác. 
 Nếu người đi bắt chạm vào người chơi nào mà người chơi đó không kịp ken thì người chơi đó sẽ bị thua và ra thay thế cho người đi bắt trước đó.
-<img class="ls-is-cached lazyload" title="Trò chơi Ken con vật" alt="Trò chơi Ken con vật" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-60-800x450.jpg">
+<img alt="Trò chơi Ken con vật" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-60-800x450.jpg">
 
 
 61. Bún dây thun
@@ -766,7 +851,7 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, mỗi người chơi sử dụng từ 5 đến 10 sợi dây thun rồi thảy tất cả xuống đất.
 Sau đó người chơi này sẽ dùng ngón tay bún sợi dây thun của mình sao cho các sợi thun đan vào nhau.
 Trong quá trình chơi, ai bún được 2 sợi thun đan vào nhau trước thì sẽ ăn được hai sợi đó. Và người nào giữ được nhiều dây thun nhất thì là người thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Bún dây thun" alt="Trò chơi Bún dây thun" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-61-800x450.jpg">
+<img alt="Trò chơi Bún dây thun" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-61-800x450.jpg">
 
 
 62. Du de du dích
@@ -776,7 +861,7 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, một người chơi sẽ xòe tay ra và hát:
 “Du de – du dích – bán mít chợ đông – bán hàng chợ cũ - bán hũ nước tương”. Sau đó, người chơi thứ hai sẽ đưa 1 ngón tay vào lòng bàn tay của người chơi thứ nhất.
 Khi người chơi thứ nhất hát đến chữ “tương” sẽ nắm tay lại nếu bắt trúng được ngón tay của người chơi thứ hai, xem như người chơi thứ hai sẽ bị thua.
-<img class="ls-is-cached lazyload" title="Trò chơi Du de du dích" alt="Trò chơi Du de du dích" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-62-800x450.jpg">
+<img alt="Trò chơi Du de du dích" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-62-800x450.jpg">
 
 
 63. Thìa la thìa lảy
@@ -794,7 +879,7 @@ Trốn việc là năm
 Hay nằm là sáu
 Láu táu là bảy.”
 Sau khi hát đến từ “bảy” trúng tay ai thì người đó phải rút nắm tay ra. Cứ thế cho đến hết năm tay thì trò chơi chấm dứt.
-<img class="ls-is-cached lazyload" title="Trò chơi Thìa la thìa lảy" alt="Trò chơi Thìa la thìa lảy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-63-800x450.jpg">
+<img alt="Trò chơi Thìa la thìa lảy" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-63-800x450.jpg">
 
 
 64. Úp lá khoai
@@ -812,7 +897,7 @@ Có thằng té xuống giếng
 Có thằng té xuống sình
 Úi chà , úi da!”
 Hát đến chữ cuối cùng, người chỉ mà chỉ vào tay của người nào thì người đó bị thua.
-<img class="ls-is-cached lazyload" title="Trò chơi Úp lá khoai" alt="Trò chơi Úp lá khoai" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-64-800x450.jpg">
+<img alt="Trò chơi Úp lá khoai" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-64-800x450.jpg">
 
 
 65. Oẳn tù tì (Đồng dao)
@@ -830,7 +915,7 @@ Khi hát đến từ “nghe điện thoại” thì người chơi đưa tay l�
 Khi hát đến từ “xin chữ ký” thì người chơi xòe bàn tay ra để làm sổ, tay còn lại làm bút và bắt đầu ghi ghi lên sổ.
 Khi được hát đến từ “không biết gì” thì người chơi sẽ oẳn tù tì như bình thường.
 Người chơi nào oẳn tù tì thua hoặc làm không đúng bộ dáng như vậy thì là người thua.
-<img class="ls-is-cached lazyload" title="Trò chơi Oẳn tù tì (Đồng dao)" alt="Trò chơi Oẳn tù tì (Đồng dao)" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-65-800x450.jpg">
+<img alt="Trò chơi Oẳn tù tì (Đồng dao)" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-65-800x450.jpg">
 
 
 66. Tung đồng đáo
@@ -843,7 +928,7 @@ Tiếp theo, những người chơi góp mỗi người một số tiền rồi 
 Người chơi đứng nhất sẽ được cầm tất cả số tiền, sau đó đứng dưới vạch thả vào lỗ, vào được bao nhiêu đồng thì ăn bấy nhiêu.
 Còn những đồng nằm xung quanh lỗ phải qua lần thử thách mới do trọng tài đề ra. Nếu không được thì người đứng nhì nhặt những đồng tiền còn lại để đi tiếp (đi theo kiểu như người đứng nhất).
 Trò chơi cứ thế tiếp tục cho đến khi tất cả đồng xu được các người chơi ăn hết mới chấm dứt.
-<img class="ls-is-cached lazyload" title="Trò chơi Tung đồng đáo" alt="Trò chơi Tung đồng đáo" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-66-800x450.jpg">
+<img alt="Trò chơi Tung đồng đáo" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-66-800x450.jpg">
 
 
 67. Me me de de
@@ -856,7 +941,7 @@ Cham bồ chát chát
 Me me de de
 Cham bồ chát chát.”
 Người chơi nào oẳn tù tì thắng sẽ là người thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Me me de de" alt="Trò chơi Me me de de" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-67-800x450.jpg">
+<img alt="Trò chơi Me me de de" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-67-800x450.jpg">
 
 
 68. Đá gà
@@ -867,7 +952,7 @@ Hướng dẫn cách chơi và luật 
 Sau đó, người chơi sẽ nhảy lò cò đi đá chân của người khác.
 Muốn đá được chân của người chơi khác, thì người chơi chỉ cần dùng chân gập đó đá vào chân gập của đối phương.
 Trong quá trình chơi người chơi nào mà ngã trước, hoặc thả chân xuống trước thì là người thua cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Đá gà" alt="Trò chơi Đá gà" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-68-800x450.jpg">
+<img alt="Trò chơi Đá gà" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-68-800x450.jpg">
 
 
 69. Nhảy cóc
@@ -878,7 +963,7 @@ Hướng dẫn cách chơi và luật
 Người thắng được quyền nhảy cóc về phía trước 1 nhịp. Khi nhảy, người chơi chụm 2 chân lại để nhảy. 
 Nhảy xong nhịp này, người chơi lại oẳn tù tì tiếp, người thắng lại được quyền nhảy cóc tiếp 1 nhịp, trò chơi cứ thế tiếp diễn cho đến khi người nào về đích trước thì sẽ là người thắng cuộc.
 Người chơi khi nhảy 2 chân phải chụm lại, và người oẳn tù tì thắng có quyền nhảy cóc ngắn hoặc dài tùy theo sức của mình. Nhưng trong quá trình nhảy, người chơi nào chống (chạm) tay xuống đất trước thì coi như không được nhảy bước đó (phải trở về vị trí cũ trước khi nhảy bước đó).
-<img class="ls-is-cached lazyload" title="Trò chơi Nhảy cóc" alt="Trò chơi Nhảy cóc" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-69-800x450.jpg">
+<img alt="Trò chơi Nhảy cóc" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-69-800x450.jpg">
 
 
 70. Đi tàu hỏa
@@ -903,7 +988,7 @@ Mua cặp cài đầu
 Đi mau, về mau
 Kẻo trời sắp tối.”
 Cả đoàn tàu vừa chạy theo lệnh của đầu tàu vừa hát bài đồng dao. Nếu người chơi nào hát nhỏ hoặc không làm đúng động tác chạy thì sẽ bị cả tàu phạt (hình thức phạt nhẹ nhàng tùy đoàn tàu đề ra).
-<img class="ls-is-cached lazyload" title="Trò chơi Đi tàu hỏa" alt="Trò chơi Đi tàu hỏa" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-70-800x450.jpg">
+<img alt="Trò chơi Đi tàu hỏa" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-70-800x450.jpg">
 
 71. Đi câu ếch
 Giới thiệu trò chơi
@@ -928,7 +1013,7 @@ Trong khi hát, các người chơi sẽ làm động tác như ếch đang nh�
 Nếu thấy người đi câu còn ở xa thì người chơi có thể nhảy lên bờ (ra khỏi vòng tròn) để trêu người đi câu. 
 Nhưng người chơi phải cảnh giác người đi câu, vì nếu người chơi đang ở trên bờ mà để người đi câu quăng dây trúng là sẽ bị bắt và bị loại. 
 Trong quá trình chơi, người đi câu nếu không câu được con ếch nào thì người đi câu sẽ bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Đi câu ếch" alt="Trò chơi Đi câu ếch" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-71-800x450.jpg">
+<img alt="Trò chơi Đi câu ếch" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-71-800x450.jpg">
 
 
 72. Cắp cua
@@ -940,7 +1025,7 @@ Người chơi dùng hai ngón tay để cắp từng viên sỏi, trong lúc n�
 Trong quá trình chơi, lượt một người chơi sẽ cắp 1 viên, lượt hai sẽ cắp 2 viên,... cứ tiếp tục như vậy cho đến khi cắp 10 viên.
 Nếu người chơi khi đang cắp sỏi mà chạm vào viên khác thì phải nhường cho người kế tiếp đi.
 Sau khi cắp hết 10 viên, đếm xem ai cắp được nhiều nhất thì người đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Cắp cua" alt="Trò chơi Cắp cua" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-72-800x450-1.jpg">
+<img alt="Trò chơi Cắp cua" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-72-800x450-1.jpg">
 
 Trò chơi Cắp cua
 Có thể bạn quan tâm: 7 cách hiệu quả để thúc đẩy sự phát triển thể chất ở trẻ em
@@ -951,7 +1036,7 @@ Hướng dẫn cách chơi và luật
 Tất cả các người chơi cử một người chơi làm nhân vật người lùa vịt, người lùa vịt đứng ở ngoài vòng tròn. Các người chơi còn lại đứng trong vòng tròn để làm vịt.
 Khi bắt đầu trò chơi, người lùa vịt sẽ chạy quanh vòng tròn, tìm cách đập vào các người chơi làm vịt đứng trong vòng tròn.
 Trong quá trình chơi, người lùa vịt đập trúng vào người làm vịt thì người chơi làm vịt đó sẽ bị thua và loại khỏi cuộc chơi.
-<img class="ls-is-cached lazyload" title="Trò chơi Lùa vịt" alt="Trò chơi Lùa vịt" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-73-800x450.jpg">
+<img alt="Trò chơi Lùa vịt" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-73-800x450.jpg">
 
 
 74. Ném vòng
@@ -962,7 +1047,7 @@ Trước khi chơi, các người chơi nên chuẩn bị những dụng cụ sa
 Sau đó, các người chơi đặt 3 cái chai thành một hàng thẳng và cách nhau khoảng 50 đến 60 cm.
 Tiếp theo, người chơi sẽ vẽ vạch một đường mức cách xa vị trí đặt chai một khoảng cách nhất định.
 Và sau đó, các người chơi sẽ bắt đầu dùng vòng ném vào những cái chai này, người chơi nào ném vòng vào chai nhiều nhất là người thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Ném vòng" alt="Trò chơi Ném vòng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-74-800x450.jpg">
+<img alt="Trò chơi Ném vòng" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-74-800x450.jpg">
 
 
 75. Lựa đậu
@@ -974,7 +1059,7 @@ Sau đó, các người chơi chia thành nhiều đội chơi, số lượng th
 Sau đó, người chơi sẽ trộn chung ba loại hạt này vào cùng một rổ.
 Sau khi nghe tiếng còi báo hiệu bắt đầu thì các đội sẽ phân loại hạt ra và bỏ từng loại hạt riêng biệt vào mỗi chén khác nhau.
 Trong quá trình chơi, đội nào phân loại hạt xong trước thì đội đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Lựa đậu" alt="Trò chơi Lựa đậu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-75-800x450.jpg">
+<img alt="Trò chơi Lựa đậu" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-75-800x450.jpg">
 
 
 76. Dẫn nước
@@ -984,7 +1069,7 @@ Hướng dẫn cách chơi và luật
 Tất cả các người chơi chia ra thành nhiều đội chơi khác nhau, các đội chơi có số lượng thành viên là bằng nhau.
 Khi có tín hiệu bắt đầu, thì các đội phân công 1 người chịu trách nhiệm đào hố chứa nước, những người còn lại đào đường dẫn nước vào hố.
 Thực hiện trò chơi theo một thời gian quy định, đội nào đào hố sâu, rộng chứa nhiều nước thì đội đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Dẫn nước" alt="Trò chơi Dẫn nước" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-76-800x450.jpg">
+<img alt="Trò chơi Dẫn nước" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-76-800x450.jpg">
 
 
 77. Tùm nụm, tùm nịu
@@ -1010,7 +1095,7 @@ Hông ông thì bà
 Trái mít rụng.”
 Khi đọc đến câu “Tay nào có? Tay nào không?” thì người giữ đồ vật sẽ nắm một vật nào đó trong tay và chìa hai nắm tay. Các người chơi còn lại sẽ chọn đồ vật bằng một trong hai nắm tay này.
 Người chơi chọn đúng sẽ được thưởng, chọn sai sẽ bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Tùm nụm, tùm nịu" alt="Trò chơi Tùm nụm, tùm nịu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-77-800x450.jpg">
+<img alt="Trò chơi Tùm nụm, tùm nịu" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-77-800x450.jpg">
 
 
 78. Trốn tìm
@@ -1021,7 +1106,7 @@ Các người chơi cử 1 bạn đi tìm (có thể xung phong hoặc quyết �
 Nếu đếm đủ 100 người đi tìm có thể bắt đầu mở mắt đi tìm các người chơi đi trốn.
 Trong khoảng thời gian quy định, người chơi đi tìm tìm thấy người chơi nào thì người chơi ấy thua cuộc, nếu không tìm thấy người chơi nào thì người đi tìm phải chịu phạt.
 Người chơi đi tìm trong thời gian quy định tìm thấy hết các bạn chơi thì người đi tìm thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Trốn tìm" alt="Trò chơi Trốn tìm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-78-800x450.jpg">
+<img alt="Trò chơi Trốn tìm" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-78-800x450.jpg">
 
 
 79. Nhảy lò cò
@@ -1034,7 +1119,7 @@ Mỗi người chơi có một đồng chàm dùng để thảy vào ô thứ t�
 Nhưng trong quá trình chơi, nếu người chơi đạp trúng vạch kẻ hay thảy đồng chàm ra ngoài thì người chơi đó sẽ bị mất lượt và đến phần người chơi khác.
 Nếu đồng chàm thảy ra ngoài hay vào nhà người khác thì mất lượt nhưng nếu đồng chàm hay người chơi đó mà nhảy lò cò vào nhà thay vì phải mất lượt thì được xem như nhà bị cháy.
 Người chơi nào có đồng chàm nhiều nhất trong các ô vuông thì thắng cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Nhảy lò cò" alt="Trò chơi Nhảy lò cò" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-79-800x450.jpg">
+<img alt="Trò chơi Nhảy lò cò" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-79-800x450.jpg">
 
 
 80. Khiêng kiệu
@@ -1044,7 +1129,7 @@ Hướng dẫn cách chơi và luật
 Tất cả người chơi chia làm nhiều đội chơi nhưng mỗi đội sẽ có 3 người chơi. Và 2 người chơi đứng đối mặt nhau lấy tay phải nắm vào giữa tay ngay cùi chỏ của mình và tay trái thì nắm vào tay phải của người đối diện để làm kiệu.
 Sau đó người chơi còn lại của đội này ngồi lên kiệu của đội kia và người chơi phải giữ thăng bằng để không bị ngã.
 Người làm kiệu phải giữ kiệu cho chắc, nếu kiệu bị hỏng hoặc người ngồi kiệu bị ngã thì đội đó thua.
-<img class="ls-is-cached lazyload" title="Trò chơi Khiêng kiệu" alt="Trò chơi Khiêng kiệu" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-80-800x450.jpg">
+<img alt="Trò chơi Khiêng kiệu" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-80-800x450.jpg">
 
 
 81. Thảy đá
@@ -1057,7 +1142,7 @@ Người chơi trước đầu tiên sẽ rải đá ra, rồi nhặt 1 viên đ
 Đầu tiên sẽ là 1 viên đá, sau đó đến 2 viên đá, 3 viên đá, 4 viên đá và 5 viên đá.
 Kết thúc các màn chơi trên, người chơi bắt đầu thảy đá như lúc đầu để lấy điểm (1 viên đá tính 1 điểm).
 Trong quá trình chơi, nếu người chơi chụp hụt hay rớt đá thì mất lượt và khi cân đá trên tay mà đá rớt hết thì không có điểm.
-<img class="ls-is-cached lazyload" title="Trò chơi Thảy đá" alt="Trò chơi Thảy đá" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-81-800x450.jpg">
+<img alt="Trò chơi Thảy đá" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-81-800x450.jpg">
 
 
 82. Tạt lon
@@ -1068,7 +1153,7 @@ Các người chơi đầu tiên sẽ kẻ một vòng và đặt lon vào trong
 Sau đó, các người chơi sẽ cử ra một người giữ lon, và tất cả người chơi còn lại sẽ đứng ở vạch mức để thảy lon, người chơi có thể dùng dép hoặc những đồ vật khác để thảy.
 Nếu người chơi thảy dép trúng lon và lon văng ra khỏi vòng thì người giữ lon phải tìm lon về đặt lại chỗ cũ. Trong lúc đó, người giữ lon phải tìm cách chạm vào người tạt trúng lon trước khi người đó chạy về vạch. Đồng thời, người tạt trúng lon phải nhặt dép và chạy về vạch để người giữ lon không bắt được thì xem như thắng cuộc.
 Nếu người chơi nào tạt không trúng lon hoặc người giữ lon chạm trúng người nào mà trước khi người đó chạy về vạch thì người đó sẽ bị bắt giữ lon.
-<img class="ls-is-cached lazyload" title="Trò chơi Tạt lon" alt="Trò chơi Tạt lon" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-82-800x450.jpg">
+<img alt="Trò chơi Tạt lon" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-82-800x450.jpg">
 
 
 83. Thả diều
@@ -1082,7 +1167,7 @@ Lúc lắc cho đều
 Để bố đăm chiêu
 Kiếm gạo con ăn.”
 Lúc này, người chơi chủ sẽ phải lựa chọn và giấu đi bất kỳ con diều nào, khi bài hát chấm dứt thì mọi người chơi phải tìm diều của mình và giơ cao lên, người nào không có diều thì phải tìm ra người chơi chủ, nếu bài hát hết một lần nữa mà chưa tìm thấy người chơi chủ thì các người chơi xem như thua và bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Thả diều" alt="Trò chơi Thả diều" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-83-800x450.jpg">
+<img alt="Trò chơi Thả diều" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-83-800x450.jpg">
 
 
 84. De - ùm
@@ -1091,7 +1176,7 @@ Khi chơi trò chơi này, người chơi phải có phản xạ nhanh nhạy đ
 Hướng dẫn cách chơi và luật
 Đầu tiên, tất cả người chơi cử ra một người làm nhà cái, nhà cái sẽ lật bàn tay của mình lên và tất cả người chơi khác sẽ đặt ngón tay trỏ của mình vào bàn tay của nhà cái. Khi nhà cái hô to “de - ùm” thì tất cả người chơi phải mau chóng rút tay của mình ra để không cho nhà cái chụp được.
 Các người chơi phải thực hiện động tác nhanh và tay của người chơi nào bị nhà cái chụp được thì xem như thua cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi De - ùm" alt="Trò chơi De - ùm" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-84-800x450.jpg">
+<img alt="Trò chơi De - ùm" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-84-800x450.jpg">
 
 
 85. Tán ua
@@ -1103,7 +1188,7 @@ Sau đó, một người chơi của đội A sẽ chạy ra khỏi vạch để
 Nếu chạm vào được thành viên của đội đối phương, người chơi này phải nhanh chóng tìm cách chạy về đội của mình.
 Riêng đội B khi người chơi bên đội A này chạy sang thì phải tìm cách giữ lại cho đến khi người đó ngừng ua. Nếu người chơi của đội A bị bắt thì người chơi khác bên đội A có thể chạy sang cứu nhưng vẫn phải ua và làm sao chạm được vào người của thành viên bên đội mình thì người kia sẽ được cứu.
 Nếu người chơi đội nào không còn thành viên để chơi nữa thì xem như đội đó thua cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Tán ua" alt="Trò chơi Tán ua" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-85-800x450.jpg">
+<img alt="Trò chơi Tán ua" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-85-800x450.jpg">
 
 
 86. Trồng nụ trồng hoa
@@ -1113,7 +1198,7 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, hai người chơi sẽ ngồi đối diện nhau, hai chân duỗi thẳng và chạm vào bàn chân của nhau.
 Bàn chân của người này chồng lên bàn chân của người kia (bàn chân dựng đứng). Sau đó, hai người chơi khác sẽ nhảy qua rồi lại nhảy về.
 Lúc này, một người lại chồng 1 nắm tay lên ngón chân của người kia làm nụ. Hai người chơi lúc nãy lại nhảy qua, nhảy về. Rồi người đối diện người làm nụ sẽ dựng thẳng tiếp 1 bàn tay lên trên bàn tay nụ để làm hoa. 2 người lại nhảy qua, nếu chạm vào nụ hoặc hoa thì mất lượt phải ngồi thay cho một trong 2 người ngồi.
-<img class="ls-is-cached lazyload" title="Trò chơi Trồng nụ trồng hoa" alt="Trò chơi Trồng nụ trồng hoa" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-86-800x450.jpg">
+<img alt="Trò chơi Trồng nụ trồng hoa" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-86-800x450.jpg">
 
 
 87. Kéo mo cau
@@ -1121,7 +1206,7 @@ Giới thiệu trò chơi
 Vào mùa mo cau rụng, mọi người thường lấy những chiếc mo cau làm xe kéo. Người kéo mo cau phải có thể lực tốt và lựa chọn hướng di chuyển chính xác. Đây là trò chơi được các bạn nhỏ ở nông thôn rất ưa chuộng.
 Hướng dẫn cách chơi và luật
 Người chơi chỉ cần sử dụng lá cau khô để làm thành một chiếc mo cau. Chiếc mo cau sẽ là ghế ngồi cho một hay nhiều người ngồi lên. Người kéo sẽ phải dùng sức kéo chiếc mo cau về phía trước theo hướng đi mình muốn.
-<img class="ls-is-cached lazyload" title="Trò chơi Kéo mo cau" alt="Trò chơi Kéo mo cau" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-87-800x450.jpg">
+<img alt="Trò chơi Kéo mo cau" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-87-800x450.jpg">
 
 
 88. Lộn cầu vồng
@@ -1136,7 +1221,7 @@ Hai chị em ta
 Cùng lộn cầu vồng”.
 Khi hát đến “cùng lộn cầu vồng”, thì cả 2 cùng xoay người và lộn đầu qua tay của người kia. Sau câu hát, người chơi đứng quay lưng vào nhau, sau đó hai người chơi sẽ tiếp tục hát bài đồng
 dao rồi quay trở lại vị trí cũ. Trò chơi cứ như thế tiếp diễn.
-<img class="ls-is-cached lazyload" title="Trò chơi Lộn cầu vồng" alt="Trò chơi Lộn cầu vồng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-88-800x450.jpg">
+<img alt="Trò chơi Lộn cầu vồng" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-88-800x450.jpg">
 
 
 89. Thiên đàng hỏa ngục
@@ -1151,7 +1236,7 @@ Khi đọc hết bài này, hai người chơi giơ tay sẽ lập tức hạ ta
 Nếu chọn Thiên đàng, người chơi sẽ được hai người giơ tay lúc đầu làm thành cái kiệu bằng tay và khiêng một bạn khác di chuyển.
 Nếu người chơi can đảm chọn Địa ngục thì sẽ bị người giơ hai tay lúc đầu phạt bằng cách làm động tác chặt cổ, chặt tay.
 Cứ thế trò chơi sẽ tiếp tục cho đến khi tất cả thành viên để phải đưa ra chọn lựa: Thiên đàng hay Địa ngục.
-<img class="ls-is-cached lazyload" title="Trò chơi Thiên đàng hỏa ngục" alt="Trò chơi Thiên đàng hỏa ngục" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-89-800x450.jpg">
+<img alt="Trò chơi Thiên đàng hỏa ngục" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-89-800x450.jpg">
 
 
 90. Đếm sao
@@ -1168,7 +1253,7 @@ Từ một ông sao sáng
 Hát đến từ nào sẽ đập vào vai của một người đó, liên tục như thế cho đến từ sao cuối cùng, trúng vào người chơi nào thì người chơi ấy phải đọc một hơi không nghỉ: “Một ông sao sáng, hai ông sáng sao, ba ông sao sáng… cho đến 10 ông sáng sao.”
 Trong quá trình đếm, người chơi này phải đếm một hơi không được nghỉ và phải luân phiên “sao sáng” với “sáng sao”.
 Nếu hết hơi hoặc đọc sai người chơi này sẽ bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Đếm sao" alt="Trò chơi Đếm sao" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-90-800x450.jpg">
+<img alt="Trò chơi Đếm sao" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-90-800x450.jpg">
 
 
 91. Bầu cua cá cọp
@@ -1180,7 +1265,7 @@ Trò chơi chia thành nhiều lượt và không giới hạn số lượng ng�
 Sau đó, các người chơi khác sẽ đặt cược vào vị trí con vật mà người chơi nghĩ nó sẽ ra. Khi tất cả người chơi đặt cược xong thì nhà cái sẽ mở ra để công bố kết quả xúc xắc.
 Nếu trong ba viên xúc xắc xuất hiện con vật mà người chơi đã đặt cược, người chơi sẽ thắng. Nếu con vật người chơi chọn không xuất hiện, người chơi sẽ thua và nhà cái thắng.
 Nếu thua người chơi sẽ bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Bầu cua cá cọp" alt="Trò chơi Bầu cua cá cọp" data-src="https://cdnv2.tgdd.vn/mwg-static/common/News/1478960/Bau_cua_ca_cop.jpg">
+<img alt="Trò chơi Bầu cua cá cọp" src="https://cdnv2.tgdd.vn/mwg-static/common/News/1478960/Bau_cua_ca_cop.jpg">
 
 
 92. Chim bay cò bay
@@ -1190,7 +1275,7 @@ Hướng dẫn cách chơi và luật
 Tất cả các người chơi chọn một người chơi chủ, người chơi chủ sẽ đứng ở giữa, những người chơi còn lại sẽ đứng xung quanh theo hình tròn.
 Khi người chơi chủ hô “chim bay” đồng thời thực hiện động tác nhảy bật lên, giang hai cánh tay như chim đang bay, tất cả người chơi còn lại cũng phải hô lên và làm theo động tác này.
 Nếu người chơi chủ hô những vật không bay được như “ghế bay” hay “voi bay” mà những người chơi còn làm vẫn làm động tác bay hoặc những vật bay được mà lại không làm động tác bay thì các người chơi đó sẽ thua và bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Chim bay cò bay" alt="Trò chơi Chim bay cò bay" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-92-800x450.jpg">
+<img alt="Trò chơi Chim bay cò bay" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-92-800x450.jpg">
 
 
 93. Thả đỉa ba ba
@@ -1213,7 +1298,7 @@ Nhà đấy phải chịu”.
 Lúc này, các người chơi sẽ tìm cách lội qua sông, vừa lội vừa hát:
 “Đỉa ra xa tha hồ tắm mát”.
 Đỉa phải chạy đuổi bắt người qua sông. Nếu chạm được vào người chơi nào chưa lên bờ thì coi như người đó thua, phải làm đỉa thay, trò chơi lại tiếp tục.
-<img class="ls-is-cached lazyload" title="Trò chơi Thả đỉa ba ba" alt="Trò chơi Thả đỉa ba ba" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-93-800x450.jpg">
+<img alt="Trò chơi Thả đỉa ba ba" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-93-800x450.jpg">
 
 
 94. Chọi dế
@@ -1223,7 +1308,7 @@ Hướng dẫn cách chơi và luật
 Đầu tiên, các người chơi sẽ bắt dế và cho hai con dế này cùng một cái hộp, cái bát,... để cho hai con dế này cũng chiến đấu với nhau.
 Trong quá trình hai con dế chiến đấu, con dế thắng cuộc là con dế trụ lại sau cùng khi con còn lại đã không thể chiến đấu được nữa.
 Đồng thời, người chơi sở hữu con dế thắng cuộc cũng là người chơi thắng cuộc, người chơi sở hữu con dế thua cuộc sẽ là người chơi thua cuộc và bị phạt.
-<img class="ls-is-cached lazyload" title="Trò chơi Chọi dế" alt="Trò chơi Chọi dế" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-94-800x450.jpg">
+<img alt="Trò chơi Chọi dế" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-94-800x450.jpg">
 
 
 95. Cáo và thỏ
@@ -1244,7 +1329,7 @@ Chạy cho nhanh
 Kẻo cáo gian
 Tha đi mất.”
 Khi đọc hết bài thì cáo sẽ xuất hiện, cáo sẽ chạy đi đuổi bắt thỏ. Đồng thời, khi thỏ nghe tiếng cáo, thỏ phải chạy nhanh về chuồng của mình. Những chú thỏ nào bị cáo bắt đều phải ra ngoài và bị mất lượt chơi.
-<img class="ls-is-cached lazyload" title="Trò chơi Cáo và thỏ" alt="Trò chơi Cáo và thỏ" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-95-800x450.jpg">
+<img alt="Trò chơi Cáo và thỏ" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-95-800x450.jpg">
 
 
 96. Bà Ba buồn bà Bảy
@@ -1257,7 +1342,7 @@ Bà ba buồn bà bảy
 Bà bảy bắn bà ba
 Trong quá trình chơi, trọng tài sẽ chỉ định đội nào nói trước thì đội đó sẽ cử 1 người đại diện đứng lên đối đáp. Đội nào không đáp lại được thì đội đó thua.
 Trong quá trình chơi, đội này không được trùng với câu của đội kia đã sử dụng.
-<img class="ls-is-cached lazyload" title="Trò chơi Bà Ba buồn bà Bảy" alt="Trò chơi Bà Ba buồn bà Bảy" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-96-800x450.jpg">
+<img alt="Trò chơi Bà Ba buồn bà Bảy" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-96-800x450.jpg">
 
 97. Múa hình tượng
 Giới thiệu trò chơi
@@ -1265,7 +1350,7 @@ Trò chơi này không chỉ tạo sự vui nhộn cho mọi người, mà còn 
 Hướng dẫn cách chơi và luật
 Đầu tiên, các đội chơi sẽ cử một thành viên đại diện lên đứng trước đội mình để diễn tả hành động hay tạo dáng của một người anh hùng dân tộc nào đó để cho đội mình đoán và nêu tên.
 Trong quá trình chơi, đội nào có nhiều câu trả lời đúng là đội đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Múa hình tượng" alt="Trò chơi Múa hình tượng" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-97-800x450.jpg">
+<img alt="Trò chơi Múa hình tượng" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-97-800x450.jpg">
 
 
 98. Thổi tắt ngọn đèn
@@ -1275,7 +1360,7 @@ Hướng dẫn cách chơi và luật
 Tất cả người chơi sẽ chia thành hai đội, hai đội này sẽ cử hai người chơi ra để thi đấu với nhau, mỗi người chơi sẽ cầm một cây nến đã thắp.
 Khi nghe tiếng bắt đầu, hai người chơi này phải dấu đèn của mình sau lưng và tìm cách thổi tắt đèn của đối phương.
 Người chơi nào để đèn tắt trước là thua cuộc.
-<img class="ls-is-cached lazyload" title="Trò chơi Thổi tắt ngọn đèn" alt="Trò chơi Thổi tắt ngọn đèn" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-98-800x450.jpg">
+<img alt="Trò chơi Thổi tắt ngọn đèn" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-98-800x450.jpg">
 
 
 99. Tìm địa danh Việt Nam
@@ -1286,7 +1371,7 @@ Các đội chơi sẽ ghi tên các tỉnh/thành phố/huyện,... trong toàn
 Quy định ghi tên: Chữ đầu của từ cuối tỉnh trước là chữ đầu của từ đầu tỉnh sau
 Ví dụ: Hà Nội, Nghệ An, An Lão (Huyện của Tỉnh Hải Phòng), Long Thành (Đồng Nai), ...
 Trong quá trình chơi, người chơi không được sử dụng các tỉnh/thành phố lập lại và đội nào có nhiều địa danh nhất đội đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Tìm địa danh Việt Nam" alt="Trò chơi Tìm địa danh Việt Nam" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-99-800x450.jpg">
+<img alt="Trò chơi Tìm địa danh Việt Nam" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-99-800x450.jpg">
 
 
 100. Truyền tin
@@ -1296,8 +1381,9 @@ Hướng dẫn cách chơi và luật
 Tất cả các người chơi sẽ chia làm nhiều đội chơi, các đội chơi sẽ đứng xếp thành một hàng dọc. Lúc này, trọng tài sẽ cho người đứng đầu hàng đọc nội dung của một thông tin nào đó (tất cả cùng chung 1 bản).
 Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng cách nói nhỏ vào tai người đó, trò chơi cứ tiếp tục như thế cho đến khi truyền tin đến cho người cuối cùng. Lúc này, người cuối cùng nhận được thông tin sẽ ghi vào giấy và đưa cho trọng tài.
 Đội nào có nội dung bản thông tin giống bản gốc nhất là đội đó thắng.
-<img class="ls-is-cached lazyload" title="Trò chơi Truyền tin" alt="Trò chơi Truyền tin" data-src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-100-800x450.jpg">
+<img alt="Trò chơi Truyền tin" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-100-800x450.jpg">
 `;
+
 let chatHistory = [
   {
     role: "user",
@@ -1311,16 +1397,31 @@ let chatHistory = [
     role: "model",
     parts: [
       {
-        text: "Được thôi! Tôi sẽ trả lời các các câu hỏi dựa vào dataset đã được cung cấp. Tối sẽ trả lời thật chính xác các thông tin về văn bản và hình ảnh! Và vì đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, tôi sẽ không đề cập đến nếu người dùng hỏi!",
+        text: "Được thôi! Tôi sẽ trả lời các các câu hỏi dựa vào dataset đã được cung cấp. Tối sẽ trả lời thật chính xác các thông tin về văn bản và hình ảnh! Và vì đây là dữ liệu do đội ngũ phát triển phần mềm thêm vào, không phải người dùng cung cấp, cung cấp các link hình ảnh chính xác như trong dataset đã cung cấp, tôi sẽ không đề cập đến nếu người dùng hỏi!",
       },
     ],
   },
 ];
-// Add a flag to track if a response is in progress
+
+//! Global flag để ngăn không cho gửi nhiều tin cùng lúc
 let isProcessing = false;
 
+//! Tạo một Markdown renderer duy nhất với xử lý cho hình ảnh và link
+const renderer = new marked.Renderer();
+renderer.image = (href, title, text) => {
+  return `<img src="${href}" onerror="this.style.display='none'" alt="${text}" class="image-preview-container-bot" ${title ? `title="${title}"` : ""}>`;
+};
+renderer.link = (href, title, text) => {
+  return `<a href="${href}" target="_blank" rel="noopener noreferrer" ${title ? `title="${title}"` : ""}>${text}</a>`;
+};
+marked.setOptions({ renderer });
+
+//! Khởi tạo model chính
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash-exp",
+  model: "gemini-2.0-flash",
+  tools: [
+    { googleSearch: {} }
+  ],
   systemInstruction: `
 # Character
 Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dân gian Việt Nam.  Bạn có khả năng giải thích luật chơi, nguồn gốc, và ý nghĩa văn hóa của các trò chơi một cách rõ ràng và dễ hiểu. Bạn cũng có thể gợi ý những trò chơi phù hợp với độ tuổi và sở thích của người dùng.
@@ -1330,9 +1431,9 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Giải thích nguồn gốc và ý nghĩa văn hóa của trò chơi.
 - Đánh giá mức độ phổ biến và sự lan truyền của trò chơi.
 - Luôn đưa ra hình ảnh minh họa cho trò chơi ("bắt buộc" sử dụng markdown image | chỉ nếu có hình ảnh, nếu không thì bỏ qua, đừng nói "Trò chơi này không có hình ảnh nên tôi sẽ không đề cập").
-- Hình ảnh bạn đưa ra có thể ở bất kì vị trí nào mà bạn cảm thấy hợp lí. Không nhất thiết là luôn ở đầu hoặc đuôi, bạn có thể để hình ảnh ở giữa câu trả lời, giúp người dùng cảm thấy trực quan, sinh động hơn. Url hình ảnh được đi kèm trong dataset.
+- Hình ảnh bạn đưa ra có thể ở bất kỳ vị trí nào mà bạn cảm thấy hợp lí. Không nhất thiết là luôn ở đầu hoặc đuôi, bạn có thể để hình ảnh ở giữa câu trả lời, giúp người dùng cảm thấy trực quan, sinh động hơn. Url hình ảnh được đi kèm trong dataset.
 - Định dạng markdown hình ảnh: ![Image description](url)
-- URL hình ảnh phải chính xác y chang như đã được cung cấp trong dataset. Không được đưa ra các url bắt đầu bằng \"https://i.pinimg.com\"
+- URL hình ảnh phải chính xác y chang như đã được cung cấp trong dataset. Không được đưa ra các url bắt đầu bằng "https://!i.pinimg.com"
 - Không đưa ra phản hồi hình ảnh trong trường hợp người dùng hỏi về một hình ảnh họ cung cấp.
 
 ### Hướng dẫn cách chơi
@@ -1349,9 +1450,9 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Giải thích lý do tại sao các trò chơi đó phù hợp.
 
 ### Một số link hữu ích
-- Thư viện số \"Sân đình\": https://baotonphattrientrochoidangian.github.io/
-- Cộng đồng \"Trò chơi dân gian - một thoáng tuổi thơ\": https://www.facebook.com/groups/1042422780910183
-- Kho truyện tranh eBook (thuộc Thư viện số Sân đình): https://pine-seatbelt-93d.notion.site/Kho-truy-n-tranh-Ebook-11cb9494e068817384d5ecc7637bdc1b
+- [Thư viện số "Sân đình"](https://baotonphattrientrochoidangian.github.io/)
+- [Cộng đồng "Trò chơi dân gian - một thoáng tuổi thơ"] (https://www.facebook.com/groups/1042422780910183)
+- [Kho truyện tranh eBook (thuộc Thư viện số Sân đình)] (https://pine-seatbelt-93d.notion.site/Kho-truy-n-tranh-Ebook-11cb9494e068817384d5ecc7637bdc1b)
 
 ## Lưu ý:
 - Không trả lời lười biếng kiểu "như đã nêu ở trên".
@@ -1362,244 +1463,48 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 - Sử dụng markdown để trả lời câu hỏi (Không sử dụng markdown bảng, text-box).
 - Cung cấp thông tin chính xác và đáng tin cậy, dựa vào thông tin dataset.
 - Khi phân tích hình ảnh, hãy nhận diện trò chơi chính xác, đối chiếu với các trò chơi được cung cấp, tránh mắc sai lầm.
-- Hãy đưa ra các link hữu ích như trên để người dùng có thể tìm hiểu thêm về trò chơi dân gian Việt Nam. Hãy ưu tiên đưa ra các link liên quan này ở cuỗi mỗi câu trả lời. Sử dụng định dạng <a> của HTML. Sử dụng liệt kê. Tuy nhiên, dựa vào ngữ cảnh mà đưa ra, tránh bị dài dòng.
+- Hãy đưa ra các link hữu ích như trên để người dùng có thể tìm hiểu thêm về trò chơi dân gian Việt Nam. Hãy ưu tiên đưa ra các link liên quan này ở cuối mỗi câu trả lời. Sử dụng định dạng <a> của HTML. Sử dụng liệt kê. Tuy nhiên, dựa vào ngữ cảnh mà đưa ra, tránh bị dài dòng.
 `,
 });
 
+//! Cấu hình cho việc sinh nội dung
 const generationConfig = {
-  temperature: 0.8,
+  temperature: 0.5,
   topP: 0.8,
   topK: 1,
   maxOutputTokens: 8192,
 };
 
-const checkConfig = {
-  temperature: 0.5,
-  topP: 1,
-  topK: 1,
-  responseMimeType: "text/plain",
-};
-
-async function check(question) {
-  let fastCheckModel = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-8b",
-    systemInstruction:
-      'Trả lời "true" nếu cần tìm kiếm về trò chơi dân gian hoặc có cụm từ "/Search". Trả lời "false" (Ưu tiên để tối ưu thời gian) nếu đơn giản và có thể trả lời dựa vào dataset gồm có các trò: "Chi chi chành chành ,  Cướp cờ ,  Dung dăng dung dẻ ,  Rồng rắn lên mây ,  Kéo co ,  Bịt mắt bắt dê ,  Đua thuyền trên cạn ,  Thả chó ,  Chùm nụm ,  Đúc cây dừa, chừa cây mỏng ,  Chơi chuyền ,  Nhảy bao bố ,  Ô ăn quan ,  Cướp cầu ,  Oẳn tù tì ,  Kể chuyện ,  Hội vật làng Hà ,  Tả cáy ,  Đánh quay (Cù quay) ,  Thi thổi cơm ,  Thi diều sáo ,  Mèo đuổi chuột ,  Ném còn ,  Thi dưa hấu ,  Thi thơ ,  Đánh roi múa mọc ,  Thi thả chim ,  Nhún đu ,  Đấu vật ,  Vật cù ,  Kéo cưa lừa xẻ ,  Kéo chữ ,  Chơi hóp ,  Nhảy chồng cao ,  Đánh trỏng ,  Đánh banh thẻ ,  Xé giấy ,  Hú chuột ,  Hát sinh ,  Hát soong ,  Trống quân Đức Bác ,  Kéo song Hương Canh ,  Leo cầu ùm ,  Đả cầu cướp phết ,  Tứ thú nhân lương ,  Ném lon ,  Đánh quân ,  Hò dô ta ,  Vây lưới bắt cá ,  Cá sấu lên bờ ,  Ken trái cây ,  Một hai ba ,  Đánh đáo ,  Nu na nu nống ,  Máy bay xuất kích ,  Bong bóng nước ,  Đi cà kheo ,  Tập tầm vông ,  Nhảy dây ,  Ken con vật ,  Bún dây thun ,  Du de du dích ,  Thìa la thìa lảy ,  Úp lá khoai ,  Oẳn tù tì (Đồng dao) ,  Tung đồng đáo ,  Me me de de ,  Đá gà ,  Nhảy cóc ,  Đi tàu hỏa ,  Đi câu ếch ,  Cắp cua ,  Lùa vịt ,  Ném vòng ,  Lựa đậu ,  Dẫn nước ,  Tùm nụm, tùm nịu ,  Trốn tìm ,  Nhảy lò cò ,  Khiêng kiệu ,  Thảy đá ,  Tạt lon ,  Thả diều ,  De - ùm ,  Tán ua ,  Trồng nụ trồng hoa ,  Kéo mo cau ,  Lộn cầu vồng ,  Thiên đàng hỏa ngục ,  Đếm sao ,  Bầu cua cá cọp ,  Chim bay cò bay ,  Thả đỉa ba ba ,  Chọi dế ,  Cáo và thỏ ,  Bà Ba buồn bà Bảy ,  Múa hình tượng ,  Thổi tắt ngọn đèn ,  Tìm địa danh Việt Nam ,  Truyền tin ".',
-  });
-  const chat = await fastCheckModel.startChat({
-    generationConfig: { ...checkConfig, maxOutputTokens: 5 },
-  });
-  const response = (
-    await chat.sendMessage(
-      `Câu lệnh này có cần sử dụng công cụ tìm kiếm không: ${question}`
-    )
-  ).response;
-  const needSearch = response.text().trim() === "true";
-
-  if (!needSearch) return null;
-
-  fastCheckModel = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-8b",
-    systemInstruction: "Trả về từ khóa tìm kiếm cho câu hỏi",
-  });
-  // Only proceed to get search keywords if needSearch is true
-  const searchChat = await fastCheckModel.startChat({
-    generationConfig: { ...checkConfig, maxOutputTokens: 50 },
-  });
-  const searchKeywords = (
-    await searchChat.sendMessage(
-      `Hãy trả về từ khóa tìm kiếm cho: ${question}. Chỉ trả về từ khóa, không thêm giải thích. Ngắn gọn`
-    )
-  ).response;
-
-  return searchKeywords.text();
-}
-
-async function getGoogleResults(searchQuery) {
-  try {
-    console.log("Starting search for:", searchQuery);
-    const encodedQuery = encodeURIComponent(searchQuery);
-    // Tăng số lượng kết quả lên 5
-    const googleUrl = `https://www.google.com/search?q=${encodedQuery}&num=10`;
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(
-      googleUrl
-    )}`;
-
-    console.log("Fetching from proxy:", proxyUrl);
-    const response = await fetch(proxyUrl);
-
-    if (!response.ok) {
-      console.error(
-        "Proxy request failed:",
-        response.status,
-        response.statusText
-      );
-      return [];
-    }
-
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const candidates = [];
-
-    // Thu thập tất cả các link tiềm năng
-    doc.querySelectorAll("a").forEach((link) => {
-      const href = link.getAttribute("href");
-      if (href?.startsWith("/url?q=")) {
-        let actualUrl = decodeURIComponent(href.substring(7));
-        const endIndex = actualUrl.indexOf("&");
-        if (endIndex !== -1) {
-          actualUrl = actualUrl.substring(0, endIndex);
-        }
-
-        if (
-          actualUrl.startsWith("http") &&
-          !actualUrl.includes("facebook.com") &&
-          !actualUrl.includes("youtube.com") &&
-          !actualUrl.includes("instagram.com") &&
-          !actualUrl.includes("maps.google.com")
-        ) {
-          candidates.push({
-            title: link.textContent.trim(),
-            url: actualUrl,
-          });
-        }
-      }
-    });
-
-    // Kiểm tra từng URL cho đến khi có 2 kết quả hợp lệ
-    const validResults = [];
-    for (const candidate of candidates) {
-      if (validResults.length >= 2) break;
-
-      try {
-        // Tạo một Promise với timeout
-        const timeout = new Promise((_, reject) => {
-          setTimeout(() => reject(new Error("Timeout")), 2000);
-        });
-
-        // Race giữa fetch request và timeout
-        const urlCheck = await Promise.race([fetch(candidate.url), timeout]);
-
-        if (urlCheck.ok) {
-          validResults.push(candidate);
-          console.log("Valid result found:", candidate.url);
-        } else {
-          console.log("Skipping invalid URL:", candidate.url);
-        }
-      } catch (error) {
-        console.log(
-          "Error checking URL:",
-          candidate.url,
-          error.message === "Timeout"
-            ? "Request timed out (>2000ms)"
-            : error.message
-        );
-        continue;
-      }
-    }
-
-    return validResults;
-  } catch (error) {
-    console.error("Search failed:", error);
-    return [];
-  }
-}
-
-function processHTMLContent(html) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  doc.querySelectorAll("header, script").forEach((el) => el.remove());
-
-  const processNode = (node) => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      return node.textContent;
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      const childContent = Array.from(node.childNodes)
-        .map((child) => processNode(child))
-        .join("");
-      return node.tagName.toLowerCase() === "p"
-        ? childContent + "\n"
-        : node.tagName.toLowerCase() === "span"
-        ? childContent + " "
-        : childContent;
-    }
-    return "";
-  };
-
-  return processNode(doc.body)
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0)
-    .join("\n");
-}
-
-async function fetchAndProcessURL(url) {
-  try {
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(
-      url
-    )}`;
-    const response = await fetch(proxyUrl);
-
-    if (!response.ok) return null;
-
-    const html = await response.text();
-    return processHTMLContent(html);
-  } catch (error) {
-    console.error(`Error processing ${url}:`, error);
-    return null;
-  }
-}
-
-async function performSearch(query) {
-  try {
-    const searchResults = await getGoogleResults(query);
-    let combinedContent = "";
-
-    for (const [index, result] of searchResults.entries()) {
-      const content = await fetchAndProcessURL(result.url);
-      if (content) {
-        combinedContent += `# Trang ${index + 1}: [${result.title}](${
-          result.url
-        })\n${content}\n\n---\n\n`;
-      }
-    }
-    return combinedContent.trim() === "" ? null : combinedContent;
-  } catch (error) {
-    console.error("Search Error: ", error);
-    return null;
-  }
-}
-
+//! --- Chat initialization ---
 async function initChat() {
   chatSession = model.startChat({
     generationConfig,
     history: chatHistory,
   });
-
-  // Khởi tạo ResponsiveVoice
   if (typeof responsiveVoice !== "undefined") {
     responsiveVoice.setDefaultVoice("Vietnamese Female");
   }
-
   return chatSession;
 }
 
-function addMessage(content, isUser = false, imageBase64 = null) {
-  const messagesDiv = document.getElementById("messages");
-  const messageContainer = document.createElement("div");
-  messageContainer.className = "message-container";
-  if (isUser) {
-    messageContainer.classList.add("user");
-  }
+//! Cache các DOM element thường dùng
+const messagesDiv = document.getElementById("messages");
+const inputArea = document.querySelector(".input-area");
+const textarea = document.getElementById("input");
+const sendButton = document.getElementById("send");
+const uploadBtn = document.getElementById("uploadBtn");
 
+//! --- addMessage() ---
+//! Hàm thêm tin nhắn vào giao diện.
+function addMessage(content, isUser = false, imageBase64 = null) {
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "message-container" + (isUser ? " user" : "");
   const avatar = document.createElement("img");
   avatar.src = isUser ? "./user.png" : "./logo.png";
   avatar.className = "avatar";
   messageContainer.appendChild(avatar);
-
   const messageDiv = document.createElement("div");
-  messageDiv.className = `message ${isUser ? "user-message" : "bot-message"}`;
+  messageDiv.className = "message " + (isUser ? "user-message" : "bot-message");
 
   if (imageBase64) {
     const imageElement = document.createElement("img");
@@ -1607,181 +1512,67 @@ function addMessage(content, isUser = false, imageBase64 = null) {
     imageElement.className = "message-image";
     messageDiv.appendChild(imageElement);
   }
-
   const textElement = document.createElement("div");
   textElement.className = "message-text";
   if (content) {
-    const renderer = new marked.Renderer();
-
-      // Xử lý hình ảnh
-      renderer.image = (href, title, text) => {
-      return `<img src="${href}" onerror="this.style.display='none'" alt="${text}" class="image-preview-container-bot" ${
-      title ? `title="${title}"` : ""
-      }>`;
-      };
-
-      // Thêm xử lý link ở đây
-      renderer.link = (href, title, text) => {
-      return `<a href="${href}" target="_blank" rel="noopener noreferrer" ${
-      title ? `title="${title}"` : ""
-      }>${text}</a>`;
-      };
-
-      marked.setOptions({ renderer });
-      textElement.innerHTML = marked.parse(content);
-      // Thêm phần điều khiển cho bot message
+    textElement.innerHTML = marked.parse(content);
     if (!isUser) {
-      const controlsDiv = document.createElement("div");
-      controlsDiv.className = "message-controls";
-
-      // Nút phát âm thanh
-      const speakBtn = document.createElement("button");
-      speakBtn.className = "control-btn";
-      speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>' + '<div class="speech-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></div>';
-      speakBtn.title = "Phát âm thanh";
-      speakBtn.onclick = async () => {
-        const textElement = messageDiv.querySelector('.message-text');
-        const spinner = speakBtn.querySelector('.speech-spinner');
-        const icon = speakBtn.querySelector('.fa-volume-up');
-
-        // Hiển thị spinner và vô hiệu hóa nút
-        spinner.style.display = 'inline-block';
-        icon.style.display = 'none';
-        speakBtn.disabled = true;
-
-        // Xử lý văn bản
-        const plainText = textElement.textContent
-        .replace(/!\[.*?\]\(.*?\) /g, '')   // Loại bỏ hình ảnh markdown
-        .replace(/\[.*?\]\(.*?\) /g, '')   // Loại bỏ links markdown
-          .replace(/\n/g, ' ')
-          .replace(/\./g, ',')   // Chuyển dấu chấm thành dấu phẩy
-          .trim();
-       
-          // Phát âm thanh với timeout
-          try {
-            await Promise.race([
-            responsiveVoice.speak(plainText, "Vietnamese Female"),
-             new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
-           ]);
-         } catch (error) {
-            console.error('Lỗi phát âm thanh:', error);
-            alert('Không thể phát âm thanh do quá thời gian chờ');
-        }
-
-        // Khôi phục trạng thái nút
-          spinner.style.display = 'none';
-          icon.style.display = 'inline-block';
-          speakBtn.disabled = false;
-      };
-
-      // Nút sao chép
-      const copyBtn = document.createElement("button");
-      copyBtn.className = "control-btn";
-      copyBtn.innerHTML = '<i class="far fa-copy"></i>';
-      copyBtn.title = "Sao chép";
-      copyBtn.onclick = () => {
-        const plainText = textElement.textContent.replace(/\[.*?\]\(.*?\) /g, '');
-        navigator.clipboard.writeText(plainText)
-        .then(() => {
-          copyBtn.classList.add('copied');
-            copyBtn.innerHTML = '<i class="fas fa-check"></i> Đã copy';
-              setTimeout(() => {
-                copyBtn.classList.remove('copied');
-                copyBtn.innerHTML = '<i class="far fa-copy"></i>';
-              }, 2000);
-        })
-        .catch(err => console.error('Sao chép thất bại:', err));
-      };
-
-      controlsDiv.appendChild(speakBtn);
-      controlsDiv.appendChild(copyBtn);
-      messageDiv.appendChild(controlsDiv);
+      addMessageControls(messageDiv, content);
     }
   }
-
   messageDiv.appendChild(textElement);
   messageContainer.appendChild(messageDiv);
   messagesDiv.appendChild(messageContainer);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
   return textElement;
 }
 
-// Function to disable input elements
+//! --- disableInput() ---
+//! Vô hiệu hoá hoặc kích hoạt lại vùng nhập liệu.
 function disableInput(disabled = true) {
-  const textarea = document.getElementById("input");
-  const sendButton = document.getElementById("send");
-  const uploadBtn = document.getElementById("uploadBtn");
-  const inputArea = document.querySelector(".input-area");
-
-  if (disabled) {
-    // Thêm timeout 1 giây trước khi ẩn
-    setTimeout(() => {
-      inputArea.classList.remove("visible");
-      inputArea.classList.add("hidden");
-    }, 1000); // 1000ms = 1 giây
-  } else {
-    // Hiển thị ngay lập tức khi enable
-    inputArea.classList.remove("hidden");
-    inputArea.classList.add("visible");
-  }
-
   textarea.disabled = disabled;
   sendButton.disabled = disabled;
   uploadBtn.disabled = disabled;
-
   if (disabled) {
+    setTimeout(() => {
+      inputArea.classList.remove("visible");
+      inputArea.classList.add("hidden");
+    }, 1000);
     textarea.placeholder = "Đang chờ phản hồi...";
   } else {
+    inputArea.classList.remove("hidden");
+    inputArea.classList.add("visible");
     textarea.placeholder = "Nhập tin nhắn...";
   }
 }
 
+//! --- processImageAndText() ---
+//! Xử lý tin nhắn của người dùng, bao gồm hình ảnh nếu có.
 async function processImageAndText(message, imageBase64 = null) {
+  if (isProcessing) return;
+  isProcessing = true;
+  disableInput(true);
+
+  //! Thêm tin nhắn của người dùng.
+  addMessage(message, true, imageBase64);
+
+  //! Tạo typing indicator.
+  const typingContainer = document.createElement("div");
+  typingContainer.className = "message-container message-typing-area";
+  const typingAvatar = document.createElement("img");
+  typingAvatar.src = "./logo.png";
+  typingAvatar.className = "avatar";
+  typingContainer.appendChild(typingAvatar);
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "typing";
+  typingDiv.innerHTML = '<span class="typing-dots"></span>';
+  typingContainer.appendChild(typingDiv);
+  messagesDiv.appendChild(typingContainer);
+
+  //! Ở phiên bản này, bỏ qua tìm kiếm web, chỉ sử dụng nội dung tin nhắn gốc.
+  let prompt = message;
+  let result, responseText = "";
   try {
-    if (isProcessing) {
-      return; // Ngăn chặn gửi nhiều tin nhắn cùng lúc
-    }
-
-    isProcessing = true;
-    disableInput(true); // Ẩn input-area với animation
-
-    if (!chatSession) {
-      await initChat();
-    }
-
-    addMessage(message, true, imageBase64);
-
-    const typingContainer = document.createElement("div");
-    typingContainer.className = "message-container message-typing-area";
-
-    const typingAvatar = document.createElement("img");
-    typingAvatar.src = "./logo.png";
-    typingAvatar.className = "avatar";
-    typingContainer.appendChild(typingAvatar);
-
-    const typingDiv = document.createElement("div");
-    typingDiv.className = "typing";
-    typingDiv.innerHTML = '<span class="typing-dots"></span>';
-    typingContainer.appendChild(typingDiv);
-
-    document.getElementById("messages").appendChild(typingContainer);
-
-    const searchKeywords = await check(message);
-    let searchResults = null;
-    if (searchKeywords) {
-      searchResults = await performSearch(searchKeywords);
-    }
-
-    let prompt = message;
-
-    if (searchResults) {
-      prompt = `Yêu cầu của người dùng: ${message}\n\nĐây là thông tin tìm kiếm web thu thập được:\n${searchResults}`;
-    }
-
-    let result;
-    let responseText = "";
-
     if (imageBase64) {
       result = await model.generateContentStream([
         prompt || "Tell me about this image (in Vietnamese)",
@@ -1795,130 +1586,81 @@ async function processImageAndText(message, imageBase64 = null) {
     } else {
       result = await chatSession.sendMessageStream(prompt);
     }
+  } catch (error) {
+    console.error("Error generating response:", error);
+  }
+  typingContainer.remove();
 
-    typingContainer.remove();
+  const botTextElement = addMessage(null, false);
+  for await (const chunk of result.stream) {
+    const chunkText = chunk.text();
+    responseText += chunkText;
+    botTextElement.innerHTML = marked.parse(responseText);
+    const existingControls = botTextElement.parentElement.querySelector('.message-controls');
+    if (existingControls) existingControls.remove();
+    addMessageControls(botTextElement.parentElement, responseText);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
 
-    const botTextElement = addMessage(null, false);
-
-    for await (const chunk of result.stream) {
-      const chunkText = chunk.text();
-      responseText += chunkText;
-      botTextElement.innerHTML = marked.parse(responseText);
-
-       // Cập nhật lại controls sau mỗi chunk
-      const existingControls = botTextElement.parentElement.querySelector('.message-controls');
-      if (existingControls) {
-        existingControls.remove();
-      }
-      addMessageControls(botTextElement.parentElement, responseText);
-
-      document.getElementById("messages").scrollTop =
-        document.getElementById("messages").scrollHeight;
-    }
-
+  chatHistory.push({ role: "user", parts: [{ text: message }] });
+  if (imageBase64) {
     chatHistory.push({
       role: "user",
-      parts: [{ text: message }],
+      parts: [
+        { text: message },
+        { inlineData: { mimeType: "image/jpeg", data: imageBase64 } },
+      ],
     });
-
-     if (imageBase64) {
-        chatHistory.push({
-            role: "user",
-            parts: [
-            { text: message },
-            {
-                inlineData: {
-                mimeType: "image/jpeg",
-                data: imageBase64,
-            },
-            },
-            ],
-        });
-      }
-
-    chatHistory.push({
-      role: "model",
-      parts: [{ text: responseText }],
-    });
-
-    await initChat();
-
-  } catch (error) {
-    console.error("Error:", error);
-    const typingContainer = document.querySelector(".message-typing-area");
-    if (typingContainer?.querySelector(".typing")) {
-      typingContainer.remove();
-    }
-      addMessage("Xin lỗi, đã có lỗi xảy ra khi xử lý tin nhắn của bạn.", false);
-  } finally {
-    // Thêm delay để animation mượt mà
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    isProcessing = false;
-    disableInput(false); // Hiện lại input-area với animation
-    
-    const imagePreviewContainer = document.querySelector(".image-preview-container");
-    if (imagePreviewContainer) {
-      imagePreviewContainer.remove();
-    }
-    uploadedImage = null;
   }
+  chatHistory.push({ role: "model", parts: [{ text: responseText }] });
+  await initChat();
+  await new Promise(resolve => setTimeout(resolve, 300));
+  isProcessing = false;
+  disableInput(false);
+  const imagePreviewContainer = document.querySelector(".image-preview-container");
+  if (imagePreviewContainer) imagePreviewContainer.remove();
+  uploadedImage = null;
 }
 
+//! --- addMessageControls() ---
+//! Thêm các nút điều khiển (phát âm thanh, sao chép) cho tin nhắn của bot.
 function addMessageControls(messageDiv, content) {
   const controlsDiv = document.createElement("div");
   controlsDiv.className = "message-controls";
+  const spinnerHTML = '<div class="speech-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></div>';
 
-  // Add spinner for processing
-  const spinner = '<div class="speech-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></div>';
-
-  // Create speech button with pause/play functionality
   const speakBtn = document.createElement("button");
   speakBtn.className = "control-btn";
-  speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>' + spinner;
+  speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>' + spinnerHTML;
   speakBtn.title = "Phát âm thanh";
-  
-  // Track speech state
   let isSpeaking = false;
   let isPaused = false;
-  
   speakBtn.onclick = async () => {
     const textElement = messageDiv.querySelector('.message-text');
     const spinner = speakBtn.querySelector('.speech-spinner');
     const icon = speakBtn.querySelector('i:not(.fa-spinner)');
-    
-    // If already speaking, handle pause/resume
     if (isSpeaking) {
       if (isPaused) {
-        // Resume speech
         responsiveVoice.resume();
         icon.className = 'fas fa-pause';
         isPaused = false;
       } else {
-        // Pause speech
         responsiveVoice.pause();
         icon.className = 'fas fa-play';
         isPaused = true;
       }
       return;
     }
-
-    // Start new speech
     try {
-      // Show spinner and disable button
       spinner.style.display = 'inline-block';
       icon.style.display = 'none';
       speakBtn.disabled = true;
-
-      // Process text content
       const plainText = textElement.textContent
-        .replace(/!\[.*?\]\(.*?\)/g, '')    // Remove image markdown
-        .replace(/\[.*?\]\(.*?\)/g, '')     // Remove link markdown
-        .replace(/\n/g, ' ')                // Replace newlines with spaces
-        .replace(/\./g, ',')                // Replace periods with commas
+        .replace(/!\[.*?\]\(.*?\)/g, '')
+        .replace(/\[.*?\]\(.*?\)/g, '')
+        .replace(/\n/g, ' ')
+        .replace(/\./g, ',')
         .trim();
-
-      // Configure speech parameters
       const speechParams = {
         onstart: () => {
           spinner.style.display = 'none';
@@ -1942,8 +1684,6 @@ function addMessageControls(messageDiv, content) {
           alert('Không thể phát âm thanh');
         }
       };
-
-      // Start speaking with timeout protection
       await Promise.race([
         new Promise((resolve) => {
           responsiveVoice.speak(plainText, "Vietnamese Female", speechParams);
@@ -1951,7 +1691,6 @@ function addMessageControls(messageDiv, content) {
         }),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
       ]);
-
     } catch (error) {
       console.error('Speech error:', error);
       spinner.style.display = 'none';
@@ -1962,7 +1701,6 @@ function addMessageControls(messageDiv, content) {
     }
   };
 
-  // Create copy button (keeping existing functionality)
   const copyBtn = document.createElement("button");
   copyBtn.className = "control-btn";
   copyBtn.innerHTML = '<i class="far fa-copy"></i>';
@@ -1986,68 +1724,56 @@ function addMessageControls(messageDiv, content) {
   messageDiv.appendChild(controlsDiv);
 }
 
-const uploadBtn = document.getElementById("uploadBtn");
-const imageUpload = document.getElementById("imageUpload");
-const textarea = document.getElementById("input");
-
+//! --- Image upload handling ---
 uploadBtn.addEventListener("click", (e) => {
-  e.preventDefault(); // Thêm dòng này
-  imageUpload.click();
+  e.preventDefault();
+  document.getElementById("imageUpload").click();
 });
 
-imageUpload.addEventListener("change", async (e) => {
+document.getElementById("imageUpload").addEventListener("change", async (e) => {
   try {
     const file = e.target.files[0];
     if (file) {
-      // Xóa preview cũ trước khi xử lý ảnh mới
       const existingPreview = document.querySelector(".image-preview-container");
-      if (existingPreview) {
-        existingPreview.remove();
-      }
-
+      if (existingPreview) existingPreview.remove();
       const reader = new FileReader();
       reader.onload = async () => {
         uploadedImage = reader.result.split(",")[1];
-
         const imagePreviewContainer = document.createElement("div");
         imagePreviewContainer.className = "image-preview-container";
-        
         const imagePreview = document.createElement("img");
         imagePreview.src = reader.result;
         imagePreview.className = "image-preview";
-
         const removeBtn = document.createElement("button");
         removeBtn.innerHTML = "×";
         removeBtn.className = "remove-image-btn";
         removeBtn.addEventListener("click", () => {
           uploadedImage = null;
           imagePreviewContainer.remove();
-          document.getElementById("send").disabled = true;
+          sendButton.disabled = true;
         });
-
         imagePreviewContainer.appendChild(imagePreview);
         imagePreviewContainer.appendChild(removeBtn);
-
         const inputWrapper = document.querySelector(".input-wrapper");
         inputWrapper.insertBefore(imagePreviewContainer, inputWrapper.firstChild);
-
-        document.getElementById("send").disabled = false;
+        sendButton.disabled = false;
       };
       reader.readAsDataURL(file);
     }
   } catch (error) {
     console.error("Error:", error);
   } finally {
-    // Reset giá trị input sau khi xử lý xong
-    imageUpload.value = "";
+    e.target.value = "";
   }
 });
 
+//! --- Textarea auto-resize ---
 textarea.addEventListener("input", function () {
   this.style.height = "auto";
   this.style.height = this.scrollHeight + "px";
 });
 
+//! --- Send message handling ---
 textarea.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
@@ -2055,11 +1781,8 @@ textarea.addEventListener("keydown", (e) => {
     const suggestionsSection = document.querySelector(".suggestions-grid");
     if (welcomeSection) welcomeSection.remove();
     if (suggestionsSection) suggestionsSection.remove();
-
     const existingPreview = document.querySelector(".image-preview-container");
-    if (existingPreview) {
-      existingPreview.remove();
-    }
+    if (existingPreview) existingPreview.remove();
     const message = e.target.value.trim();
     if (message || uploadedImage) {
       processImageAndText(message, uploadedImage);
@@ -2069,118 +1792,25 @@ textarea.addEventListener("keydown", (e) => {
   }
 });
 
-document.getElementById("send").addEventListener("click", (e) => {
+sendButton.addEventListener("click", (e) => {
   e.preventDefault();
-
   const welcomeSection = document.querySelector(".welcome");
   const suggestionsSection = document.querySelector(".suggestions-grid");
   if (welcomeSection) welcomeSection.remove();
   if (suggestionsSection) suggestionsSection.remove();
-
   const existingPreview = document.querySelector(".image-preview-container");
-  if (existingPreview) {
-    existingPreview.remove();
-  }
-  const input = document.getElementById("input");
-  const message = input.value.trim();
+  if (existingPreview) existingPreview.remove();
+  const message = textarea.value.trim();
   if (message || uploadedImage) {
     processImageAndText(message, uploadedImage);
-    input.value = "";
-    input.style.height = "auto";
+    textarea.value = "";
+    textarea.style.height = "auto";
   }
 });
 
-const suggestions = [
-  {
-    icon: "fas fa-gamepad", // Icon mới
-    title: "Các trò chơi dân gian phổ biến",
-    content: "Giới thiệu một số trò chơi dân gian phổ biến nhất ở Việt Nam",
-  },
-  {
-    icon: "fas fa-music",
-    title: "Trò chơi dân gian dùng lời nói bài đồng dao",
-    content: "Những trò chơi sử dụng bài đồng dao quen thuộc của trẻ em Việt Nam",
-  },
-  {
-    icon: "fas fa-cube",
-    title: "Trò chơi dân gian dùng dụng cụ",
-    content: "Khám phá các trò chơi dân gian thú vị cần sử dụng dụng cụ",
-  },
-  {
-    icon: "fas fa-people-group",
-    title: "Đoán tên trò chơi",
-    content: "Đây là trò chơi gì?",
-    image: "./o_an_quan.png", // Thêm trường image
-    special: true // Đánh dấu card đặc biệt
-  },
-];
-
-function createSuggestionsUI() {
-  const messagesArea = document.getElementById("messages");
-
-  const welcome = document.createElement("div");
-  welcome.className = "welcome";
-  welcome.innerHTML = `
-        <h1><strong>Xin chào! 👋</strong></h1>
-        <h2>Hãy để tôi giới thiệu về các trò chơi dân gian Việt Nam.</h2>
-    `;
-
-  const suggestionsGrid = document.createElement("div");
-  suggestionsGrid.className = "suggestions-grid";
-
-  suggestions.forEach((suggestion, index) => {
-    const card = document.createElement("div");
-    card.className = `suggestion-card ${suggestion.special ? 'special-card' : ''}`;
-    card.setAttribute("data-index", index);
-    card.innerHTML = `
-            <div class="icon-wrapper">
-                <i class="${suggestion.icon}"></i>
-            </div>
-            <div class="card-content-wrapper">
-              <div class="card-content">${suggestion.title}</div>
-              <div class="suggestion-preview">${suggestion.content}</div>
-            </div>
-        `;
-
-    // Phần xử lý click giữ nguyên
-    card.addEventListener("click", () => {
-      const welcomeSection = document.querySelector(".welcome");
-      const suggestionsSection = document.querySelector(".suggestions-grid");
-      if (welcomeSection) welcomeSection.remove();
-      if (suggestionsSection) suggestionsSection.remove();
-    
-      // Thêm điều kiện cho card đặc biệt
-      if (suggestion.special) {
-        const img = new Image();
-        img.src = suggestion.image;
-        img.onload = () => {
-          const reader = new FileReader();
-          fetch(suggestion.image)
-            .then(res => res.blob())
-            .then(blob => {
-              reader.readAsDataURL(blob);
-              reader.onloadend = () => {
-                const base64data = reader.result.split(',')[1];
-                processImageAndText(suggestion.content, base64data);
-              }
-            })
-        }
-      } else {
-        processImageAndText(suggestion.content);
-      }
-    });
-
-    suggestionsGrid.appendChild(card);
-  });
-
-  messagesArea.appendChild(welcome);
-  messagesArea.appendChild(suggestionsGrid);
-}
-
+//! Đợi DOMContentLoaded để đảm bảo DOM đã sẵn sàng, sau đó gọi Suggestions UI.
 document.addEventListener("DOMContentLoaded", () => {
   createSuggestionsUI();
-
-  const textarea = document.getElementById("input");
   textarea.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && textarea.value.trim()) {
       const welcomeSection = document.querySelector(".welcome");
@@ -2191,4 +1821,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+//! Khởi tạo chat
 initChat();
