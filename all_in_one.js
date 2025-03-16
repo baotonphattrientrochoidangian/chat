@@ -1382,6 +1382,68 @@ Tất cả các người chơi sẽ chia làm nhiều đội chơi, các đội 
 Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng cách nói nhỏ vào tai người đó, trò chơi cứ tiếp tục như thế cho đến khi truyền tin đến cho người cuối cùng. Lúc này, người cuối cùng nhận được thông tin sẽ ghi vào giấy và đưa cho trọng tài.
 Đội nào có nội dung bản thông tin giống bản gốc nhất là đội đó thắng.
 <img alt="Trò chơi Truyền tin" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-100-800x450.jpg">
+
+101. Nhảy sạp
+**Nhảy sạp** là một trò chơi dân gian kết hợp giữa vận động và âm nhạc, phổ biến trong các lễ hội của người Thái và một số dân tộc thiểu số ở Tây Bắc Việt Nam. Ngày nay, nhảy sạp không chỉ xuất hiện trong các lễ hội dân tộc mà còn được tổ chức trong trường học, sự kiện văn hóa và hoạt động du lịch để giới thiệu nét đẹp văn hóa Việt Nam.
+
+</aside>
+
+![Nhảy sạp](https://img.notionusercontent.com/s3/prod-files-secure%2Fc770a005-bff2-4602-b667-3969744d93ff%2F7dc83ee5-129c-4e14-a43e-3c6c41627b90%2F6.jpg/size/w=1050?exp=1742090413&sig=eQiENxNkkuAuw1f9PyP2gOSmeywmlHiIYq_3abCQ3n8)
+
+---
+
+## 1. Nguồn gốc
+
+Nhảy sạp có xuất xứ từ các dân tộc thiểu số ở vùng Tây Bắc Việt Nam, đặc biệt phổ biến trong cộng đồng người Thái. Ban đầu, trò chơi này được tổ chức trong các lễ hội mừng mùa màng bội thu, lễ cưới hỏi hoặc các dịp vui của bản làng. Hiện nay, nhảy sạp không chỉ giới hạn trong cộng đồng dân tộc mà đã trở thành một hoạt động phổ biến trong các sự kiện văn hóa trên cả nước.
+
+---
+
+## 2. Ý nghĩa tên gọi
+
+- **"Nhảy"** là hành động di chuyển linh hoạt trên các thanh sạp.
+- **"Sạp"** là những cây tre hoặc nứa được đặt song song và đập vào nhau theo nhịp để tạo thử thách cho người nhảy.
+
+---
+
+## 3. Cách chơi đơn giản
+
+### 3.1 Chuẩn bị dụng cụ
+
+- **Thanh sạp**: Thường là 2 – 4 thanh tre hoặc nứa dài khoảng 3 – 4m. Nếu không có tre, có thể dùng gậy gỗ hoặc ống nhựa cứng.
+- **Người giữ sạp**: Hai nhóm người ngồi đối diện nhau, mỗi nhóm giữ một đầu sạp và gõ nhịp bằng cách mở ra – khép vào theo nhạc.
+- **Người nhảy sạp**: Một hoặc nhiều người nhảy vào trong khoảng trống giữa các thanh sạp và di chuyển theo nhịp điệu.
+
+### 3.2 Cách chơi
+
+- **Nhóm giữ sạp** gõ nhịp theo thứ tự: **mở – đóng, mở – đóng**. Ban đầu có thể gõ chậm để người nhảy làm quen.
+- **Người nhảy sạp** quan sát nhịp sạp, bước vào khi sạp mở ra và bước ra trước khi sạp khép lại.
+- **Các bước nhảy cơ bản**:
+  - Nhảy bằng hai chân hoặc bước từng chân theo nhịp.
+  - Di chuyển theo hướng tiến – lùi hoặc sang ngang để tăng độ khó.
+  - Khi quen nhịp, có thể nhảy nhanh hơn hoặc kết hợp động tác múa nhẹ nhàng.
+
+> **Lưu ý:** Người mới chơi chỉ cần bước vào – bước ra theo nhịp chậm để làm quen. Khi đã quen, nhịp điệu có thể tăng lên để tạo thêm thử thách và sự thú vị.
+
+![Hướng dẫn nhảy sạp](https://img.notionusercontent.com/s3/prod-files-secure%2Fc770a005-bff2-4602-b667-3969744d93ff%2Fd6d315dc-79b6-4ee5-bc5e-906e519b0dee%2Fimage.png/size/w=1050?exp=1742090361&sig=vH1Emnl1w_d4QGLMs2zoyyRrOWMKJoY7fnmlJbPvyfU)
+
+---
+
+## 4. Ý nghĩa của trò chơi
+
+- **Gắn kết cộng đồng**: Nhảy sạp giúp mọi người giao lưu, kết nối và tạo không khí vui vẻ, đoàn kết.
+- **Rèn luyện sự khéo léo**: Người chơi phải quan sát nhịp sạp và di chuyển chính xác, giúp tăng khả năng phản xạ và sự linh hoạt.
+- **Bảo tồn văn hóa dân gian**: Nhảy sạp là nét đẹp truyền thống của dân tộc Thái, giúp thế hệ trẻ hiểu và trân trọng văn hóa dân gian.
+- **Mang ý nghĩa tâm linh và chúc phúc**: Điệu nhảy này thường được xem là cách cầu mong may mắn, mùa màng bội thu và cuộc sống sung túc.
+- **Tạo niềm vui và giảm căng thẳng**: Trò chơi giúp người tham gia thư giãn, tạo không khí sôi động trong các sự kiện cộng đồng.
+
+---
+## 5. Múa sạp - Nghệ thuật dân gian
+
+Ngoài ra, múa sạp còn là một loại  nghệ thuật dân gian. Múa sạp là một hình thức nâng cao hơn của nhảy sạp, thường được biểu diễn bởi các nghệ nhân hoặc những người có luyện tập kỹ lưỡng. Không chỉ đơn thuần là bước nhảy qua sạp, múa sạp còn kết hợp với các động tác múa mềm mại, nhịp nhàng, thể hiện sự uyển chuyển và kỹ thuật điêu luyện của người múa. 
+
+Biểu diễn múa sạp thường có sự đầu tư về **trang phục truyền thống**, **âm nhạc dân tộc** (trống, khèn, đàn tính) và thường được thực hiện theo nhóm với đội hình đồng đều, đẹp mắt.
+
+![Múa sạp nghệ thuật](https://img.notionusercontent.com/s3/prod-files-secure%2Fc770a005-bff2-4602-b667-3969744d93ff%2F1a129197-a410-460b-8bf5-ea3976cc6eaa%2Fimage.png/size/w=1050?exp=1742090341&sig=tTrMa-oa0wDVQT9KOLdk0i8T3yWf6FjqlSIynIv4EPE)
 `;
 
 let chatHistory = [
@@ -1467,7 +1529,7 @@ Bạn là một AI chuyên giới thiệu và hướng dẫn về Trò chơi dâ
 `,
 });
 
-//! Cấu hình cho việc sinh nội dung
+//! Cấu hình cho việc tạo sinh nội dung
 const generationConfig = {
   temperature: 0.5,
   topP: 0.8,
@@ -1568,8 +1630,6 @@ async function processImageAndText(message, imageBase64 = null) {
   typingDiv.innerHTML = '<span class="typing-dots"></span>';
   typingContainer.appendChild(typingDiv);
   messagesDiv.appendChild(typingContainer);
-
-  //! Ở phiên bản này, bỏ qua tìm kiếm web, chỉ sử dụng nội dung tin nhắn gốc.
   let prompt = message;
   let result, responseText = "";
   try {
