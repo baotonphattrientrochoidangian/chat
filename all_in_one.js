@@ -568,53 +568,6 @@ Người xưa thường nói làm như thế để cho răng được mọc đ�
 <img alt="Trò chơi Hú chuột" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-38-800x450.jpg">
 
 
-39. Hát sinh
-Giới thiệu trò chơi
-Truyền thống hát sinh được bắt nguồn từ người Cao Lan, hát sinh thường được các nam nữ thanh niên sử dụng với người mình mến mộ. Hát sinh có nội dung phong phú, tươi sáng để ca ngợi tình yêu lứa đôi, tình đoàn kết, tình yêu quê hương tổ quốc.
-Hướng dẫn cách chơi và luật
-Người Cao Lan thường hát những bài như sau (tạm dịch):
-“Quả ớt dù cay cũng ăn cả vỏ
-Quả chuối dù ngọt cũng bỏ vỏ ngoài”.
-Và họ tự hào:
-“Thơ ca của vị chúa thơ ca làm ra
-Hát ba mươi sáu ngày đêm chưa hết”.
-“Giọng hát nàng trong như tiếng chim
-Nhớ mãi câu hát của nàng
-Ngày mưa đội chung nón
-Ngày nắng che chung ô…”.
-<img alt="Trò chơi Hát sinh" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-39-800x450.jpg">
-
-
-40. Hát soong
-Giới thiệu trò chơi
-Hát soong là một thể loại dân ca của đồng bào dân tộc Sán Dìu. Hát soong chủ yếu được hát theo hình thức đối đáp. Hát soong thường được lên kế hoạch sẵn và được tạo ra lời trước. Người đi hát phải thuộc các câu hát và dẫn câu hát trong sách ra để hát đố. Người đáp lại cũng vậy, phải sử dụng những câu đáp hợp tình, hợp cảnh để hát đáp câu của người trước.
-Hướng dẫn cách chơi và luật
-Hát soong thường được phân chia và hát như sau:
-Chiều tối mọi người thường hát gọi để mời chơi, mời ngồi, mời nước, mời trầu,...
-Nửa đêm khi hát mọi người thường hỏi, hỏi về quê quán, gia sự, nghề nghiệp, ý nguyện của nhau,…&nbsp;
-Cuối cùng là hát chào, hát xin về, hát níu giữ nhau,... Sau đó, họ vừa hát vừa tiễn nhau ra cổng và hát hẹn hò cuộc gặp mặt tới.
-Trong quá trình hát, phải hát nghiêm túc, không đùa giỡn, hát đối đáp hát theo giọng ví, còn hát cộc là hát kiểu kể lể. Trong các đám cưới, thường được hát ru. Người hát ru giọng phải ru dài ra, nếu một từ hát cộc kể ra rồi bắt ngay sang từ khác nhưng hát ru thì ru đi ru lại ngân nga luyến láy điệp khúc kéo dài gấp dăm bảy lần hát cộc.&nbsp;
-<img alt="Trò chơi Hát soong" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-40-800x450.jpg">
-
-
-41. Trống quân Đức Bác
-Giới thiệu trò chơi
-Trò chơi trống quân Đức Bác được Làng Cả sáng tác nên, vào mỗi năm, làng sẽ mở tiệc khai xuân cầu đinh và trò chơi sẽ được diễn ra vào ngày này. Trò chơi ngoài trời này thường được nam thanh nữ tú của dân làng đền Đức Ông và đền Đức Bà tham gia.
-Hướng dẫn cách chơi và luật
-Đầu tiên, các chàng trai vừa gõ trống vừa hát:
-“Đón chào từ sớm tới giờ
-Để cho tin đợi, tin chờ, tin mong
-Hát đế:
-Kìa hỡi í a trống quân
-Các cô liền đáp:
-Chờ mong xin giữ ơn lòng
-Cách sông cách đồng giờ mới tới đây.”
-Hát đế:
-“Kìa hỡi í a trống quân…”
-Cứ như thế hai bên đối đáp lời qua lời lại. Lời ca đối đáp thường mộc mạc nhưng chứa đầy tình ý mặn nồng.
-<img alt="Trò chơi Trống quân Đức Bác" src="https://cdn.tgdd.vn//GameApp/1369218//top-100-tro-choi-dan-gian-viet-nam-pho-bien-trong-dip-tet-41-800x450.jpg">
-
-
 42. Kéo song Hương Canh
 Giới thiệu trò chơi
 Hàng năm, làng Hương Canh (Bình Xuyên) thường tổ chức kéo song, kéo song thường thu hút được rất nhiều người tham gia. Những người chơi dùng sức để kéo những dây song. Trò chơi này mang tính tập thể rất cao, nên các thành viên của mỗi đội nên có sự chuẩn bị trước khi thi đấu.
@@ -1029,6 +982,8 @@ Sau khi cắp hết 10 viên, đếm xem ai cắp được nhiều nhất thì n
 
 Trò chơi Cắp cua
 Có thể bạn quan tâm: 7 cách hiệu quả để thúc đẩy sự phát triển thể chất ở trẻ em
+
+
 73. Lùa vịt
 Giới thiệu trò chơi
 Trò chơi này không còn quá xa lạ với các bạn nhỏ, khi chơi các người chơi chỉ cần chia làm 2 trạng thái, người chơi bên trong vòng tròn cố tránh khỏi người bên ngoài vòng tròn và ngược lại, người bên ngoài vòng tròn cố gắng đập vào người bên trong vòng tròn.
@@ -1385,8 +1340,6 @@ Sau đó, người thứ nhất sẽ truyền tin cho người thứ hai bằng 
 
 101. Nhảy sạp
 **Nhảy sạp** là một trò chơi dân gian kết hợp giữa vận động và âm nhạc, phổ biến trong các lễ hội của người Thái và một số dân tộc thiểu số ở Tây Bắc Việt Nam. Ngày nay, nhảy sạp không chỉ xuất hiện trong các lễ hội dân tộc mà còn được tổ chức trong trường học, sự kiện văn hóa và hoạt động du lịch để giới thiệu nét đẹp văn hóa Việt Nam.
-
-</aside>
 
 ![Nhảy sạp](https://img.notionusercontent.com/s3/prod-files-secure%2Fc770a005-bff2-4602-b667-3969744d93ff%2F7dc83ee5-129c-4e14-a43e-3c6c41627b90%2F6.jpg/size/w=1050?exp=1742090413&sig=eQiENxNkkuAuw1f9PyP2gOSmeywmlHiIYq_3abCQ3n8)
 
