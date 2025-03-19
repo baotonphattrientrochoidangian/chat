@@ -101,7 +101,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 10px 15px;
+  padding: 20px;
   border-radius: 15px;
   font-size: 17px;
   line-height: 1.6;
@@ -274,7 +274,7 @@ textarea::placeholder {
 .image-preview-container.loading .image-preview {
   filter: brightness(0.8) blur(2px);
 }
-.image-preview-container-bot {
+.image-preview-container-bot, .bot-message img {
   position: relative;
   margin: 20px auto;
   width: 80%;
