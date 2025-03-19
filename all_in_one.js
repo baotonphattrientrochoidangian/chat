@@ -29,8 +29,9 @@ const suggestions = [
 function createSuggestionsUI() {
   const messagesDiv = document.getElementById("messages");
   if (!messagesDiv) return; //! Nếu chưa có, không làm gì
-  const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment(); // dùng fragment để tạo phần tử tạm thời
 
+  //! Tạo phần tử chào mừng
   const welcome = document.createElement("div");
   welcome.className = "welcome";
   welcome.innerHTML = `
@@ -39,8 +40,10 @@ function createSuggestionsUI() {
     `;
   fragment.appendChild(welcome);
 
+  //! Tạo phần tử grid chứa các suggestion
   const suggestionsGrid = document.createElement("div");
   suggestionsGrid.className = "suggestions-grid";
+
   suggestions.forEach((suggestion, index) => {
     const card = document.createElement("div");
     card.className = `suggestion-card${suggestion.special ? ' special-card' : ''}`;
@@ -54,20 +57,22 @@ function createSuggestionsUI() {
               <div class="suggestion-preview">${suggestion.content}</div>
             </div>
         `;
+
     card.addEventListener("click", () => {
       const welcomeSection = document.querySelector(".welcome");
       const suggestionsSection = document.querySelector(".suggestions-grid");
       if (welcomeSection) welcomeSection.remove();
       if (suggestionsSection) suggestionsSection.remove();
+      
       if (suggestion.special) {
         const img = new Image();
         img.src = suggestion.image;
-        img.onload = () => {
-          const reader = new FileReader();
+        img.onload = () => { // tải xong
+          const reader = new FileReader(); // mã hóa ảnh thành base64
           fetch(suggestion.image)
-            .then(res => res.blob())
-            .then(blob => {
-              reader.readAsDataURL(blob);
+            .then(res => res.blob()) // chuyển thành blob
+            .then(blob => { // blob là dạng dữ liệu nhị phân
+              reader.readAsDataURL(blob); 
               reader.onloadend = () => {
                 const base64data = reader.result.split(',')[1];
                 processImageAndText(suggestion.content, base64data);
@@ -1248,7 +1253,7 @@ const generationConfig = {
 };
 
 //! --- Chat initialization ---
-async function initChat() {
+async function initChat() { // async là hàm bất đồng bộ, xử lý các tác vụ chạy nền mà không làm chặn chương trình
   chatSession = model.startChat({
     generationConfig,
     history: chatHistory,
@@ -1268,7 +1273,7 @@ const uploadBtn = document.getElementById("uploadBtn");
 
 //! --- addMessage() ---
 //! Hàm thêm tin nhắn vào giao diện.
-function addMessage(content, isUser = false, imageBase64 = null) {
+function addMessage(content , isUser = false, imageBase64 = null) {
   const messageContainer = document.createElement("div");
   messageContainer.className = "message-container" + (isUser ? " user" : "");
   const avatar = document.createElement("img");
@@ -1306,14 +1311,8 @@ function disableInput(disabled = true) {
   sendButton.disabled = disabled;
   uploadBtn.disabled = disabled;
   if (disabled) {
-    setTimeout(() => {
-      inputArea.classList.remove("visible");
-      inputArea.classList.add("hidden");
-    }, 1000);
     textarea.placeholder = "Đang chờ phản hồi...";
   } else {
-    inputArea.classList.remove("hidden");
-    inputArea.classList.add("visible");
     textarea.placeholder = "Nhập tin nhắn...";
   }
 }
@@ -1474,7 +1473,6 @@ function addMessageControls(messageDiv, content) {
   const copyBtn = document.createElement("button");
   copyBtn.className = "control-btn";
   copyBtn.innerHTML = '<i class="far fa-copy"></i>';
-  copyBtn.title = "Sao chép";
   copyBtn.onclick = () => {
     const plainText = messageDiv.querySelector('.message-text').textContent.replace(/\[.*?\]\(.*?\)/g, '');
     navigator.clipboard.writeText(plainText)

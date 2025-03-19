@@ -101,7 +101,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 20px;
+  padding: 15px;
   border-radius: 15px;
   font-size: 17px;
   line-height: 1.6;
@@ -683,10 +683,6 @@ button:disabled {
   transform: translateX(-50%) scale(1.02);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   background: var(--secondary-bg);
-}
-.action-btn,
-.send-btn {
-  /* có thể áp dụng .base-animation nếu cần */
 }
 .action-btn:hover {
   transform: scale(1.15);
