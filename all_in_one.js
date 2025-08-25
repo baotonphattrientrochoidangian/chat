@@ -90,7 +90,7 @@ function createSuggestionsUI() {
 }
 
 //! Các khai báo và cấu hình ban đầu
-const apiKey = "AIzaSyDKuUZczmcIsNg8ewNnZzEBv0eNnNFgPkE";
+const apiKey = "AIzaSyCOECCL9PByfFOyOgs935lOWtpKM4-4j-A";
 const genAI = new GoogleGenerativeAI(apiKey);
 let chatSession;
 let uploadedImage = null;
